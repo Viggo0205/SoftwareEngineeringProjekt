@@ -1,4 +1,4 @@
 
 public class Helloworld {
-	sup cunts
+	//sup cunts
 }

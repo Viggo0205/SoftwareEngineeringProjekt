@@ -1,4 +1,4 @@
-package dtu.library.acceptance_tests;
+/*package dtu.library.acceptance_tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -33,25 +33,25 @@ public class BookSteps {
 	 * 
 	 * This principle is called <em>dependency injection</em>. More information can
 	 * be found in the "Cucumber for Java" book available online from the DTU Library.
-	 */
+
 	public BookSteps(LibraryApp libraryApp, ErrorMessageHolder errorMessageHolder) {
 		this.libraryApp = libraryApp;
 		this.errorMessageHolder = errorMessageHolder;
 	}
 
-	@Given("there is a book with title {string}, author {string}, and signature {string}")
+	//@Given("there is a book with title {string}, author {string}, and signature {string}")
 	public void thereIsABookWithTitleAuthorAndSignature(String title, String author, String signature) throws Exception {
 		book = new Book(title,author,signature);
 	}
 
-	@Given("these books are contained in the library")
+	//@Given("these books are contained in the library")
 	public void theseBooksAreContainedInTheLibrary(List<List<String>> books) throws Exception {
 		for (List<String> bookInfo : books) {
 			libraryApp.addBook(new Book(bookInfo.get(0), bookInfo.get(1), bookInfo.get(2)));
 		}
 	}
 
-	@When("the book is added to the library")
+	//@When("the book is added to the library")
 	public void bookIsAddedToTheLibrary() {
 		try {
 			libraryApp.addBook(book);
@@ -60,10 +60,10 @@ public class BookSteps {
 		}
 	}
 
-	@Then("the book with title {string}, author {string}, and signature {string} is contained in the library")
+	//@Then("the book with title {string}, author {string}, and signature {string} is contained in the library")
 	public void theBookWithTitleAuthorAndSignatureIsContainedInTheLibrary(String title, String author, String signature)
 			throws Exception {
-		assertTrue(libraryApp.containsBookWithSignature(signature));
+	//	assertTrue(libraryApp.containsBookWithSignature(signature));
 	}
 
 	@Then("the error message {string} is given")
@@ -81,7 +81,7 @@ public class BookSteps {
 	/*@When("the user searches for the text {string}")
 	public void theUserSearchesForTheText(String searchText) throws Exception {
 	books = libraryApp.search(searchText);
-	}*/
+	}
 
 	@Then("the book with signature {string} is found")
 	public void theBookWithSignatureIsFound(String signature) throws Exception {
@@ -103,4 +103,4 @@ public class BookSteps {
 				|| (book1.getSignature().equals(signature2) && book2.getSignature().equals(signature1)));
 	}
 
-}
+}*/

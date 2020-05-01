@@ -1,4 +1,4 @@
-package dtu.library.acceptance_tests;
+/*package dtu.library.acceptance_tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -27,17 +27,17 @@ public class LoginLogoutSteps {
 	 * This principle is called <em>dependency injection</em>. More information can
 	 * be found in "The Cucumber for Java Book" available online from the DTU Library.
 	 * (search using findit.dtu.dk).
-	 */
+
 	public LoginLogoutSteps(LibraryApp libraryApp) {
 		this.libraryApp = libraryApp;
 	}
 
-	@Given("that the administrator is not logged in")
+	//@("that the administrator is not logged in")
 	public void thatTheAdministratorIsNotLoggedIn() throws Exception {
 		assertFalse(libraryApp.adminLoggedIn());
 	}
 
-	@Given("the password is {string}")
+	@Gi("the password is {string}")
 	public void thePasswordIs(String password) throws Exception {
 		this.password = password;
 	}
@@ -75,4 +75,4 @@ public class LoginLogoutSteps {
 	public void theAdministratorLogsOut() throws Exception {
 		libraryApp.adminLogout();
 	}
-}
+}*/
