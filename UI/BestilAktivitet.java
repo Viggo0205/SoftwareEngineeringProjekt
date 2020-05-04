@@ -28,6 +28,7 @@ public class BestilAktivitet {
 
     public static void main(String[] args) {
        JFrame frame = new JFrame("Bestil Aktivitet");
+       frame.setSize(200,200);
        frame.setContentPane(new BestilAktivitet().panel1);
        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
        frame.pack();

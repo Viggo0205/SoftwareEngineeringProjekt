@@ -1,5 +1,6 @@
 // Skrevet af Eigil Sejer Larsen - s194282
 
+import io.cucumber.java.en.Given;
 import java.util.ArrayList;
 
 public class Aktivitet {
@@ -15,7 +16,8 @@ public class Aktivitet {
 		this.budgetTid = budgetTid;
 		this.realTid = 0;
 	}
-	
+
+	@Given("RegistrerTimer")
 	public void addTid (int tid) {
 		this.realTid += tid;
 	}
