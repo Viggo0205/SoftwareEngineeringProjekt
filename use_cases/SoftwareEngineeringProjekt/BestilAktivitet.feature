@@ -24,4 +24,4 @@ Feature: <Bestil Aktivitet>
     And <Bruger Tilfoejer tidsramme>
     And <Bruger tilfoejer arbejdstimer>
     And <Angivet projektet eksisterer>
-    Then <Print fejl besked "Du er ikke udviklingsled">
+    Then <Print fejl besked "Du er ikke udviklingsleder">
