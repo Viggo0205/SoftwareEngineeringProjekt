@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 public class TildelAktivitet {
     private JComboBox comboBox1;
     private JComboBox comboBox2;
-    private JTextField textField1;
     public JPanel mainPanel;
     private JButton Tildel;
+    private JComboBox comboBox3;
 
     public TildelAktivitet() {
         Tildel.addActionListener(new ActionListener() {

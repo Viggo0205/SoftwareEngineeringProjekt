@@ -20,7 +20,7 @@ public class TidBrugtAktivitet {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Tid brugt på aktivitet");
+        JFrame frame = new JFrame("Tid brugt paa aktivitet");
         frame.setContentPane(new TidBrugtAktivitet().mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();

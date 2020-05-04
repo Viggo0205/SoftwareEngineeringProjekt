@@ -16,7 +16,9 @@ public class UserInterface extends JFrame implements ActionListener{
 	private JButton maAkt4;
 	private JButton maAkt5;
 	private JButton maAkt6;
-
+	public static void main(String[] args) {
+		menu();
+	}
 
 	public static void menu() {
 		UserInterface window = new UserInterface();
@@ -129,6 +131,7 @@ public class UserInterface extends JFrame implements ActionListener{
 
 		
 	}
+
 
 
 }
