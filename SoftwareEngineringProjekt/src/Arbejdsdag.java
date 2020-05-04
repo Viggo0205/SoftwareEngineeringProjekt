@@ -1,3 +1,5 @@
+// Skrevet af Eigil Sejer Larsen - s194282
+
 import java.util.ArrayList;
 
 public class Arbejdsdag {

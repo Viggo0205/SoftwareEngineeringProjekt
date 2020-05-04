@@ -1,5 +1,8 @@
+// Skrevet af Eigil Sejer Larsen - s194282
+
 import java.awt.*;
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /*
 	Behandl lovlige uger client-side
@@ -7,7 +10,7 @@ import java.util.ArrayList;
 	Start- og slut-uger er egentligt datoer, men kan blot returneres som med .beregnUge()
 */
 
-public class Project {
+public class Project implements Serializable {
 	private ArrayList<Aktivitet> aktiviteter = new ArrayList<Aktivitet>();
 	private ArrayList<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
 	private Medarbejder projektleder;
@@ -53,14 +56,6 @@ public class Project {
 	
 	// Getters, setters & adders
 	
-	public void addAktivitet() {
-		// add kode
-	}
-
-	public ArrayList<Aktivitet> getAktiviteter(){
-		return this.aktiviteter;
-	}
-	
 	public void setNavn (String s) {
 		this.navn = s;
 	}
@@ -73,16 +68,16 @@ public class Project {
 		return this.projektNummer;
 	}
 	
-	public int getStartUge() {
-		return this.startDato.beregnUge();
+	public int[] getStartUge() {
+		return new int[] {this.startDato.beregnUge(), this.startDato.getYear()};
 	}
 	
 	public void setStartUge(int uge, int year) {
 		this.startDato = new Dato(uge, year);
 	}
 	
-	public int getSlutUge() {
-		return this.slutDato.beregnUge();
+	public int[] getSlutUge() {
+		return new int[]{this.slutDato.beregnUge(), this.slutDato.getYear()};
 	}
 	
 	public void setSlutUge(int uge, int year) {
@@ -103,7 +98,23 @@ public class Project {
 	
 	public void addMedarbejder(Medarbejder nyMed) {
 		this.medarbejdere.add(nyMed);
-		
+	}
+	
+	public void addAktivitet(String navn, Dato startUge, Dato slutUge, int budgetTid) {
+		this.aktiviteter.add(new Aktivitet(navn, startUge, slutUge, budgetTid));
+	}
+
+	public ArrayList<Aktivitet> getAktiviteter(){
+		return this.aktiviteter;
+	}
+	
+	public int getCertainAkt(String navn) {
+		for (Aktivitet a : this.aktiviteter)
+		{
+			if (a.getNavn().equalsIgnoreCase(navn))
+				return this.aktiviteter.indexOf(a);
+		}
+		return -1;
 	}
 	
 }

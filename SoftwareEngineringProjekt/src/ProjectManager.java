@@ -1,3 +1,5 @@
+// Skrevet af Eigil Sejer Larsen - s194282
+
 import java.util.ArrayList;
 
 public class ProjectManager {
@@ -15,5 +17,9 @@ public class ProjectManager {
 	
 	public int getProjektListLength() {
 		return projekter.size();
+	}
+	
+	public Project getCertainProject(int i) {
+		return projekter.get(i);
 	}
 }
