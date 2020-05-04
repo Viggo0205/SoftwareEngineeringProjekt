@@ -1,3 +1,4 @@
+#Author: Christian s194307
 Feature: <Soege hjaelp fra andre>
       Description: <Brugeren soeger hjaelp fra andre brugere>
       Actor: <Udviklere og Udviklingsleder>
