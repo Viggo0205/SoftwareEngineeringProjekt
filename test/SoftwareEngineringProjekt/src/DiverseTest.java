@@ -54,6 +54,10 @@ public class DiverseTest {
 		test.addTid("TestProj1", "TestAkt1.3", 1);
 		test.addTid("TestProj2", "TestAkt2.1", 5);
 		System.out.println(test.getTid());
+		
+		Aktivitet aktivitet = new Aktivitet("Aktivitet 1", new Dato(2, 2020), new Dato(5, 2020), 6);
+		aktivitet.addMedarbejder(new Medarbejder("TEST", 1));
+		System.out.println(aktivitet.getAllData());
 	}
 
 }
