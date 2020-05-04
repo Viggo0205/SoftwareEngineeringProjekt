@@ -1,3 +1,5 @@
+// Skrevet af Eigil Sejer Larsen - s194282
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.io.Serializable;
