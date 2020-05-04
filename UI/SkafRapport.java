@@ -22,7 +22,7 @@ public class SkafRapport {
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Aktivitet er tildelt");
+        JFrame frame = new JFrame("Skaf rapport");
         frame.setContentPane(new  SkafRapport().mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();

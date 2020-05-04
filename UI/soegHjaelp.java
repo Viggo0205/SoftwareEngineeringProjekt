@@ -19,7 +19,7 @@ public class soegHjaelp {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Tildel aktivitet");
+        JFrame frame = new JFrame("Soeg Hjaelp");
         frame.setContentPane(new soegHjaelp().mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
