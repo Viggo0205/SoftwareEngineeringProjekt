@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class ServControll {
 	private static ProjectManager projekter;
@@ -25,6 +26,10 @@ public class ServControll {
 			System.out.println(m.getInitialer());
 		System.out.println("Dags dato: " + currentDate.getFormatedDate());
 		
+		newAktivitet("test0", "aktivitets test", new Dato(1, 2020), new Dato(3, 2020), 7);
+		addMedarbToAkt("ADM", "test0", "aktivitets test");
+		System.out.println("Aktivitetsdata for projekt test0: " + projekter.getProjects().get(0).getAktiviteter().get(0).getAllData());
+		
 		ConnectionManager.openCon();
 	}
 	
@@ -35,6 +40,38 @@ public class ServControll {
 	public static Dato getDato() {
 		return ServControll.currentDate;
 	}
+	
+	
+	
+	// RELEVANS TIL AKTIVITETER
+	public static int newAktivitet(String projekt, String navn, Dato startUge, Dato slutUge, int budgetTid) {
+		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).addAktivitet(navn, startUge, slutUge, budgetTid);
+		return 0;
+	}
+	
+	public static int addMedarbToAkt (String initialer, String projekt, String aktivitet) {
+		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).getAktiviteter()
+		.get(ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).getCertainAkt(aktivitet))
+		.addMedarbejder(ServControll.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
+		return 0;
+	}
+	
+	/*
+	private static int findAktVedNavn(String navn) {
+		
+	}
+	*/
+	
+	private static int findMedarbVedInit (String init) {
+		for (Medarbejder m : medarbejdere.getMedarbejdere())
+		{
+			if (m.getInitialer().equalsIgnoreCase(init))
+				return ServControll.medarbejdere.getMedarbejdere().indexOf(m);
+		}
+		return -1;
+	}
+	
+	// RELEVANS TIL PROJEKTER
 	
 	public static int newProjekt(String navn, Medarbejder projektLeder, Dato startUge, Dato slutUge) {
 		System.out.println(projektLeder.getInitialer() + " tries to create project " + navn);
@@ -48,4 +85,21 @@ public class ServControll {
 			}
 		return 0;
 	}
+	
+	public static int addMedarbToProj (String initialer, String projekt) {
+		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt))
+		.addMedarbejder(ServControll.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
+		return 0;
+	}
+	
+	private static int findProjektVedNavn(String navn) {
+		for (Project p : projekter.getProjects())
+		{
+			if (p.getNavn().equalsIgnoreCase(navn))
+				return ServControll.projekter.getProjects().indexOf(p);
+		}
+		return -1;
+	}
+	
+	
 }

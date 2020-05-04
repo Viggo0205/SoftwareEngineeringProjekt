@@ -16,4 +16,8 @@ public class ProjectManager {
 	public int getProjektListLength() {
 		return projekter.size();
 	}
+	
+	public Project getCertainProject(int i) {
+		return projekter.get(i);
+	}
 }

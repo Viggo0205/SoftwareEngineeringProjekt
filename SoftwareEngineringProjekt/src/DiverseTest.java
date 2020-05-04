@@ -2,8 +2,8 @@
 public class DiverseTest {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		/*System.out.println(new Dato(1,1,2019).getDeltaDag(new Dato(1,7,2020)));
+		/*
+		System.out.println(new Dato(1,1,2019).getDeltaDag(new Dato(1,7,2020)));
 		System.out.println(new Dato(1,7,2020).getDeltaDag(new Dato(1,1,2020)));
 		System.out.println(new Dato(1,3,2020).getDeltaDag(new Dato(1,3,2021)));
 		System.out.println(new Dato(1,1,2020).getDeltaDag(new Dato(1,1,2021)));
@@ -34,9 +34,9 @@ public class DiverseTest {
 		System.out.println(new Dato(52, 2020).beregnUge());
 		System.out.println(new Dato(1, 1, 2020).getDeltaDag(new Dato(34, 2020)));
 		System.out.println(new Dato(1, 1, 2020).getDeltaDag(new Dato(52, 2020)));
-		System.out.println(new Dato(34, 2020).getFormatedDate());*/
-		System.out.println(new Dato(1, 2020).getFormatedDate());
-		System.out.println(new Dato(1, 1, 2020).getDeltaDag(new Dato( 56, 2020)));
+		System.out.println(new Dato(34, 2020).getFormatedDate());
+		System.out.println(new Dato(52, 2020).getFormatedDate());
+		*/
 		/*
 		for (int i = 1; i < 53; i++)
 		{
@@ -45,6 +45,13 @@ public class DiverseTest {
 			System.out.println(new Dato(1, 1, 2020).getDeltaDag(new Dato(i, 2020)));
 		}
 		*/
+		
+		Arbejdsdag test = new Arbejdsdag(new Dato(1, 1, 2020));
+		test.addTid("TestProj1", "TestAkt1.1", 3);
+		test.addTid("TestProj1", "TestAkt1.2", 2);
+		test.addTid("TestProj1", "TestAkt1.3", 1);
+		test.addTid("TestProj2", "TestAkt2.1", 5);
+		System.out.println(test.getTid());
 	}
 
 }
