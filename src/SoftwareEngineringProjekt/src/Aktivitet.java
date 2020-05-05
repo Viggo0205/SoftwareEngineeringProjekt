@@ -49,4 +49,15 @@ public class Aktivitet {
 		this.slutDato = new Dato(uge, year);
 	}
 
+	public String getMedarbejdere() {
+		String s = "Medarbejdere:";
+		for (Medarbejder m : medarbejdere)
+			s += "\n" + m.getInitialer();
+		return s;
+	}
+
+	public int getTime() {
+		return this.realTid;
+	}
+
 }
