@@ -7,10 +7,11 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 
     private JComboBox comboBox1;
     public  JPanel panel1;
-    private JComboBox comboBox2;
-    private JComboBox comboBox3;
     private JTextField textField1;
     private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JTextField NavnTextField;
     private JButton bestilButton;
     private JLabel Beskrivelse;
     private JLabel NavnAktivitet;
@@ -31,8 +32,10 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         frame.pack();
         frame.setVisible(true);
 
-        NavnAktivitet = new JLabel("Navn på Aktivitet");
-        panel1.add()
+        NavnAktivitet = new JLabel("Navn paa Aktivitet");
+        panel1.add(NavnAktivitet);
+        NavnTextField = new JTextField();
+        panel1.add(NavnTextField);
 
         VaelgProj = new JLabel("Vaelg projekt");
         panel1.add(VaelgProj);
@@ -48,14 +51,14 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 
         startUge = new JLabel("Start Uge");
         panel1.add(startUge);
-        comboBox2 = new JComboBox();
-        panel1.add(comboBox2);
+        textField3 = new JTextField();
+        panel1.add(textField3);
 
 
         slutUge = new JLabel("Slut uge");
         panel1.add(slutUge);
-        comboBox3 = new JComboBox();
-        panel1.add(comboBox3);
+        textField4 = new JTextField();
+        panel1.add(textField4);
 
         BudgeteretTid = new JLabel("Budgeteret tid");
         panel1.add(BudgeteretTid);
