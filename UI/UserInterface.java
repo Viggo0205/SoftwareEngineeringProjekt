@@ -16,7 +16,7 @@ public class UserInterface extends JFrame implements ActionListener{
 	private JButton maAkt4;
 	private JButton maAkt5;
 	private JButton maAkt6;
-	private String windowWait;
+	private static String windowWait;
 	
 //	public static void main(String[] args) {
 //		menu();
@@ -45,6 +45,12 @@ public class UserInterface extends JFrame implements ActionListener{
 		maAkt4 = new JButton("akt 4");
 		maAkt5 = new JButton("akt 5");
 		maAkt6 = new JButton("akt 6");
+		maAkt1.addActionListener(this);
+		maAkt2.addActionListener(this);
+		maAkt3.addActionListener(this);
+		maAkt4.addActionListener(this);
+		maAkt5.addActionListener(this);
+		maAkt6.addActionListener(this);
 		medarbAktiv.add(maAkt1);
 		medarbAktiv.add(maAkt2);
 		medarbAktiv.add(maAkt3);
@@ -68,6 +74,12 @@ public class UserInterface extends JFrame implements ActionListener{
 		leAkt4 = new JButton("akt 4");
 		leAkt5 = new JButton("akt 5");
 		leAkt6 = new JButton("akt 6");
+		leAkt1.addActionListener(this);
+		leAkt2.addActionListener(this);
+		leAkt3.addActionListener(this);
+		leAkt4.addActionListener(this);
+		leAkt5.addActionListener(this);
+		leAkt6.addActionListener(this);
 		lederBut.add(leAkt1);
 		lederBut.add(leAkt2);
 		lederBut.add(leAkt3);
@@ -95,8 +107,10 @@ public class UserInterface extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == maAkt1) {
-			Communicator.sendProjAccess();
-			windowWait = "maAkt1";
+			System.out.println("knap trykket");
+			BestilAktvitet.popup();
+//			Communicator.sendProjAccess();
+//			windowWait = "maAkt1";
 //			Communicator.sendOpretAktiv("1234", "5", "50", "", "");
 		}
 		if(e.getSource() == maAkt2) {
@@ -134,6 +148,14 @@ public class UserInterface extends JFrame implements ActionListener{
 		}
 
 		//
+	}
+
+
+	public static void proListModt() {
+		if(windowWait.equals("maAkt1")) {
+			BestilAktvitet.popup();
+		}
+		
 	}
 	
 }

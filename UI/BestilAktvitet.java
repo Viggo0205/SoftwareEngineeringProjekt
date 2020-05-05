@@ -24,24 +24,30 @@ public class BestilAktvitet extends JFrame implements ActionListener {
     public BestilAktvitet()
     {
 
+//    	String[] testliste = {"1243","3456","1714","9334","2463","5211","6132",};
         JFrame frame = new JFrame();
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
         frame.add(panel1);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+//        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
-        NavnAktivitet = new JLabel("Navn paa Aktivitet");
+        NavnAktivitet = new JLabel("Navn på Aktivitet");
         panel1.add(NavnAktivitet);
         NavnTextField = new JTextField();
         panel1.add(NavnTextField);
 
-        VaelgProj = new JLabel("Vaelg projekt");
+        VaelgProj = new JLabel("Vælg projekt");
         panel1.add(VaelgProj);
 
         comboBox1 = new JComboBox();
         panel1.add(comboBox1);
+        for(int i = 0; i < testliste.length; i++) {
+        	comboBox1.addItem(Controll.projektListe[i]);
+//        	comboBox1.addItem(testliste[i]);
+        }
+        comboBox1.addActionListener(this);
 
         Beskrivelse = new JLabel("Beskrivelse af aktivitet");
         panel1.add(Beskrivelse);
@@ -71,14 +77,16 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         frame.setSize(200, 500);
     }
 
-    public static void main(String[] args) {
-        new BestilAktvitet();
+    public static void popup() {
+    	new BestilAktvitet();
 
     }
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == bestilButton) {
 
+        } else if(e.getSource()== comboBox1) {
+        	System.out.println("valgt i comboBox: " + comboBox1.getSelectedItem());
         }
 
 

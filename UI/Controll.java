@@ -1,24 +1,31 @@
 
 public class Controll {
-	
+
 	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"};
 	public static boolean ready;
 	private static String[] sQueue;
+	public static String[] projektListe;
 
-	
+
 	public static void main(String[] args) {		
-		Thread t = new Thread(new Communicator());
-		t.start();
+//		Thread t = new Thread(new Communicator());
+//		t.start();
 		Login.menu();
-		
-		while(true) {
-			if(!ready) {
-				if(sQueue[0].equals("placeholder")) { // modtagelse af aktivitets liste
-					
-				}
-			}
-		}
-			
+
+//		while(true) {
+//			if(!ready) {
+//				if(sQueue[0].equals("placeholder")) { // modtagelse af projekt liste
+//					projektListe = sQueue[1].split(";");
+//					UserInterface.proListModt();
+//
+//
+//
+//				} 
+//			}
+//			else if (sQueue[0].equals("placeholder2")) { // fremtidige mulige koder
+//				System.out.println("");
+//			}
+//		}
 	}
 
 	public static boolean isEmployee(String initialer) {
@@ -30,9 +37,9 @@ public class Controll {
 
 	public static void loggedIn() {
 		UserInterface.menu();
-		
+
 	}
-	
+
 	public static void msgQueue(String[] sa) {
 		ready = false;
 		System.out.println(sa[0] + sa[1] + "sat i msgQueue");
@@ -42,5 +49,5 @@ public class Controll {
 	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
 		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
 	}
-  
+
 }
