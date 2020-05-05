@@ -27,7 +27,10 @@ public class Aktivitet {
 	}
 	
 	public String getAllData() {
-		return "\nAktivitets navn: " + this.navn + "\nstartuge: " + this.startDato.beregnUge() + "\nslutuge: " + this.slutDato.beregnUge() + "\nbudgettid: " + this.budgetTid + "\nrealtid: " + this.realTid + "\nmedarbejdere: " + this.medarbejdere.get(0).getInitialer();
+		String s = "\nAktivitets navn: " + this.navn + "\nstartuge: " + this.startDato.beregnUge() + "\nslutuge: " + this.slutDato.beregnUge() + "\nbudgettid: " + this.budgetTid + "\nrealtid: " + this.realTid + "\nmedarbejdere: ";
+		for (Medarbejder m : medarbejdere)		
+			s += m.getInitialer();
+		return s;
 	}
 	
 	public String getNavn() {
