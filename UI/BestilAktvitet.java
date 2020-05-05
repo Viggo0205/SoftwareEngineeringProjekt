@@ -90,6 +90,6 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         }
 
 
-
+//
     }
 }
