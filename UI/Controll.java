@@ -42,5 +42,5 @@ public class Controll {
 	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
 		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
 	}
-	
+  
 }
