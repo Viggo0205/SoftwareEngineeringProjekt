@@ -3,13 +3,22 @@ public class Controll {
 	
 	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"};
 	public static boolean ready;
-	private String[] sQueue;
+	private static String[] sQueue;
 
 	
 	public static void main(String[] args) {		
 		Thread t = new Thread(new Communicator());
 		t.start();
-		Login.menu();		
+		Login.menu();
+		
+		while(true) {
+			if(!ready) {
+				if(sQueue[0].equals("placeholder")) { // modtagelse af aktivitets liste
+					
+				}
+			}
+		}
+			
 	}
 
 	public static boolean isEmployee(String initialer) {
@@ -28,6 +37,10 @@ public class Controll {
 		ready = false;
 		System.out.println(sa[0] + sa[1] + "sat i msgQueue");
 		sQueue = sa;
+	}
+
+	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
+		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
 	}
 	
 }
