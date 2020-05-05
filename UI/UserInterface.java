@@ -24,7 +24,7 @@ public class UserInterface extends JFrame implements ActionListener{
 		UserInterface window = new UserInterface();
 		window.setTitle("Software company. Velkommen " + Login.initialer);
 		window.setSize(600, 600);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 	}
 	
@@ -111,7 +111,7 @@ public class UserInterface extends JFrame implements ActionListener{
 			
 		}
 		if(e.getSource() == leAkt1) {
-			
+			OpretProjekt.init();
 		}
 		if(e.getSource() == leAkt2) {
 			
