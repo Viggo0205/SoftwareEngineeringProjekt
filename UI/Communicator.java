@@ -133,5 +133,5 @@ public class Communicator implements Runnable {
 		pw.flush();
 		sendMsg = null;
 	}
-	// totally changed, pls let me push github
+	
 }
