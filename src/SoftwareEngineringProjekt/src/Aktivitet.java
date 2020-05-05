@@ -38,7 +38,7 @@ public class Aktivitet {
 	}
 	
 	public int[] getStartUge() {
-		return new int[]{this.startDato.beregnUge(), this.slutDato.getYear()};
+		return new int[]{this.startDato.beregnUge(), this.startDato.getYear()};
 	}
 	
 	public int[] getSlutUge() {
