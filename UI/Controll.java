@@ -29,4 +29,5 @@ public class Controll {
 		System.out.println(sa[0] + sa[1] + "sat i msgQueue");
 		sQueue = sa;
 	}
+	// totally changed, pls let me push github
 }
