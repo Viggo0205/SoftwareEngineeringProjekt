@@ -2,29 +2,42 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RetTimer {
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JLabel LabelDato;
-    private JLabel LabelTimerBrugt;
-    private JButton retTimerButton;
-    private JPanel mainPanel;
+public class RetTimer extends JFrame implements ActionListener {
+    private JLabel LabelDato = new JLabel("Dato");
+    private JTextField dato = new JTextField();
+    private JLabel TimerLabel = new JLabel("Antal timer");
+    private JTextField AntalTimer = new JTextField();
+    private JButton retTimerButton = new JButton("Ret timer");
+    private JPanel mainPanel = new JPanel();
 
     public RetTimer() {
-        retTimerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(null,"Timer er blevet rettet");
-            }
-        });
-    }
-
-    public static void main(String[] args) {
         JFrame frame = new JFrame("Ret timer");
-        frame.setContentPane(new RetTimer().mainPanel);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        frame.add(mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+        mainPanel.add(LabelDato);
+        mainPanel.add(dato);
+
+        mainPanel.add(TimerLabel);
+        mainPanel.add(AntalTimer);
+
+        mainPanel.add(retTimerButton);
+
+        frame.setSize(400, 500);
+
+    }
+
+    public static void main(String[] args) {
+
+        new RetTimer();
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
 
     }
 }

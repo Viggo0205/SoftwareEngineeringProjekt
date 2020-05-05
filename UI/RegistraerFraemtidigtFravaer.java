@@ -2,16 +2,19 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SeLedigUdvikler extends JFrame implements ActionListener {
-    private JLabel startDatoLabel = new JLabel("Start dato");
+
+public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListener {
+
+    private JLabel startDatoLabel = new JLabel("Start Dato");
     private JTextField startDato = new JTextField();
     private JLabel slutDatoLabel = new JLabel("Slut dato");
     private JTextField slutDato = new JTextField();
-    private JButton registrer = new JButton("Se udviklere");
+    private JButton registrer = new JButton("Registrer");
     private JPanel mainPanel;
 
-    public SeLedigUdvikler() {
-        JFrame frame = new JFrame("Se ledige udviklere");
+    public RegistraerFraemtidigtFravaer()
+    {
+        JFrame frame = new JFrame("Registrer fraemtidigt fravaer");
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
@@ -27,14 +30,15 @@ public class SeLedigUdvikler extends JFrame implements ActionListener {
 
         mainPanel.add(registrer);
         frame.setSize(400, 500);
-    }
 
-    public static void main(String[] args) {
-        new SeLedigUdvikler();
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
+    }
+
+    public static void main(String[] args) {
+        new RegistraerFraemtidigtFravaer();
     }
 }

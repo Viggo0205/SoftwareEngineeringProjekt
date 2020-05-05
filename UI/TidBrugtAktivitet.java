@@ -3,27 +3,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TidBrugtAktivitet {
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JButton seTidBrugtButton;
-    private JLabel Projekt;
-    private JLabel Aktivitet;
-    private JPanel mainPanel;
+    private JComboBox Projekt = new JComboBox();
+    private JComboBox aktivitet =new JComboBox();
+    private JButton seTidBrugtButton =new JButton("Se tid brugt");
+    private JLabel ProjektLabel =new JLabel();
+    private JLabel AktivitetLabel= new JLabel();
+    private JPanel mainPanel = new JPanel();
 
     public TidBrugtAktivitet() {
-        seTidBrugtButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+        JFrame frame = new JFrame("tid Brugt paa akvititet");
 
-            }
-        });
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Tid brugt paa aktivitet");
-        frame.setContentPane(new TidBrugtAktivitet().mainPanel);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        frame.add(mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+
+        mainPanel.add(ProjektLabel);
+        mainPanel.add(Projekt);
+
+        mainPanel.add(AktivitetLabel);
+        mainPanel.add(aktivitet);
+
+        mainPanel.add(seTidBrugtButton);
+        frame.setSize(400, 500);
+    }
+
+    public static void main(String[] args) {
+        new TidBrugtAktivitet();
     }
 }
