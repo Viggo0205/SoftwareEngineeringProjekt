@@ -43,7 +43,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 
         comboBox1 = new JComboBox();
         panel1.add(comboBox1);
-        for(int i = 0; i < testliste.length; i++) {
+        for(int i = 0; i < Controll.projektListe.length; i++) {
         	comboBox1.addItem(Controll.projektListe[i]);
 //        	comboBox1.addItem(testliste[i]);
         }
