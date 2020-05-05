@@ -60,7 +60,4 @@ public class Aktivitet {
 		return this.realTid;
 	}
 
-	private void neverUsed() {
-		
-	}
 }
