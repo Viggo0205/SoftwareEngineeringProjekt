@@ -2,28 +2,50 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RegistrerTimer {
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JComboBox comboBox3;
-    private JComboBox comboBox4;
-    private JButton registrerTimerButton;
+public class RegistrerTimer extends JFrame implements ActionListener {
+    private JLabel ProjektLabel = new JLabel("Projekt");
+    private JComboBox projekt = new JComboBox();
+    private JLabel aktivitetLabel = new JLabel("Aktivitet");
+    private JComboBox aktiviteter =new JComboBox();
+    private JLabel datoLabel = new JLabel("Dato");
+    private JTextField dato = new JTextField();
+    private JLabel timerLabel = new JLabel("Timer brugt");
+    private JTextField timer = new JTextField();
+    private JButton registrerTimerButton = new JButton("Registrer timer");
     private JPanel mainPanel;
 
     public RegistrerTimer() {
-        registrerTimerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(null,"Timer er blevet registret");
-            }
-        });
-    }
-
-    public static void main(String[] args) {
         JFrame frame = new JFrame("Registrer timer");
-        frame.setContentPane(new RegistrerTimer().mainPanel);
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        frame.add(mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+
+        mainPanel.add(ProjektLabel);
+        mainPanel.add(projekt);
+
+        mainPanel.add(aktivitetLabel);
+        mainPanel.add(aktiviteter);
+
+        mainPanel.add(datoLabel);
+        mainPanel.add(dato);
+
+        mainPanel.add(timerLabel);
+        mainPanel.add(timer);
+
+        mainPanel.add(registrerTimerButton);
+        frame.setSize(200, 500);
+    }
+
+    public static void main(String[] args) {
+       new RegistrerTimer();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+
     }
 }

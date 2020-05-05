@@ -1,4 +1,4 @@
-/*package dtu.library.acceptance_tests;
+package dtu.library.acceptance_tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -20,19 +20,19 @@ public class BookSteps {
 	private Book book;
 	private List<Book> books;
 
-	/*
-	 * Note that the constructor is apparently never called, but there are no null
-	 * pointer exceptions regarding that libraryApp is not set. When creating the
-	 * BookSteps object, the Cucumber libraries are using that constructor with an
-	 * object of class LibraryApp as the default.
-	 * 
-	 * This also holds for all other step classes that have a similar constructor.
-	 * In this case, the <b>same</b> object of class LibraryApp is used as an
-	 * argument. This provides an easy way of sharing the same object, in this case
-	 * the object of class LibraryApp and the errorMessage Holder, among all step classes.
-	 * 
-	 * This principle is called <em>dependency injection</em>. More information can
-	 * be found in the "Cucumber for Java" book available online from the DTU Library.
+
+	// * Note that the constructor is apparently never called, but there are no null
+	// * pointer exceptions regarding that libraryApp is not set. When creating the
+	// * BookSteps object, the Cucumber libraries are using that constructor with an
+	// * object of class LibraryApp as the default.
+	// *
+	// * This also holds for all other step classes that have a similar constructor.
+	// * In this case, the <b>same</b> object of class LibraryApp is used as an
+	// * argument. This provides an easy way of sharing the same object, in this case
+	// * the object of class LibraryApp and the errorMessage Holder, among all step classes.
+	// *
+	// * This principle is called <em>dependency injection</em>. More information can
+	// * be found in the "Cucumber for Java" book available online from the DTU Library.
 
 	public BookSteps(LibraryApp libraryApp, ErrorMessageHolder errorMessageHolder) {
 		this.libraryApp = libraryApp;
@@ -51,7 +51,7 @@ public class BookSteps {
 		}
 	}
 
-	//@When("the book is added to the library")
+	@When("the book is added to the library")
 	public void bookIsAddedToTheLibrary() {
 		try {
 			libraryApp.addBook(book);
@@ -60,10 +60,10 @@ public class BookSteps {
 		}
 	}
 
-	//@Then("the book with title {string}, author {string}, and signature {string} is contained in the library")
+	@Then("the book with title {string}, author {string}, and signature {string} is contained in the library")
 	public void theBookWithTitleAuthorAndSignatureIsContainedInTheLibrary(String title, String author, String signature)
 			throws Exception {
-	//	assertTrue(libraryApp.containsBookWithSignature(signature));
+		assertTrue(libraryApp.containsBookWithSignature(signature));
 	}
 
 	@Then("the error message {string} is given")
@@ -78,9 +78,9 @@ public class BookSteps {
 		libraryApp.addBook(book);
 	}
 
-	/*@When("the user searches for the text {string}")
+	@When("the user searches for the text {string}")
 	public void theUserSearchesForTheText(String searchText) throws Exception {
-	books = libraryApp.search(searchText);
+	//books = libraryApp.search(searchText);
 	}
 
 	@Then("the book with signature {string} is found")
@@ -103,4 +103,4 @@ public class BookSteps {
 				|| (book1.getSignature().equals(signature2) && book2.getSignature().equals(signature1)));
 	}
 
-}*/
+}

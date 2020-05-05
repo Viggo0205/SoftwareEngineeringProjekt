@@ -115,7 +115,7 @@ public class UserInterface extends JFrame implements ActionListener{
 			
 		}
 		if(e.getSource() == leAkt1) {
-			OpretProjekt.init();
+			//OpretProjekt.init();
 		}
 		if(e.getSource() == leAkt2) {
 			
