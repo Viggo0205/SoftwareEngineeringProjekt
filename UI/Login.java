@@ -58,8 +58,8 @@ public class Login extends JFrame implements ActionListener {
 		if(e.getSource() == logInBut) {
 			initialer = logInput.getText();
 			if(Controll.isEmployee(initialer)) {
-				Controll.setInit(initialer);
 				bund.setText("logget ind");
+				Controll.loggedIn();
 			}
 			else 
 				bund.setText("Forkerte initialer");
@@ -67,5 +67,5 @@ public class Login extends JFrame implements ActionListener {
 		}
 		
 	}
-
+	
 }
