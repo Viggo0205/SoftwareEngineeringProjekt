@@ -24,11 +24,11 @@ Feature: Title of your feature
   Scenario: Title of your scenario
     Given User is logged in
     And User is ADM
-    When I complete action
-    And some other action
-    And yet another action
-    Then I validate the outcomes
-    And check more outcomes
+    When User tries to create new user
+    And Initials are give
+    And Initials are unique
+    Then New user should be created
+    And Creator should be informed
 
   @tag2
   Scenario Outline: Title of your scenario outline
