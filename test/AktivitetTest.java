@@ -18,6 +18,7 @@ public class AktivitetTest {
 //    @Given("RegistrerTimer")
 	
 	@org.junit.Test
+	@Given("test123") 
     public void addTid() {
     	
     	// Arrrange

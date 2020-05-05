@@ -26,8 +26,11 @@ public class Aktivitet {
 	}
 	
 	public String getAllData() {
-		return "\nAktivitets navn: " + this.navn + "\nstartuge: " + this.startDato.beregnUge() + "\nslutuge: " + this.slutDato.beregnUge() + "\nbudgettid: " + this.budgetTid + "\nrealtid: " + this.realTid + "\nmedarbejdere: " + this.medarbejdere.get(0).getInitialer();
-	}
+		String s = "Aktivitets navn: " + this.navn + "\nstartuge: " + this.startDato.beregnUge() + "\nslutuge: " + this.slutDato.beregnUge() + "\nbudgettid: " + this.budgetTid + "\nrealtid: " + this.realTid + "\nmedarbejdere:";
+		for (Medarbejder m : this.medarbejdere)
+			s += "\n" + m.getInitialer();
+		return s;
+		}
 	
 	public String getNavn() {
 		return this.navn;
@@ -38,7 +41,7 @@ public class Aktivitet {
 	}
 	
 	public int[] getStartUge() {
-		return new int[]{this.startDato.beregnUge(), this.slutDato.getYear()};
+		return new int[]{this.startDato.beregnUge(), this.startDato.getYear()};
 	}
 	
 	public int[] getSlutUge() {
@@ -49,4 +52,17 @@ public class Aktivitet {
 		this.slutDato = new Dato(uge, year);
 	}
 
+	public String getMedarbejdere() {
+		String s = "Medarbejdere:";
+		for (Medarbejder m : medarbejdere)
+			s += "\n" + m.getInitialer();
+		return s;
+	}
+
+	public int getTime() {
+		return this.realTid;
+	}
+	
+	
+	//asdasd
 }
