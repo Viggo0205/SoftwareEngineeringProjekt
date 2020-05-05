@@ -60,8 +60,8 @@ public class Communicator implements Runnable {
 
 	}
 	
-	public void sendLogin(String initialer) {
-		pw.print("0:" + initialer);
+	public static void sendLogin(String initialer) {
+		pw.print("0;" + initialer);
 		pw.flush();
 	}
 	// sender besked om, klienten vil kende sine projekter/aktiviteter

@@ -27,6 +27,7 @@ public class UserInterface extends JFrame implements ActionListener{
 		window.setTitle("Software company. Velkommen " + Login.initialer);
 		window.setSize(600, 600);
 //		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 	}
 	
@@ -39,12 +40,13 @@ public class UserInterface extends JFrame implements ActionListener{
 		medarbAktiv.setLayout(new GridLayout(2,3));
 		medarbAktiv.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		maAkt1 = new JButton("Bestil ny aktivitet");
-		maAkt2 = new JButton("Tildel opgaver til udviklere");
-		maAkt3 = new JButton("akt 3");
-		maAkt4 = new JButton("akt 4");
-		maAkt5 = new JButton("akt 5");
-		maAkt6 = new JButton("akt 6");
+		maAkt1 = new JButton("Registrer fremtidig fravær");
+		maAkt2 = new JButton("Se timer brugt");
+		maAkt3 = new JButton("Ret registrerede timer");
+		maAkt4 = new JButton("Søg hjælp fra anden udvikler");
+		maAkt5 = new JButton("Opret projekt");
+		maAkt6 = new JButton("");
+		maAkt6.setEnabled(false);
 		maAkt1.addActionListener(this);
 		maAkt2.addActionListener(this);
 		maAkt3.addActionListener(this);
@@ -68,12 +70,13 @@ public class UserInterface extends JFrame implements ActionListener{
 		JPanel lederBut = new JPanel();
 		lederBut.setLayout(new GridLayout(2,3));
 		
-		leAkt1 = new JButton("akt 1");
-		leAkt2 = new JButton("akt 2");
-		leAkt3 = new JButton("akt 3");
-		leAkt4 = new JButton("akt 4");
-		leAkt5 = new JButton("akt 5");
-		leAkt6 = new JButton("akt 6");
+		leAkt1 = new JButton("Bestil ny aktivitet");
+		leAkt2 = new JButton("Tildel opgaver til udviklere");
+		leAkt3 = new JButton("Se ledige udviklere for perioder");
+		leAkt4 = new JButton("Se udvikling af timer på aktivitet");
+		leAkt5 = new JButton("Skaf rapporter");
+		leAkt6 = new JButton("");
+		leAkt6.setEnabled(false);
 		leAkt1.addActionListener(this);
 		leAkt2.addActionListener(this);
 		leAkt3.addActionListener(this);
@@ -106,55 +109,54 @@ public class UserInterface extends JFrame implements ActionListener{
 
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == maAkt1) {
+		if(e.getSource() == maAkt1) {		// Registrer fremtidig fravær
+			
+		}
+		if(e.getSource() == maAkt2) {		// Se timer brugt
+			
+		}
+		if(e.getSource() == maAkt3) {		// Ret registrerede timer
+			
+		}
+		if(e.getSource() == maAkt4) {		// Søg hjælp fra anden udvikler
+			
+		}
+		if(e.getSource() == maAkt5) {		// Opret projekt
+			
+		}
+		if(e.getSource() == maAkt6) {		// tom
+			
+		}
+		if(e.getSource() == leAkt1) {		// Bestil ny aktivitet
 			System.out.println("knap trykket");
 			BestilAktvitet.popup();
 //			Communicator.sendProjAccess();
 //			windowWait = "maAkt1";
 //			Communicator.sendOpretAktiv("1234", "5", "50", "", "");
 		}
-		if(e.getSource() == maAkt2) {
+		if(e.getSource() == leAkt2) {		// Tildel opgaver til udviklere
 			
 		}
-		if(e.getSource() == maAkt3) {
+		if(e.getSource() == leAkt3) {		// Se ledige udviklere for perioder
 			
 		}
-		if(e.getSource() == maAkt4) {
+		if(e.getSource() == leAkt4) {		// Se udvikling af timer på aktivitet
 			
 		}
-		if(e.getSource() == maAkt5) {
+		if(e.getSource() == leAkt5) {		// Skaf rapporter
 			
 		}
-		if(e.getSource() == maAkt6) {
-			
-		}
-		if(e.getSource() == leAkt1) {
-			//OpretProjekt.init();
-		}
-		if(e.getSource() == leAkt2) {
-			
-		}
-		if(e.getSource() == leAkt3) {
-			
-		}
-		if(e.getSource() == leAkt4) {
-			
-		}
-		if(e.getSource() == leAkt5) {
-			
-		}
-		if(e.getSource() == leAkt6) {
+		if(e.getSource() == leAkt6) {		// tom
 			
 		}
 
-		//
 	}
 
 
 	public static void proListModt() {
 		if(windowWait.equals("maAkt1")) {
 			BestilAktvitet.popup();
-		}
+		} else if(windowWait.equals("maAkt2"))
 		
 	}
 //	
