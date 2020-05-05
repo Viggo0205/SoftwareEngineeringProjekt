@@ -15,7 +15,7 @@ public class Communicator implements Runnable {
 	public boolean comModRun = false;
 	private boolean listening = true;
 	private String[] ca = new String[2];
-	private String sendMsg;
+	private static String sendMsg;
 
 	@Override
 	public void run() {
@@ -43,8 +43,8 @@ public class Communicator implements Runnable {
 		while(comModRun) {
 
 			if (Controll.ready) {
-				System.out.println("123");
-				System.out.println(netin.hasNext());
+//				System.out.println("123");
+//				System.out.println(netin.hasNext());
 				if (netin.hasNext()) {	
 					ca = netin.nextLine().split(":",2);
 					Controll.msgQueue(ca);
@@ -64,74 +64,83 @@ public class Communicator implements Runnable {
 		pw.print("0:" + initialer);
 		pw.flush();
 	}
+	// sender besked om, klienten vil kende sine projekter/aktiviteter
+	public static void sendProjAccess() {
+		pw.print("1");
+		pw.flush();
+	}
+	public static void sendAktivAccess() {
+		pw.print("2");
+		pw.flush();
+	}
 	
 	
 	// metoder for at sende beskeder til serveren afhængig af hvilket event.
-	public void sendOpretAktiv(String projekt, String uger, String timer) {
-		sendMsg = "a:" + projekt + ";" + uger + ";" + timer;
+	public static void sendOpretAktiv(String projekt, String startUge, String slutUge, String timer) {
+		sendMsg = "a;" + projekt + ";" + startUge  + ";" + slutUge + ";" + timer;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendTildelAkt(String projekt, String aktivitet, String udvikler) {
-		sendMsg = "b:" + projekt + ";" + aktivitet + ";" + udvikler;
+	public static void sendTildelAkt(String projekt, String aktivitet, String udvikler) {
+		sendMsg = "b;" + projekt + ";" + aktivitet + ";" + udvikler;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendSkafRapport(String projekt) {
-		sendMsg = "c:" + projekt;
+	public static void sendSkafRapport(String projekt) {
+		sendMsg = "c;" + projekt;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendRegistrerFerie(String startDato, String slutDato) {
-		sendMsg = "d:" + startDato + ";" + slutDato;
+	public static void sendRegistrerFerie(String startDato, String slutDato) {
+		sendMsg = "d;" + startDato + ";" + slutDato;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendSoegHjaelp(String projekt, String aktivitet, String udvikler) {
-		sendMsg = "e:" + projekt + ";" + aktivitet + ";" + udvikler;
+	public static void sendSoegHjaelp(String projekt, String aktivitet, String udvikler) {
+		sendMsg = "e;" + projekt + ";" + aktivitet + ";" + udvikler;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendRetterTimer(String dato, String timer) {
-		sendMsg = "f:" + dato + ";" + timer;
+	public static void sendRetterTimer(String dato, String timer) {
+		sendMsg = "f;" + dato + ";" + timer;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendOpretPro(String leder, String beskrivelse, String startDato, String slutDato) {
-		sendMsg = "g:" + leder + ";" + beskrivelse + ";" + startDato + ";" + slutDato;
+	public static void sendOpretPro(String leder, String beskrivelse, String startDato, String slutDato) {
+		sendMsg = "g;" + leder + ";" + beskrivelse + ";" + startDato + ";" + slutDato;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendIndmeldTid(String projekt, String aktivitet, String dag, String timer) {
-		sendMsg = "h:" + projekt + ";" + aktivitet + ";" + dag + ";" + timer;
+	public static void sendIndmeldTid(String projekt, String aktivitet, String dag, String timer) {
+		sendMsg = "h;" + projekt + ";" + aktivitet + ";" + dag + ";" + timer;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendErLedig(String uge) {
-		sendMsg = "i:" + uge;
+	public static void sendErLedig(String uge) {
+		sendMsg = "i;" + uge;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendTidsbrug(String projekt, String aktivitet) {
-		sendMsg = "j:" + projekt + ";" + aktivitet;
+	public static void sendTidsbrug(String projekt, String aktivitet) {
+		sendMsg = "j;" + projekt + ";" + aktivitet;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	public void sendSeArbejde(String startDato, String slutDato) {
-		sendMsg = "k:" + startDato + ";" + slutDato;
+	public static void sendSeArbejde(String startDato, String slutDato) {
+		sendMsg = "k;" + startDato + ";" + slutDato;
 		pw.print(sendMsg);
 		pw.flush();
 		sendMsg = null;
 	}
-	
+	//
 }

@@ -16,9 +16,11 @@ public class UserInterface extends JFrame implements ActionListener{
 	private JButton maAkt4;
 	private JButton maAkt5;
 	private JButton maAkt6;
-	public static void main(String[] args) {
-		menu();
-	}
+	private String windowWait;
+	
+//	public static void main(String[] args) {
+//		menu();
+//	}
 
 	public static void menu() {
 		UserInterface window = new UserInterface();
@@ -93,7 +95,9 @@ public class UserInterface extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == maAkt1) {
-			
+			Communicator.sendProjAccess();
+			windowWait = "maAkt1";
+//			Communicator.sendOpretAktiv("1234", "5", "50", "", "");
 		}
 		if(e.getSource() == maAkt2) {
 			
@@ -129,7 +133,7 @@ public class UserInterface extends JFrame implements ActionListener{
 			
 		}
 
-		
+		//
 	}
 	
 }
