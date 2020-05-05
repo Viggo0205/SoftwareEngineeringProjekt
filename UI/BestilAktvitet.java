@@ -31,6 +31,8 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         frame.pack();
         frame.setVisible(true);
 
+        NavnAktivitet = new JLabel("Navn på Aktivitet");
+        panel1.add()
 
         VaelgProj = new JLabel("Vaelg projekt");
         panel1.add(VaelgProj);
@@ -63,7 +65,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         bestilButton = new JButton("Bestil Aktivitet");
         panel1.add(bestilButton);
 
-        frame.setPreferredSize(new Dimension(8000,100));
+        frame.setSize(200, 500);
     }
 
     public static void main(String[] args) {
@@ -73,7 +75,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == bestilButton) {
-            
+
         }
 
 

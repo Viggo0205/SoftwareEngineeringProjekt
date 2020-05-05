@@ -1,8 +1,10 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class OpretProjekt {
+
     private JPanel mainPanel;
     private JLabel slutDatoLabel;
     private JLabel startDatoLabel;

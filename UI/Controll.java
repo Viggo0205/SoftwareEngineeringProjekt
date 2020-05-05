@@ -27,7 +27,7 @@ public class Controll {
 	public static void msgQueue(String[] sa) {
 		ready = false;
 		System.out.println(sa[0] + sa[1] + "sat i msgQueue");
-		sQueue = sa;
+		//sQueue = sa;
 	}
 	
 }
