@@ -46,8 +46,8 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 
         projekter = new JComboBox();
         panel1.add(projekter);
-        for(int i = 0; i < Controll.projektListe.length; i++) {
-        	projekter.addItem(Controll.projektListe[i]);
+        for(int i = 0; i < Controll.projektListe.size(); i++) {
+        	projekter.addItem(Controll.projektListe.get(i));
 
         }
         projekter.addActionListener(this);
@@ -92,9 +92,8 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 
         } else if(e.getSource()== projekter) {
         	System.out.println("valgt i projekter: " + projekter.getSelectedItem());
+        	System.out.println("valgt i projekter: " + projekter.getSelectedIndex());
         }
 
-
-//
     }
 }

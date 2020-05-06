@@ -19,22 +19,23 @@ public class RegistrerTimer extends JFrame implements ActionListener {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
 
         mainPanel.add(ProjektLabel);
         mainPanel.add(projekter);
-        for(int i = 0; i < Controll.projektListe.length; i++) {
-            projekter.addItem(Controll.projektListe[i]);
+        for(int i = 0; i < Controll.projektListe.size(); i++) {
+            projekter.addItem(Controll.projektListe.get(i));
         }
         projekter.addActionListener(this);
 
         mainPanel.add(aktivitetLabel);
         mainPanel.add(aktiviteter);
-        for(int i = 0; i < Controll.projektListe.length; i++) {
-           aktiviteter.addItem(Controll.projektListe[i]);
+        for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {
+           aktiviteter.addItem(Controll.choiseAktivListe.get(i));
 
         }
 

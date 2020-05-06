@@ -11,8 +11,10 @@ public class Controll {
 	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"}; // test array
 	public static boolean ready;
 	private static String[] sQueue;
-//	public static String[] projektListe;
+//	public static String[] projektListe = new String[] {"CHJA", "CLLO", "EILA", "RANY", "VIOL"};
 	public static ArrayList<String> projektListe = new ArrayList<String>();
+	public static ArrayList<ArrayList<String>> aktivListe = new ArrayList<ArrayList<String>>();
+	public static ArrayList<String> choiseAktivListe = new ArrayList<String>();
 	private static String[] loginModt;
 	public static Dato currentDag;
 	private static String[] datoArray = new String[3];
@@ -65,14 +67,26 @@ public class Controll {
 
 
 	private static void lavAktListe(String s) {
-		// TODO Auto-generated method stub
 		String[] ssPro = s.split(";");
 		for(int i = 0; i < ssPro.length; i++)
-			String[] ssAkt = ssPro[i].split(":");
-			projektListe.add(ssPro[0]);
+			lavAktListe2(i,ssPro);
 	}
 
 
+	private static void lavAktListe2(int i, String[] ssPro) {
+		String[] ssAkt = ssPro[i].split(":");
+		projektListe.add(ssAkt[0]);
+		ArrayList<String> tempAktList = new ArrayList<String>();
+		for(int j = 0; j < ssAkt.length; j++)
+			tempAktList.add(ssAkt[j]);
+		aktivListe.add(tempAktList);
+	}
+
+	private static void chooseAktiv(int i) {
+		for(int j = 1; j<aktivListe.get(i).size(); j++)
+			choiseAktivListe.add(aktivListe.get(i).get(j));
+	}
+	
 	private static void lavProListe(String s) {
 		String[] ss = s.split(";");
 		for(int i = 0; i < ss.length; i++)

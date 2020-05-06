@@ -22,16 +22,16 @@ public class SkafRapport extends JFrame implements ActionListener {
 
         mainPanel.add(projektlabel);
         mainPanel.add(projekter);
-        for(int i = 0; i < Controll.projektListe.length; i++) {
-            projekter.addItem(Controll.projektListe[i]);
+        for(int i = 0; i < Controll.projektListe.size(); i++) {
+            projekter.addItem(Controll.projektListe.get(i));
 
         }
         projekter.addActionListener(this);
 
         mainPanel.add(aktivitetlabel);
         mainPanel.add(aktivitet);
-        for(int i = 0; i < Controll.projektListe.length; i++) {
-            aktivitet.addItem(Controll.projektListe[i]);
+        for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {
+            aktivitet.addItem(Controll.choiseAktivListe.get(i));
 
         }
 
