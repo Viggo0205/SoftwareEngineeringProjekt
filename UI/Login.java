@@ -6,9 +6,9 @@ public class Login extends JFrame implements ActionListener {
 
 	private JPanel center;
 	private JLabel logLabel;
-	private JTextField logInput;
-	private JButton logInBut;
-	private boolean employeeStatus;
+	private static JTextField logInput;
+	private static JButton logInBut;
+	private static boolean employeeStatus;
 	public static String initialer;
 	public static JLabel bund;
 
@@ -84,11 +84,15 @@ public class Login extends JFrame implements ActionListener {
 			if(Controll.isEmployee(initialer)) {					// testkode indtil comm virker
 				Controll.loggedIn();								// *
 			} else { 												// *
-				bund.setText("Forkerte initialer");					// *
-				employeeStatus = Controll.isEmployee(initialer);	// *
-				logInput.setEnabled(true);							// *
-				logInBut.setEnabled(true);							// *
+				failed();											// *
 			}
 		}
+	}
+
+	public static void failed() {
+		bund.setText("Forkerte initialer");
+		employeeStatus = Controll.isEmployee(initialer);
+		logInput.setEnabled(true);
+		logInBut.setEnabled(true);
 	}
 }

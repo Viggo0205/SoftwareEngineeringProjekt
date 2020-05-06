@@ -16,7 +16,8 @@ public class UserInterface extends JFrame implements ActionListener{
 	private JButton maAkt4;
 	private JButton maAkt5;
 	private JButton maAkt6;
-	private static String windowWait;
+	public static String windowWait;
+	public static JTextArea log;
 	
 //	public static void main(String[] args) {
 //		menu();
@@ -93,7 +94,7 @@ public class UserInterface extends JFrame implements ActionListener{
 		lederAktiv.add(udvText);
 		lederAktiv.add(lederBut);
 		
-		JTextArea log = new JTextArea("Hvis det er din tur, kan du vælge et af dine kort på hånden og herefter den ingrediens, man vil battle med. Din modstander kan så vælge et kort fra sin hånd at kæmpe tilbage med. Her vinder den person der har flest gram af den givne ingrediens");
+		log = new JTextArea("Hvis det er din tur, kan du vælge et af dine kort på hånden og herefter den ingrediens, man vil battle med. Din modstander kan så vælge et kort fra sin hånd at kæmpe tilbage med. Her vinder den person der har flest gram af den givne ingrediens");
 		log.setLineWrap(true);
 		log.setEditable(false);
 		JScrollPane logScroll = new JScrollPane(log);
@@ -110,54 +111,59 @@ public class UserInterface extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == maAkt1) {		// Registrer fremtidig fravær
-			
+			RegistraerFraemtidigtFravaer.popup();
 		}
-		if(e.getSource() == maAkt2) {		// Se timer brugt
-			
+		if(e.getSource() == maAkt2) {		// Se timer brugt i dag
+			// usikker på, om denne skal have popup eller bare tjekke nuværende dag
+			/*
+			 * Medarbejderen skal enkelt kunne se, 
+			 * om han/hun har registreret alle timer
+			 * man har arbejdet i dag.
+			 */
 		}
 		if(e.getSource() == maAkt3) {		// Ret registrerede timer
-			
+			RetTimer.popup();
 		}
 		if(e.getSource() == maAkt4) {		// Søg hjælp fra anden udvikler
-			
+			windowWait = "maAkt4";
+			Communicator.sendAktivAccess();
 		}
 		if(e.getSource() == maAkt5) {		// Opret projekt
-			
+			OpretProjekt.popup();
 		}
-		if(e.getSource() == maAkt6) {		// tom
-			
+		if(e.getSource() == maAkt6) {		// indmeld brugt tid
+			windowWait = "maAkt6";
+			Communicator.sendAktivAccess();
 		}
 		if(e.getSource() == leAkt1) {		// Bestil ny aktivitet
 			System.out.println("knap trykket");
-			BestilAktvitet.popup();
+			BestilAktvitet.popup();			// testkode ind til comm virker*********
+			
+//			windowWait = "leAkt1";	// rigtig kode til når comm virker*********
 //			Communicator.sendProjAccess();
-//			windowWait = "maAkt1";
-//			Communicator.sendOpretAktiv("1234", "5", "50", "", "");
+			
 		}
 		if(e.getSource() == leAkt2) {		// Tildel opgaver til udviklere
-			
+			// ehm.... rip. Den her kræver en del. Fuld medarb liste??
+			windowWait = "leAkt2";
+			Communicator.sendAktivAccess();
 		}
 		if(e.getSource() == leAkt3) {		// Se ledige udviklere for perioder
-			
+			SeLedigUdvikler.popup();
 		}
 		if(e.getSource() == leAkt4) {		// Se udvikling af timer på aktivitet
-			
+			windowWait = "leAkt4";
+			Communicator.sendAktivAccess();
 		}
 		if(e.getSource() == leAkt5) {		// Skaf rapporter
-			
+			windowWait = "leAkt6";
+			Communicator.sendProjAccess();
 		}
 		if(e.getSource() == leAkt6) {		// tom
 			
 		}
-
 	}
 
 
-	public static void proListModt() {
-		if(windowWait.equals("maAkt1")) {
-			BestilAktvitet.popup();
-		} else if(windowWait.equals("maAkt2"))
-		
-	}
-//	
+	
 }

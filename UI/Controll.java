@@ -6,6 +6,9 @@ public class Controll {
 	private static String[] sQueue;
 	public static String[] projektListe;
 	private static String[] loginModt;
+	public static Dato currentDag;
+	private static String[] datoArray = new String[3];
+	private static String[] ledigMedarbListe;
 
 
 	public static void main(String[] args) {		
@@ -15,34 +18,34 @@ public class Controll {
 
 		while(true) {
 			if(!ready) {
-				if(sQueue[0].equals("placeholder")) { // modtagelse af projekt liste
-					projektListe = sQueue[1].split(";");
-					UserInterface.proListModt();
-				} else if(sQueue[0].equals("placeholder2")) { // modtagelse af aktiviteter
-					
-				} else if(sQueue[0].equals("0")) { // svar login
+				if(sQueue[0].equals("0")) {						// login svar
 					loginModt = sQueue[1].split(";");
-					if(loginModt[0].equals("200")) { // godkendt login
-						setDate(loginModt[1]);
-						
+					if(loginModt[0].equals("200")) { 		// godkendt login, indstil dato
+						datoArray = sQueue[1].split(",");
+						currentDag = new Dato(Integer.parseInt(datoArray[0]),Integer.parseInt(datoArray[1]),Integer.parseInt(datoArray[2]));
 					} else {
-						//fejlet login
+						Login.failed();
+						// fejlet loggin
 					}
-					
-					
-					
-				} else { // fejl i protokolkode
-					System.out.println("ukendt protokolkode: " + sQueue[0]);
+				} else if(sQueue[0].equals("placeholder")) {	// modtagelse af projekt liste
+					projektListe = sQueue[1].split(";");
+					proListModt();
+				} else if(sQueue[0].equals("placeholder2")) {	// modtagelse af aktiviteter
+
+				} else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
+					ledigMedarbListe = sQueue[1].split(";");
+					UserInterface.log.append("Ledige medarbejdere i perioden er: " + ledigMedarbListe.toString());
+				} else {
+
 				}
 
+			} else { // fejl i protokolkode
+				System.out.println("ukendt protokolkode: " + sQueue[0]);
 			}
 		}
 	}
 
-	private static void setDate(String datoString) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	public static boolean isEmployee(String initialer) {
 		for(int i = 0 ; i < employees.length ; i++)
@@ -64,6 +67,29 @@ public class Controll {
 
 	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
 		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
+	}
+	/*
+	 * Metoder for, hvis der er modtaget en projektliste eller en 
+	 * aktivitetsliste fra serveren.
+	 * Det sidst efterspurgte popup åbnes.
+	 */
+	public static void proListModt() {
+		if(UserInterface.windowWait.equals("leAkt1")) {			// Bestil ny aktivitet
+			BestilAktvitet.popup();
+		} else if(UserInterface.windowWait.equals("leAkt5")) {	// skaf rapport
+			SkafRapport.popup();
+		} 
+	}
+	public static void aktListModt() {
+		if(UserInterface.windowWait.equals("leAkt2")) {			// Tildel opgaver til udvikler
+			TildelAktivitet.popup();
+		} else if(UserInterface.windowWait.equals("maAkt4")) {	// Søg hjælp fra anden udvikler
+			soegHjaelp.popup();
+		} else if(UserInterface.windowWait.equals("maAkt3")) {	// Ret registrerede timer
+			RegistrerTimer.popup();
+		} else if(UserInterface.windowWait.equals("leAkt4")) {	// se tidsbrug 
+			TidBrugtAktivitet.popup();
+		}
 	}
 	//
 }
