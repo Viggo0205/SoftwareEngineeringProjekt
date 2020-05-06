@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SkafRapport {
+public class SkafRapport extends JFrame implements ActionListener {
     private JPanel mainPanel = new JPanel();;
     private JComboBox projekter =new JComboBox();
     private JComboBox aktivitet = new JComboBox();
@@ -43,6 +43,11 @@ public class SkafRapport {
 
     public static void popup() {
         new SkafRapport();
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

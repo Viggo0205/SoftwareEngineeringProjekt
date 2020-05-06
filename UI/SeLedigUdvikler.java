@@ -36,7 +36,7 @@ public class SeLedigUdvikler extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

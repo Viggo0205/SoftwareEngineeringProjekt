@@ -52,7 +52,7 @@ public class RegistrerTimer extends JFrame implements ActionListener {
     public static void popup() { new RegistrerTimer(); }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

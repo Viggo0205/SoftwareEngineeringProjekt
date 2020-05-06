@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TidBrugtAktivitet {
+public class TidBrugtAktivitet extends JFrame implements ActionListener{
     private JComboBox projekter = new JComboBox();
     private JComboBox aktivitet =new JComboBox();
     private JButton seTidBrugtButton =new JButton("Se tid brugt");
@@ -41,5 +41,10 @@ public class TidBrugtAktivitet {
 
     public static void popup() {
         new TidBrugtAktivitet();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

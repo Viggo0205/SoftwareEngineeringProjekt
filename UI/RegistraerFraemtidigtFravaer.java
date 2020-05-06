@@ -36,7 +36,7 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
     }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void actionPerformed(ActionEvent e) {
 
     }
 

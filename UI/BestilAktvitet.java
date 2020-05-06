@@ -87,8 +87,8 @@ public class BestilAktvitet extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == bestilButton) {
 
-        } else if(e.getSource()== comboBox1) {
-        	System.out.println("valgt i comboBox: " + comboBox1.getSelectedItem());
+        } else if(e.getSource()== projekter) {
+        	System.out.println("valgt i comboBox: " + projekter.getSelectedItem());
         }
 
 
