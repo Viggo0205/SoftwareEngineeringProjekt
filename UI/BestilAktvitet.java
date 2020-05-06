@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class BestilAktvitet extends JFrame implements ActionListener {
 
-    private JComboBox comboBox1;
+    private JComboBox projekter;
     public  JPanel panel1;
     private JTextField textField1;
     private JTextField textField2;
@@ -24,24 +24,31 @@ public class BestilAktvitet extends JFrame implements ActionListener {
     public BestilAktvitet()
     {
 
-        JFrame frame = new JFrame();
+//    	String[] testliste = {"1243","3456","1714","9334","2463","5211","6132",};
+        JFrame frame = new JFrame("Bestil aktivitet");
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
         frame.add(panel1);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        NavnAktivitet = new JLabel("Navn paa Aktivitet");
+        NavnAktivitet = new JLabel("Navn på Aktivitet");
         panel1.add(NavnAktivitet);
         NavnTextField = new JTextField();
         panel1.add(NavnTextField);
 
-        VaelgProj = new JLabel("Vaelg projekt");
+        VaelgProj = new JLabel("Vælg projekt");
         panel1.add(VaelgProj);
 
-        comboBox1 = new JComboBox();
-        panel1.add(comboBox1);
+        projekter = new JComboBox();
+        panel1.add(projekter);
+        for(int i = 0; i < Controll.projektListe.length; i++) {
+        	projekter.addItem(Controll.projektListe[i]);
+//        	comboBox1.addItem(testliste[i]);
+        }
+        projekter.addActionListener(this);
 
         Beskrivelse = new JLabel("Beskrivelse af aktivitet");
         panel1.add(Beskrivelse);
@@ -66,22 +73,25 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         panel1.add(textField1);
 
         bestilButton = new JButton("Bestil Aktivitet");
+        bestilButton.addActionListener(this);
         panel1.add(bestilButton);
 
         frame.setSize(200, 500);
     }
 
-    public static void main(String[] args) {
-        new BestilAktvitet();
+    public static void popup() {
+    	new BestilAktvitet();
 
     }
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == bestilButton) {
 
+        } else if(e.getSource()== projekter) {
+        	System.out.println("valgt i projekter: " + projekter.getSelectedItem());
         }
 
 
-
+//
     }
 }

@@ -14,8 +14,9 @@ public class RetTimer extends JFrame implements ActionListener {
         JFrame frame = new JFrame("Ret timer");
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         mainPanel.add(LabelDato);
@@ -25,19 +26,19 @@ public class RetTimer extends JFrame implements ActionListener {
         mainPanel.add(AntalTimer);
 
         mainPanel.add(retTimerButton);
-
+        retTimerButton.addActionListener(this);
         frame.setSize(400, 500);
 
     }
 
-    public static void main(String[] args) {
+    public static void popup(){
 
         new RetTimer();
 
     }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TidBrugtAktivitet {
-    private JComboBox Projekt = new JComboBox();
+public class TidBrugtAktivitet extends JFrame implements ActionListener{
+    private JComboBox projekter = new JComboBox();
     private JComboBox aktivitet =new JComboBox();
     private JButton seTidBrugtButton =new JButton("Se tid brugt");
     private JLabel ProjektLabel =new JLabel();
@@ -15,22 +15,36 @@ public class TidBrugtAktivitet {
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
 
         mainPanel.add(ProjektLabel);
-        mainPanel.add(Projekt);
+        mainPanel.add(projekter);
+        for(int i = 0; i < Controll.projektListe.length; i++) {
+            projekter.addItem(Controll.projektListe[i]);
+
+        }
 
         mainPanel.add(AktivitetLabel);
         mainPanel.add(aktivitet);
+        for(int i = 0; i < Controll.projektListe.length; i++) {
+            aktivitet.addItem(Controll.projektListe[i]);
+        }
 
         mainPanel.add(seTidBrugtButton);
+        seTidBrugtButton.addActionListener(this);
         frame.setSize(400, 500);
     }
 
-    public static void main(String[] args) {
+    public static void popup() {
         new TidBrugtAktivitet();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
