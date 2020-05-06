@@ -1,7 +1,13 @@
+/*
+ * Klasse til hovedsageligt at håndtere forskellige beskeder sendt fra serveren,
+ * men generelt også til nogle af de mere grundlæggende funktioner i klienten.
+ */
+
+//import SoftwareEngineringProjekt.src.Dato;
 
 public class Controll {
 
-	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"};
+	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"}; // test array
 	public static boolean ready;
 	private static String[] sQueue;
 	public static String[] projektListe;
@@ -11,11 +17,18 @@ public class Controll {
 	private static String[] ledigMedarbListe;
 
 
-	public static void main(String[] args) {		
+	public static void main(String[] args) {	
+		// opretter thread, så communicator kan køre frit og afvente beskeder
 		Thread t = new Thread(new Communicator());
 		t.start();
+		
+		// åbner login menuen
 		Login.menu();
-
+		
+		/*
+		 * store loop, der håndterer indgående beskeder.
+		 * Liste over protokolkoder findes i bilag.
+		 */
 		while(true) {
 			if(!ready) {
 				if(sQueue[0].equals("0")) {						// login svar
@@ -23,6 +36,7 @@ public class Controll {
 					if(loginModt[0].equals("200")) { 		// godkendt login, indstil dato
 						datoArray = sQueue[1].split(",");
 						currentDag = new Dato(Integer.parseInt(datoArray[0]),Integer.parseInt(datoArray[1]),Integer.parseInt(datoArray[2]));
+						loggedIn();
 					} else {
 						Login.failed();
 						// fejlet loggin
@@ -35,7 +49,7 @@ public class Controll {
 				} else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
 					ledigMedarbListe = sQueue[1].split(";");
 					UserInterface.log.append("Ledige medarbejdere i perioden er: " + ledigMedarbListe.toString());
-				} else {
+				} else {					// mange flere...
 
 				}
 
@@ -46,7 +60,7 @@ public class Controll {
 	}
 
 
-
+	// testkode ind til communicator og server virker
 	public static boolean isEmployee(String initialer) {
 		for(int i = 0 ; i < employees.length ; i++)
 			if(employees[i].equalsIgnoreCase(initialer))
@@ -54,20 +68,24 @@ public class Controll {
 		return false;
 	}
 
+	// metode kaldes, hvis login går gennem
 	public static void loggedIn() {
 		Login.bund.setText("logget ind");
 		UserInterface.menu();
 	}
 
+	// metode kaldes, når der modtages en nu besked med krav på, klienten var klar til at modtage den
 	public static void msgQueue(String[] sa) {
 		ready = false;
 		System.out.println(sa[0] + sa[1] + "sat i msgQueue");
-		//sQueue = sa;
+		sQueue = sa;
 	}
 
+	
 	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
 		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
 	}
+	
 	/*
 	 * Metoder for, hvis der er modtaget en projektliste eller en 
 	 * aktivitetsliste fra serveren.
@@ -91,5 +109,4 @@ public class Controll {
 			TidBrugtAktivitet.popup();
 		}
 	}
-	//
 }

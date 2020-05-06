@@ -6,7 +6,7 @@
  */
 
 
-/*public class Dato {
+public class Dato {
 	private int year, month, day, uge;
 
 	public Dato(int day, int month, int year) {
@@ -212,4 +212,4 @@
 		return "" + this.day + "-" + this.month + "-" + this.year;
 	}
 
-}*/
+}

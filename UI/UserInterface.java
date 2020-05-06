@@ -1,6 +1,11 @@
+/*
+ * Klasse til klientens grund-menu
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 
 public class UserInterface extends JFrame implements ActionListener{
 
@@ -19,13 +24,10 @@ public class UserInterface extends JFrame implements ActionListener{
 	public static String windowWait;
 	public static JTextArea log;
 	
-//	public static void main(String[] args) {
-//		menu();
-//	}
 
 	public static void menu() {
 		UserInterface window = new UserInterface();
-		window.setTitle("Software company. Velkommen " + Login.initialer);
+		window.setTitle("Software company. Velkommen " + Login.initialer.toUpperCase());
 		window.setSize(600, 600);
 //		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setLocationRelativeTo(null);
@@ -36,18 +38,17 @@ public class UserInterface extends JFrame implements ActionListener{
 	public UserInterface() {
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		
-		
 		JPanel medarbAktiv = new JPanel();
 		medarbAktiv.setLayout(new GridLayout(2,3));
 		medarbAktiv.setBorder(BorderFactory.createLineBorder(Color.black));
 		
+		// knapper tilføjes
 		maAkt1 = new JButton("Registrer fremtidig fravær");
 		maAkt2 = new JButton("Se timer brugt");
 		maAkt3 = new JButton("Ret registrerede timer");
 		maAkt4 = new JButton("Søg hjælp fra anden udvikler");
 		maAkt5 = new JButton("Opret projekt");
-		maAkt6 = new JButton("");
-		maAkt6.setEnabled(false);
+		maAkt6 = new JButton("Indmeld timer"); 
 		maAkt1.addActionListener(this);
 		maAkt2.addActionListener(this);
 		maAkt3.addActionListener(this);
@@ -60,8 +61,7 @@ public class UserInterface extends JFrame implements ActionListener{
 		medarbAktiv.add(maAkt4);
 		medarbAktiv.add(maAkt5);
 		medarbAktiv.add(maAkt6);
-		
-		
+				
 		JPanel lederAktiv = new JPanel();
 		lederAktiv.setLayout(new BoxLayout(lederAktiv, BoxLayout.Y_AXIS));
 		lederAktiv.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -71,13 +71,13 @@ public class UserInterface extends JFrame implements ActionListener{
 		JPanel lederBut = new JPanel();
 		lederBut.setLayout(new GridLayout(2,3));
 		
+		// knapper tilføjes
 		leAkt1 = new JButton("Bestil ny aktivitet");
 		leAkt2 = new JButton("Tildel opgaver til udviklere");
 		leAkt3 = new JButton("Se ledige udviklere for perioder");
 		leAkt4 = new JButton("Se udvikling af timer på aktivitet");
 		leAkt5 = new JButton("Skaf rapporter");
-		leAkt6 = new JButton("");
-		leAkt6.setEnabled(false);
+		leAkt6 = new JButton("");leAkt6.setEnabled(false); // der er endnu kun behov for 5 knapper
 		leAkt1.addActionListener(this);
 		leAkt2.addActionListener(this);
 		leAkt3.addActionListener(this);
@@ -94,7 +94,8 @@ public class UserInterface extends JFrame implements ActionListener{
 		lederAktiv.add(udvText);
 		lederAktiv.add(lederBut);
 		
-		log = new JTextArea("Hvis det er din tur, kan du vælge et af dine kort på hånden og herefter den ingrediens, man vil battle med. Din modstander kan så vælge et kort fra sin hånd at kæmpe tilbage med. Her vinder den person der har flest gram af den givne ingrediens");
+		// log tekstfelt tilføjes
+		log = new JTextArea("Dags dato: " + Controll.currentDag.getFormatedDate());
 		log.setLineWrap(true);
 		log.setEditable(false);
 		JScrollPane logScroll = new JScrollPane(log);
@@ -136,11 +137,8 @@ public class UserInterface extends JFrame implements ActionListener{
 			Communicator.sendAktivAccess();
 		}
 		if(e.getSource() == leAkt1) {		// Bestil ny aktivitet
-			System.out.println("knap trykket");
-			BestilAktvitet.popup();			// testkode ind til comm virker*********
-			
-//			windowWait = "leAkt1";	// rigtig kode til når comm virker*********
-//			Communicator.sendProjAccess();
+			windowWait = "leAkt1";
+			Communicator.sendProjAccess();
 			
 		}
 		if(e.getSource() == leAkt2) {		// Tildel opgaver til udviklere
