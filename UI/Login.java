@@ -87,7 +87,7 @@ public class Login extends JFrame implements ActionListener {
 	// Ved fejlet login / forkerte initialer
 	public static void failed() {
 		bund.setText("Forkerte initialer");
-		//employeeStatus = Controll.isEmployee(initialer);
+		employeeStatus = Controll.isEmployee(initialer);
 		logInput.setEnabled(true);
 		logInBut.setEnabled(true);
 	}
