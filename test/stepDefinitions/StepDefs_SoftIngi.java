@@ -9,7 +9,7 @@ public class StepDefs_SoftIngi {
 
 	@Given("<Brugeren er logget ind>")
 	public void brugerenErLoggetInd() {
-	    // Write code here that turns the phrase above into concrete actions
+	    System.out.println("testLinje");
 	    throw new io.cucumber.java.PendingException();
 	}
 
