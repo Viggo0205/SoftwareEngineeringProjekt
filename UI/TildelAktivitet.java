@@ -15,7 +15,7 @@ public class TildelAktivitet extends JFrame implements ActionListener {
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
-        
+
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -26,6 +26,7 @@ public class TildelAktivitet extends JFrame implements ActionListener {
             projekter.addItem(Controll.projektListe[i]);
 
         }
+        projekter.addActionListener(this);
 
         mainPanel.add(aktivitetLabel);
         mainPanel.add(aktivitet);

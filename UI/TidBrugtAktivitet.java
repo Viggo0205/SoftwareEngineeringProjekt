@@ -27,6 +27,7 @@ public class TidBrugtAktivitet extends JFrame implements ActionListener{
             projekter.addItem(Controll.projektListe[i]);
 
         }
+        projekter.addActionListener(this);
 
         mainPanel.add(AktivitetLabel);
         mainPanel.add(aktivitet);

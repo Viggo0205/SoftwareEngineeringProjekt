@@ -37,14 +37,13 @@ public class ArbejdsdagTest {
 	}
 	
 	
-//	@org.junit.Test
-//	public void findAktInd() {
-//		Arbejdsdag arbejdsdag = new Arbejdsdag(new Dato(3,2020));
-//		
-//		arbejdsdag.findAktInd("aktivitet",3);
-//		
-//		assertEquals(arbejdsdag.findAktInd("aktivitet", 3), arbejdsdag.findAktInd("aktivitet", 2));	
-//	}
+	@org.junit.Test
+	public void findAktInd() {
+		Arbejdsdag arbejdsdag = new Arbejdsdag(new Dato(3,2020));
+
+		arbejdsdag.findAktInd("aktivitet",3);
+
+	assertEquals(arbejdsdag.findAktInd("aktivitet", 3), arbejdsdag.findAktInd("aktivitet", 2));		}
 	
 	
 }

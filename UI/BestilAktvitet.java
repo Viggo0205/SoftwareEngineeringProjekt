@@ -21,6 +21,8 @@ public class BestilAktvitet extends JFrame implements ActionListener {
     private JLabel BudgeteretTid;
     public  JFrame frame = new JFrame("Bestil Aktivitet");
 
+
+    //Metode der laver selve UI til BestilAktivitet popupen.
     public BestilAktvitet()
     {
 
@@ -29,10 +31,10 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
         frame.add(panel1);
-
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
 
         NavnAktivitet = new JLabel("Navn på Aktivitet");
         panel1.add(NavnAktivitet);
@@ -46,7 +48,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         panel1.add(projekter);
         for(int i = 0; i < Controll.projektListe.length; i++) {
         	projekter.addItem(Controll.projektListe[i]);
-//        	comboBox1.addItem(testliste[i]);
+
         }
         projekter.addActionListener(this);
 
@@ -84,6 +86,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 
     }
 
+    //Tilføjer funktionalitet til knapper
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == bestilButton) {
 
