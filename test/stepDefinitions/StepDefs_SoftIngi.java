@@ -1,6 +1,11 @@
 package stepDefinitions;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.And;
 
-public class StepDefs_SoftIngi {
+
+//public class StepDefs_SoftIngi {
 	
 	//BestilAktivitet -------------------------------------------------------------------------------------------------------------------
 //	@Given("<Brugeren er logget ind>")
@@ -81,10 +86,12 @@ public class StepDefs_SoftIngi {
 //	    throw new io.cucumber.java.PendingException();
 //	}
 //
-//	@When("<Brugeren er udviklingsleder og tilfoejer en ugyldig tidsramme>")
+
+import io.cucumber.java.en.When;
+
+//@When("<Brugeren er udviklingsleder og tilfoejer en ugyldig tidsramme>")
 //	public void brugeren_er_udviklingsleder_og_tilfoejer_en_ugyldig_tidsramme() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
+//       System.out.println("Den givende tidsramme er ugyldig");
 //	}
 //
 //	@When("<Bruger Tilfoejer tidsramme>")
@@ -107,8 +114,7 @@ public class StepDefs_SoftIngi {
 //
 //	@Then("<Print fejl besked \"Du er ikke udviklingsleder\">")
 //	public void print_fejl_besked_Du_er_ikke_udviklingsleder() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
+//	    System.out.println("Du er ikke udviklingsleder")
 //	}
 	//-----------------------------------------------------------------------------------------------------------------------------------
 		
@@ -134,8 +140,7 @@ public class StepDefs_SoftIngi {
 //
 //	@Then("<Systemet opretter et nyt projekt og tildeler det et projekt nummer. Dette nummer informeres brugeren om>")
 //	public void systemet_opretter_et_nyt_projekt_og_tildeler_det_et_projekt_nummer_Dette_nummer_informeres_brugeren_om() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
+//	    System.out.println("projekt nummer"+ nummer)
 //	}
 //
 //	@Given("<Bruger er logget ind>")
@@ -188,7 +193,7 @@ public class StepDefs_SoftIngi {
 //
 //	@Then("<Systemet opretter et nyt projekt og tildeler det et projekt nummer og et navn. Bruger informeres herom>")
 //	public void systemet_opretter_et_nyt_projekt_og_tildeler_det_et_projekt_nummer_og_et_navn_Bruger_informeres_herom() {
-//	    // Write code here that turns the phrase above into concrete actions
+//	    System.out.println("Projekt nr "+ nr+" Projekt navn "+ProjektNavn)
 //	    throw new io.cucumber.java.PendingException();
 //	}
 //
@@ -218,7 +223,7 @@ public class StepDefs_SoftIngi {
 //
 //	@Then("<Systemet opretter et nyt projekt og tildeler det et projekt nummer og en leder. Dette nummer informeres brugeren om>")
 //	public void systemet_opretter_et_nyt_projekt_og_tildeler_det_et_projekt_nummer_og_en_leder_Dette_nummer_informeres_brugeren_om() {
-//	    // Write code here that turns the phrase above into concrete actions
+//	    System.out.println("Projekt nummer "+ nr + "Projekt leder navn " + Navn)
 //	    throw new io.cucumber.java.PendingException();
 //	}
 //	
@@ -682,4 +687,4 @@ public class StepDefs_SoftIngi {
 //	}
 	//-----------------------------------------------------------------------------------------------------------------------------------
 	
-}
+//}

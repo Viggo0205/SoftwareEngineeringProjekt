@@ -14,6 +14,6 @@ Feature: <Tildel Aktivitet til udviklere>
       Scenario: <Brugeren ikke er udviklingsleder>
       When <Bruger bestiller ny aktivitet og ikke er udviklingsleder>
       And <Bruger giver en aktivitets beskrivelser>
-      And <Bruger har ang--ivet en udvikler>
+      And <Bruger har angivet en udvikler>
       And <Angivet projektet eksistere>
       Then <Print fejl besked "Du er ikke udviklingsleder>

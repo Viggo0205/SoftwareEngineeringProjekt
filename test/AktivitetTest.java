@@ -21,7 +21,7 @@ public class AktivitetTest {
 	@Given("test123") 
     public void addTid() {
     	
-    	// Arrrange
+    	// Arrange
     	Aktivitet aktivitet = new Aktivitet("Aktivitet 1", new Dato(2020, 2), new Dato(2020, 3), 6);
     	
     	// Act
