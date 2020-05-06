@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TidBrugtAktivitet {
-    private JComboBox Projekt = new JComboBox();
+    private JComboBox projekter = new JComboBox();
     private JComboBox aktivitet =new JComboBox();
     private JButton seTidBrugtButton =new JButton("Se tid brugt");
     private JLabel ProjektLabel =new JLabel();
@@ -22,9 +22,9 @@ public class TidBrugtAktivitet {
 
 
         mainPanel.add(ProjektLabel);
-        mainPanel.add(Projekt);
+        mainPanel.add(projekter);
         for(int i = 0; i < Controll.projektListe.length; i++) {
-            Projekt.addItem(Controll.projektListe[i]);
+            projekter.addItem(Controll.projektListe[i]);
 
         }
 

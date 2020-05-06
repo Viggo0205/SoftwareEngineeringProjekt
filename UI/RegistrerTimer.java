@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 public class RegistrerTimer extends JFrame implements ActionListener {
     private JLabel ProjektLabel = new JLabel("Projekt");
-    private JComboBox projekt = new JComboBox();
+    private JComboBox projekter = new JComboBox();
     private JLabel aktivitetLabel = new JLabel("Aktivitet");
     private JComboBox aktiviteter =new JComboBox();
     private JLabel datoLabel = new JLabel("Dato");
@@ -25,9 +25,9 @@ public class RegistrerTimer extends JFrame implements ActionListener {
 
 
         mainPanel.add(ProjektLabel);
-        mainPanel.add(projekt);
+        mainPanel.add(projekter);
         for(int i = 0; i < Controll.projektListe.length; i++) {
-            projekt.addItem(Controll.projektListe[i]);
+            projekter.addItem(Controll.projektListe[i]);
 
         }
 

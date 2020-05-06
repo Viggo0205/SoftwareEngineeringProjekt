@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 
 public class SkafRapport {
     private JPanel mainPanel = new JPanel();;
-    private JComboBox Projekt =new JComboBox();
-    private JComboBox Aktivitet = new JComboBox();
+    private JComboBox projekter =new JComboBox();
+    private JComboBox aktivitet = new JComboBox();
     private JButton skafRapportButton = new JButton("Skaf Rapport");
     private JLabel projektlabel = new JLabel();
     private JLabel aktivitetlabel=new JLabel();
@@ -21,16 +21,16 @@ public class SkafRapport {
         frame.setVisible(true);
 
         mainPanel.add(projektlabel);
-        mainPanel.add(Projekt);
+        mainPanel.add(projekter);
         for(int i = 0; i < Controll.projektListe.length; i++) {
-            Projekt.addItem(Controll.projektListe[i]);
+            projekter.addItem(Controll.projektListe[i]);
 
         }
 
         mainPanel.add(aktivitetlabel);
-        mainPanel.add(Aktivitet);
+        mainPanel.add(aktivitet);
         for(int i = 0; i < Controll.projektListe.length; i++) {
-            Aktivitet.addItem(Controll.projektListe[i]);
+            aktivitet.addItem(Controll.projektListe[i]);
 
         }
 

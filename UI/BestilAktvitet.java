@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class BestilAktvitet extends JFrame implements ActionListener {
 
-    private JComboBox comboBox1;
+    private JComboBox projekter;
     public  JPanel panel1;
     private JTextField textField1;
     private JTextField textField2;
@@ -25,7 +25,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
     {
 
 //    	String[] testliste = {"1243","3456","1714","9334","2463","5211","6132",};
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Bestil aktivitet");
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
         frame.add(panel1);
@@ -42,13 +42,13 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         VaelgProj = new JLabel("Vælg projekt");
         panel1.add(VaelgProj);
 
-        comboBox1 = new JComboBox();
-        panel1.add(comboBox1);
+        projekter = new JComboBox();
+        panel1.add(projekter);
         for(int i = 0; i < Controll.projektListe.length; i++) {
-        	comboBox1.addItem(Controll.projektListe[i]);
+        	projekter.addItem(Controll.projektListe[i]);
 //        	comboBox1.addItem(testliste[i]);
         }
-        comboBox1.addActionListener(this);
+        projekter.addActionListener(this);
 
         Beskrivelse = new JLabel("Beskrivelse af aktivitet");
         panel1.add(Beskrivelse);

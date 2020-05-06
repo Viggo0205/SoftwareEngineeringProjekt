@@ -3,8 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TildelAktivitet extends JFrame implements ActionListener {
-    private JComboBox Aktivitet =new JComboBox();
-    private JComboBox Projekt =new JComboBox();
+    private JComboBox aktivitet =new JComboBox();
+    private JComboBox projekter =new JComboBox();
     public JPanel mainPanel =new JPanel();
     private JButton Tildel = new JButton("Tildel");
     private JLabel aktivitetLabel = new JLabel("Aktivitet");
@@ -21,16 +21,16 @@ public class TildelAktivitet extends JFrame implements ActionListener {
         frame.setVisible(true);
 
         mainPanel.add(projektLabel);
-        mainPanel.add(Projekt);
+        mainPanel.add(projekter);
         for(int i = 0; i < Controll.projektListe.length; i++) {
-            Projekt.addItem(Controll.projektListe[i]);
+            projekter.addItem(Controll.projektListe[i]);
 
         }
 
         mainPanel.add(aktivitetLabel);
-        mainPanel.add(Aktivitet);
+        mainPanel.add(aktivitet);
         for(int i = 0; i < Controll.projektListe.length; i++) {
-            Aktivitet.addItem(Controll.projektListe[i]);
+            aktivitet.addItem(Controll.projektListe[i]);
 
         }
 

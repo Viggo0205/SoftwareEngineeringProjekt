@@ -21,7 +21,7 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 
 
     public OpretProjekt() {
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Opret projekt");
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
