@@ -9,7 +9,7 @@ Action: Udviklere og udviklingsleder
     Given <Brugeren er logget ind og har indregistreret arbejdstimer>
     When <Brugeren er udviklingsleder eller udvikler>
     And <Bruger retter arbejdstimer>
-    Then <Saa bliver arbejdstimer (ne) rettet og gemt>
+    Then <Saa bliver arbejdstimer(ne) rettet og gemt>
 
 #fail scenirie 1
   Scenario: <Angivet udgyldig registrerede timer>

@@ -13,7 +13,7 @@ Feature: <Bestil Aktivitet>
   Scenario: <Brugeren ikke er udviklingsleder>
     Given <Brugeren er logget ind>
     When <Bruger bestiller ny aktivitet og ikke er udviklingsleder>
-    And <Bruger Tilfoejer tidsramme>
+    And <Bruger tilfoejer tidsramme>
     And <Bruger tilfoejer arbejdstimer>
     And <Angivet projektet eksisterer>
     Then <Print fejl besked "Du er ikke udviklingsleder">
@@ -21,7 +21,7 @@ Feature: <Bestil Aktivitet>
   Scenario: <Angivet en ugyldig tidsramme>
     Given <Brugeren er logget ind>
     When <Brugeren er udviklingsleder og tilfoejer en ugyldig tidsramme>
-    And <Bruger Tilfoejer tidsramme>
+    And <Bruger tilfoejer tidsramme>
     And <Bruger tilfoejer arbejdstimer>
     And <Angivet projektet eksisterer>
     Then <Print fejl besked "Du er ikke udviklingsleder">
