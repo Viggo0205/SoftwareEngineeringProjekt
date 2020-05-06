@@ -9,38 +9,32 @@ public class StepDefs_SoftIngi {
 
 	@Given("<Brugeren er logget ind>")
 	public void brugerenErLoggetInd() {
-	    System.out.println("testLinje");
-	    throw new io.cucumber.java.PendingException();
+	    System.out.println("Brugeren er logget ind");
 	}
 
 	@When("<Bruger bestiller aktivitet og er udviklingsleder>")
 	public void brugerBestillerAktivitetOgErUdviklingsleder() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    System.out.println("Bruger bestiller aktivitet og er udviklingsleder");
 	}
 
 	@When("<Bruger tilfoejer tidsramme>")
 	public void brugerTilfoejerTidsramme() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		System.out.println("Bruger tilfoejer tidsramme");
 	}
 
 	@When("<Bruger tilfoejer arbejdstimer>")
 	public void brugerTilfoejerArbejdstimer() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		System.out.println("Bruger tilfoejer arbejdstimer");
 	}
 
 	@When("<Angivet projektet eksisterer>")
 	public void angivetProjektetEksisterer() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		System.out.println("<Angivet projektet eksisterer>");
 	}
 
 	@Then("<Saa bliver der bestilt at den nye aktviitet bliver lavet>")
 	public void saaBliverDerBestiltAtDenNyeAktviitetBliverLavet() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    System.out.println("Saa bliver der bestilt at den nye aktviitet bliver lavet");
 	}
 
 	@When("<Bruger bestiller ny aktivitet og ikke er udviklingsleder>")
@@ -123,8 +117,7 @@ public class StepDefs_SoftIngi {
 
 	@When("<Brugeren angiver en aktivitet vedkommende er tilknyttet til>")
 	public void brugerenAngiverEnAktivitetVedkommendeErTilknyttetTil() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
 	}
 
 	@When("<Brugeren angiver en acceptabel tidsmaengde>")
