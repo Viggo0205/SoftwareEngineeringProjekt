@@ -29,18 +29,22 @@ public class ArbejdsdagTest {
 	
 	@org.junit.Test
 	public void findProjInd() {
-		Arbejdsdag arbejdsdag = new Arbejdsdag(new Dato(2020, 3);
+		Arbejdsdag arbejdsdag = new Arbejdsdag(new Dato(3,2020));
+				
+		arbejdsdag.findProjInd("projekt");
 		
-		arbejdsdag.findProjInd(new projekt("test", 1));
-		
-		assertEquals(expected, arbejdsdag.findProjInd());
+		assertEquals(arbejdsdag.findProjInd("projekt"), arbejdsdag.findProjInd("projekt"));
 	}
 	
 	
 //	@org.junit.Test
 //	public void findAktInd() {
-//		Arbejdsdag arbejdsdag = new Arbejdsdag(new Dato(2020, 2);	
+//		Arbejdsdag arbejdsdag = new Arbejdsdag(new Dato(3,2020));
+//		
+//		arbejdsdag.findAktInd("aktivitet",3);
+//		
+//		assertEquals(arbejdsdag.findAktInd("aktivitet", 3), arbejdsdag.findAktInd("aktivitet", 2));	
 //	}
-//	
+	
 	
 }
