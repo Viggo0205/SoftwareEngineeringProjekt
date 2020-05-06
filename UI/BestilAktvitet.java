@@ -29,7 +29,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
         frame.add(panel1);
-//        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -73,7 +73,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         panel1.add(textField1);
 
         bestilButton = new JButton("Bestil Aktivitet");
-        bestilButton.addActionListener();
+        bestilButton.addActionListener(this);
         panel1.add(bestilButton);
 
         frame.setSize(200, 500);
@@ -88,7 +88,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         if(e.getSource() == bestilButton) {
 
         } else if(e.getSource()== projekter) {
-        	System.out.println("valgt i comboBox: " + projekter.getSelectedItem());
+        	System.out.println("valgt i projekter: " + projekter.getSelectedItem());
         }
 
 

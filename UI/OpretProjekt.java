@@ -25,12 +25,12 @@ public class OpretProjekt extends JFrame implements ActionListener  {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        navnPåUdviklingsLeder = new JLabel("Navn paa udvikler");
+        navnPåUdviklingsLeder = new JLabel("Navn på udvikler");
         mainPanel.add(navnPåUdviklingsLeder);
         Medarbejdere = new JComboBox();
         mainPanel.add(Medarbejdere);
@@ -53,7 +53,7 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 
         opretProjektButton = new JButton("Opret Projekt");
         mainPanel.add(opretProjektButton);
-        opretProjektButton.addActionListener();
+        opretProjektButton.addActionListener(this);
         frame.setSize(200, 500);
 
     }

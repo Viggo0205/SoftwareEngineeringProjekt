@@ -45,7 +45,7 @@ public class RegistrerTimer extends JFrame implements ActionListener {
         mainPanel.add(timer);
 
         mainPanel.add(registrerTimerButton);
-        registrerTimerButton.addActionListener();
+        registrerTimerButton.addActionListener(this);
         frame.setSize(200, 500);
     }
 

@@ -15,7 +15,7 @@ public class TidBrugtAktivitet extends JFrame implements ActionListener{
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -35,7 +35,7 @@ public class TidBrugtAktivitet extends JFrame implements ActionListener{
         }
 
         mainPanel.add(seTidBrugtButton);
-        seTidBrugtButton.addActionListener();
+        seTidBrugtButton.addActionListener(this);
         frame.setSize(400, 500);
     }
 

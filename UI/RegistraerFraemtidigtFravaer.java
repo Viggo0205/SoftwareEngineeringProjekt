@@ -18,7 +18,7 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -30,7 +30,7 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
         mainPanel.add(slutDato);
 
         mainPanel.add(registrer);
-        registrer.addActionListener();
+        registrer.addActionListener(this);
         frame.setSize(400, 500);
 
     }
