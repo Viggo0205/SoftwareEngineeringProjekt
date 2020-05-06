@@ -15,7 +15,7 @@ Feature: <Skaf rapport>
       When <Brugeren er ikke udviklingsleder>
       And <Brugeren tilfoejere tidsrammer>
       And <Brugeren tilfoejere arbejdstimer>
-      And <Angivet projektet eksistere>
+      And <Angivet projektet eksisterer>
       Then <Print fejl besked "Du er ikke udviklingsleder">
 #fail2      
      	Scenario: <Anmodet om ikke eksisterende rapport>

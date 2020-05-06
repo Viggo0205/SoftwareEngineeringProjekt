@@ -16,5 +16,5 @@ Feature: <Tildel Aktivitet til udviklere>
       When <Bruger bestiller ny aktivitet og ikke er udviklingsleder>
       And <Bruger giver en aktivitets beskrivelser>
       And <Bruger har angivet en udvikler>
-      And <Angivet projektet eksistere>
+      And <Angivet projektet eksisterer>
       Then <Print fejl besked "Du er ikke udviklingsleder">
