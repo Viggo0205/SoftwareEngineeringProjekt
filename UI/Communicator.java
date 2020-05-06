@@ -1,8 +1,12 @@
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+/*
+ * Klasse til at oprette forbindelse til server,
+ * sende og modtage beskeder til/fra serveren 
+ * og sende beskeder med rigtig protokol/formatering,
+ * så serveren kan læse det.
+ */
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -20,12 +24,14 @@ public class Communicator implements Runnable {
 	@Override
 	public void run() {
 		comModRun = true;
+		
 		// der forsøges at oprette kontakt til serveren
 		try {
 			s = new Socket("localhost", 8080);
 		} catch (IOException ioe) {
 			System.err.println("Socket not opened");
 		}
+		
 		// in- og output initieres
 		try {
 			netin = new Scanner(s.getInputStream());
@@ -40,11 +46,10 @@ public class Communicator implements Runnable {
 			e.printStackTrace();
 			System.err.println("pw not initiated");
 		}
+		
+		// loop, der løbende læser nye beskeder sendt fra serveren
 		while(comModRun) {
-
 			if (Controll.ready) {
-//				System.out.println("123");
-//				System.out.println(netin.hasNext());
 				if (netin.hasNext()) {	
 					ca = netin.nextLine().split(":",2);
 					Controll.msgQueue(ca);
@@ -55,25 +60,24 @@ public class Communicator implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 	
+	// sender ønske om login med brugerens initialer
 	public static void sendLogin(String initialer) {
 		pw.print("0;" + initialer);
 		pw.flush();
 	}
-	// sender besked om, klienten vil kende sine projekter/aktiviteter
+	// sender besked om, klienten vil kende sine projekter
 	public static void sendProjAccess() {
 		pw.print("1");
 		pw.flush();
 	}
+	// sender besked om, klienten vil kende sine projekter og aktiviteter
 	public static void sendAktivAccess() {
 		pw.print("2");
 		pw.flush();
 	}
-	
 	
 	// metoder for at sende beskeder til serveren afhængig af hvilket event.
 	public static void sendOpretAktiv(String projekt, String startUge, String slutUge, String timer) {
@@ -142,5 +146,4 @@ public class Communicator implements Runnable {
 		pw.flush();
 		sendMsg = null;
 	}
-	
 }
