@@ -12,11 +12,11 @@ public class ArbejdsdagTest {
 	@org.junit.Test
 	public void addTid() {
 //		arrange
-    	Arbejdsdag arbejdsdag = new Arbejdsdag(new Dato(2020, 3));
+    	Arbejdsdag arbejdsdag = new Arbejdsdag(new Dato(3,2020));
 //    	act
     	arbejdsdag.addTid("projekt", "aktivitet", 2);
 //    	assert
-    	assertEquals("Arbejdstider for: 22-1-2020\nprojekt\naktivitet: 2\nTotaltid: 2" ,arbejdsdag.getTid());
+    	assertEquals("Arbejdstider for: 15-1-2020\nprojekt\naktivitet: 2\nTotaltid: 2" ,arbejdsdag.getTid());
 	}
 
 	@org.junit.Test
