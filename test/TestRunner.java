@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 @CucumberOptions(features = "use_cases/SoftwareEngineeringProjekt",
 	plugin = { "html:target/cucumber/wikipedia.html"},
 	snippets = SnippetType.CAMELCASE,
-	glue = { "dtu.library.acceptance_tests"},
+	glue = { "stepDefinitions"},
 	strict = true)
 public class TestRunner {
 

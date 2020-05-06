@@ -5,14 +5,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.And;
 
 
-//public class StepDefs_SoftIngi {
+public class StepDefs_SoftIngi {
 	
 	//BestilAktivitet -------------------------------------------------------------------------------------------------------------------
-//	@Given("<Brugeren er logget ind>")
-//	public void brugeren_er_logget_ind() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
+	@Given("<Brugeren er logget ind>")
+	public void brugeren_er_logget_ind() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
 //
 //	@When("<Bruger bestiller aktivitet og er udviklingsleder>")
 //	public void bruger_bestiller_aktivitet_og_er_udviklingsleder() {
@@ -87,7 +87,6 @@ import io.cucumber.java.en.And;
 //	}
 //
 
-import io.cucumber.java.en.When;
 
 //@When("<Brugeren er udviklingsleder og tilfoejer en ugyldig tidsramme>")
 //	public void brugeren_er_udviklingsleder_og_tilfoejer_en_ugyldig_tidsramme() {
@@ -687,4 +686,4 @@ import io.cucumber.java.en.When;
 //	}
 	//-----------------------------------------------------------------------------------------------------------------------------------
 	
-//}
+}
