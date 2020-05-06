@@ -3,6 +3,7 @@
  * men generelt også til nogle af de mere grundlæggende funktioner i klienten.
  */
 
+import java.util.ArrayList;
 //import SoftwareEngineringProjekt.src.Dato;
 
 public class Controll {
@@ -10,7 +11,8 @@ public class Controll {
 	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"}; // test array
 	public static boolean ready;
 	private static String[] sQueue;
-	public static String[] projektListe;
+//	public static String[] projektListe;
+	public static ArrayList<String> projektListe = new ArrayList<String>();
 	private static String[] loginModt;
 	public static Dato currentDag;
 	private static String[] datoArray = new String[3];
@@ -42,10 +44,12 @@ public class Controll {
 						// fejlet loggin
 					}
 				} else if(sQueue[0].equals("placeholder")) {	// modtagelse af projekt liste
-					projektListe = sQueue[1].split(";");
+					lavProListe(sQueue[1]);
+//					projektListe = sQueue[1].split(";");
 					proListModt();
 				} else if(sQueue[0].equals("placeholder2")) {	// modtagelse af aktiviteter
-
+					lavAktListe(sQueue[1]);
+					aktListModt();
 				} else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
 					ledigMedarbListe = sQueue[1].split(";");
 					UserInterface.log.append("Ledige medarbejdere i perioden er: " + ledigMedarbListe.toString());
@@ -57,6 +61,22 @@ public class Controll {
 				System.out.println("ukendt protokolkode: " + sQueue[0]);
 			}
 		}
+	}
+
+
+	private static void lavAktListe(String s) {
+		// TODO Auto-generated method stub
+		String[] ssPro = s.split(";");
+		for(int i = 0; i < ssPro.length; i++)
+			String[] ssAkt = ssPro[i].split(":");
+			projektListe.add(ssPro[0]);
+	}
+
+
+	private static void lavProListe(String s) {
+		String[] ss = s.split(";");
+		for(int i = 0; i < ss.length; i++)
+			projektListe.add(ss[1]);
 	}
 
 

@@ -78,6 +78,7 @@ public class Login extends JFrame implements ActionListener {
 //		Communicator.sendLogin(initialer); 			// sender login forespørgsel
 		
 		if(Controll.isEmployee(initialer)) { 					// testkode indtil comm virker
+			System.out.println("helloooooo!!!=?!!?!?!?");
 			Controll.loggedIn();								// *
 		} else { 												// *
 			failed();											// *
@@ -87,7 +88,6 @@ public class Login extends JFrame implements ActionListener {
 	// Ved fejlet login / forkerte initialer
 	public static void failed() {
 		bund.setText("Forkerte initialer");
-		employeeStatus = Controll.isEmployee(initialer);
 		logInput.setEnabled(true);
 		logInBut.setEnabled(true);
 	}
