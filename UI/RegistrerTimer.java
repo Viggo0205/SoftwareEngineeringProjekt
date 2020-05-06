@@ -26,9 +26,17 @@ public class RegistrerTimer extends JFrame implements ActionListener {
 
         mainPanel.add(ProjektLabel);
         mainPanel.add(projekt);
+        for(int i = 0; i < Controll.projektListe.length; i++) {
+            projekt.addItem(Controll.projektListe[i]);
+
+        }
 
         mainPanel.add(aktivitetLabel);
         mainPanel.add(aktiviteter);
+        for(int i = 0; i < Controll.projektListe.length; i++) {
+           aktiviteter.addItem(Controll.projektListe[i]);
+
+        }
 
         mainPanel.add(datoLabel);
         mainPanel.add(dato);
@@ -37,12 +45,11 @@ public class RegistrerTimer extends JFrame implements ActionListener {
         mainPanel.add(timer);
 
         mainPanel.add(registrerTimerButton);
+        registrerTimerButton.addActionListener();
         frame.setSize(200, 500);
     }
 
-    public static void main(String[] args) {
-       new RegistrerTimer();
-    }
+    public static void popup() { new RegistrerTimer(); }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {

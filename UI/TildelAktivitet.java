@@ -17,20 +17,29 @@ public class TildelAktivitet extends JFrame implements ActionListener {
         frame.add(mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         mainPanel.add(projektLabel);
         mainPanel.add(Projekt);
+        for(int i = 0; i < Controll.projektListe.length; i++) {
+            Projekt.addItem(Controll.projektListe[i]);
+
+        }
 
         mainPanel.add(aktivitetLabel);
         mainPanel.add(Aktivitet);
+        for(int i = 0; i < Controll.projektListe.length; i++) {
+            Aktivitet.addItem(Controll.projektListe[i]);
+
+        }
 
         mainPanel.add(Tildel);
-
+        Tildel.addActionListener();
         frame.setSize(400,500);
     }
 
-    public static void main(String[] args) {
+    public static void popup() {
       new TildelAktivitet();
     }
 

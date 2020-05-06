@@ -20,6 +20,7 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
         frame.add(mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         mainPanel.add(startDatoLabel);
@@ -29,6 +30,7 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
         mainPanel.add(slutDato);
 
         mainPanel.add(registrer);
+        registrer.addActionListener();
         frame.setSize(400, 500);
 
     }
@@ -38,7 +40,7 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
 
     }
 
-    public static void main(String[] args) {
+    public static void popup() {
         new RegistraerFraemtidigtFravaer();
     }
 }

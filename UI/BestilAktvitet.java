@@ -31,6 +31,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         frame.add(panel1);
 //        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         NavnAktivitet = new JLabel("Navn på Aktivitet");
@@ -72,6 +73,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         panel1.add(textField1);
 
         bestilButton = new JButton("Bestil Aktivitet");
+        bestilButton.addActionListener();
         panel1.add(bestilButton);
 
         frame.setSize(200, 500);

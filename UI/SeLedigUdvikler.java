@@ -17,6 +17,7 @@ public class SeLedigUdvikler extends JFrame implements ActionListener {
         frame.add(mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         mainPanel.add(startDatoLabel);
@@ -26,10 +27,11 @@ public class SeLedigUdvikler extends JFrame implements ActionListener {
         mainPanel.add(slutDato);
 
         mainPanel.add(registrer);
+        registrer.addActionListener();
         frame.setSize(400, 500);
     }
 
-    public static void main(String[] args) {
+    public static void popup() {
         new SeLedigUdvikler();
     }
 

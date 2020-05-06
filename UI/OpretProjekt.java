@@ -27,6 +27,7 @@ public class OpretProjekt extends JFrame implements ActionListener  {
         frame.add(mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         navnPåUdviklingsLeder = new JLabel("Navn paa udvikler");
@@ -52,11 +53,12 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 
         opretProjektButton = new JButton("Opret Projekt");
         mainPanel.add(opretProjektButton);
+        opretProjektButton.addActionListener();
         frame.setSize(200, 500);
 
     }
 
-    public static void main(String[] args) {
+    public static void popup() {
        new OpretProjekt();
     }
 

@@ -17,21 +17,31 @@ public class SkafRapport {
         frame.add(mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         mainPanel.add(projektlabel);
         mainPanel.add(Projekt);
+        for(int i = 0; i < Controll.projektListe.length; i++) {
+            Projekt.addItem(Controll.projektListe[i]);
+
+        }
 
         mainPanel.add(aktivitetlabel);
         mainPanel.add(Aktivitet);
+        for(int i = 0; i < Controll.projektListe.length; i++) {
+            Aktivitet.addItem(Controll.projektListe[i]);
+
+        }
 
         mainPanel.add(skafRapportButton);
+        skafRapportButton.addActionListener();
         frame.setSize(400, 500);
 
     }
 
 
-    public static void main(String[] args) {
+    public static void popup() {
         new SkafRapport();
 
     }

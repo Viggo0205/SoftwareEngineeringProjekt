@@ -19,6 +19,7 @@ public class soegHjaelp extends JFrame implements ActionListener {
         frame.add(mainPanel);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         mainPanel.add(DitNavnLabel);
@@ -31,10 +32,11 @@ public class soegHjaelp extends JFrame implements ActionListener {
         mainPanel.add(navnPaaUdvikler);
 
         mainPanel.add(soegHjaelpButton);
+        soegHjaelpButton.addActionListener();
         frame.setSize(400, 500);
     }
 
-    public static void main(String[] args) {
+    public static void popup() {
         new soegHjaelp();
     }
 
