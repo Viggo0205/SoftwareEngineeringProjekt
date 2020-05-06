@@ -15,7 +15,7 @@ Action: Udviklere og udviklingsleder
   Scenario: <Angivet udgyldig registrerede timer>
     When <Bruger er udviklingsleder eller udvikler>
     And <Bruger retter ugyldige registrerede timer> 
-    And <Angivet projektet eksisterer >
+    And <Angivet projektet eksisterer>
     Then <Print fejl besked "Du har forsoegt at rette ugyldige registrerede timer">
 
     
