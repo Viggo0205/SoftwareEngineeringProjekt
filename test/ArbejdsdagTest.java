@@ -40,10 +40,12 @@ public class ArbejdsdagTest {
 	@org.junit.Test
 	public void findAktInd() {
 		Arbejdsdag arbejdsdag = new Arbejdsdag(new Dato(3,2020));
+		
+		arbejdsdag.addTid("Proj1", "aktivitet", 3);
 
-		arbejdsdag.findAktInd("aktivitet",3);
+		arbejdsdag.findAktInd("aktivitet",0);
 
-	assertEquals(arbejdsdag.findAktInd("aktivitet", 3), arbejdsdag.findAktInd("aktivitet", 2));		}
+	assertEquals(arbejdsdag.findAktInd("aktivitet", 0), arbejdsdag.findAktInd("aktivitet", 0));		}
 	
 	
 }
