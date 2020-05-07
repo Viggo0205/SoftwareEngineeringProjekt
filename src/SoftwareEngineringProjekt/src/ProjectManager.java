@@ -10,9 +10,9 @@ public class ProjectManager {
 		return this.projekter;
 	}
 	
-	public int addProject(String projektNavn, Medarbejder projektleder, Dato startUge, Dato slutUge)
+	public int addProject(Project projekt)
 	{
-		this.projekter.add(new Project(projektNavn, projektleder, startUge, slutUge));
+		this.projekter.add(projekt);
 		return 200;
 	}
 	

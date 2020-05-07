@@ -18,42 +18,43 @@ public class Project implements Serializable {
 	private Dato startDato, slutDato;
 	private String navn, projektNummer;
 	
-	public Project(String navn, Medarbejder projektleder, Dato startDato, Dato slutDato) throws NullPointerException {
+	public Project(String navn, Medarbejder projektleder, Dato startDato, Dato slutDato, String projektNummer) {
 		this.navn = navn;
 		this.projektleder = projektleder;
 		// Behandl lovlige uger client-side
 		this.startDato = startDato;
 		this.slutDato = slutDato;
-		if (ServControll.getProjekter().getProjektListLength() > 0)
-		{
-			// Sidste oprettede projekts fulde nummer
-			String s = ServControll.getProjekter().getProjects().get(ServControll.getProjekter().getProjektListLength() - 1).getProjektNummer();
-			if ( s.substring(4, 10).equals("999999") )
-			{
-				throw new NullPointerException("No more room for projects this year");
-			}
-			if ( s.substring(0, 4).equals(Integer.toString(ServControll.getDato().getYear())))
-			{
-				this.projektNummer = Integer.toString(ServControll.getDato().getYear()) + nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
-			}
-			else 
-			{
-				this.projektNummer = ServControll.getDato().getYear() + "000000";
-			}
-		}
-		else this.projektNummer = "" + ServControll.getDato().getYear() + "000000";
+		this.projektNummer = projektNummer;
+//		if (ServControll.getProjekter().getProjektListLength() > 0)
+//		{
+//			// Sidste oprettede projekts fulde nummer
+//			String s = ServControll.getProjekter().getProjects().get(ServControll.getProjekter().getProjektListLength() - 1).getProjektNummer();
+//			if ( s.substring(4, 10).equals("999999") )
+//			{
+//				throw new NullPointerException("No more room for projects this year");
+//			}
+//			if ( s.substring(0, 4).equals(Integer.toString(ServControll.getDato().getYear())))
+//			{
+//				this.projektNummer = Integer.toString(ServControll.getDato().getYear()) + nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
+//			}
+//			else 
+//			{
+//				this.projektNummer = ServControll.getDato().getYear() + "000000";
+//			}
+//		}
+//		else this.projektNummer = "" + ServControll.getDato().getYear() + "000000";
 		
-		System.out.println("User " + projektleder.getInitialer() + " succesfully creates project " + navn + " with project number " + this.projektNummer);
+		System.out.println("User " + this.projektleder.getInitialer() + " succesfully creates project " + this.navn + " with project number " + this.projektNummer);
 	}
 	
 	// Anvendes til nulstuffing af projektnumre under 6 decimaler
-	private String nulStuff(String s) {
-		for ( int i = 6 - s.length(); i > 0; i--)
-		{
-			s = "0" + s;
-		}
-		return s;
-	}
+//	private String nulStuff(String s) {
+//		for ( int i = 6 - s.length(); i > 0; i--)
+//		{
+//			s = "0" + s;
+//		}
+//		return s;
+//	}
 	
 	// Getters, setters & adders
 	

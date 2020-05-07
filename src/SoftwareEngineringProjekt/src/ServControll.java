@@ -78,15 +78,36 @@ public class ServControll {
 	
 	public static int newProjekt(String navn, Medarbejder projektLeder, Dato startUge, Dato slutUge) {
 		System.out.println(projektLeder.getInitialer() + " tries to create project " + navn);
-		try {
-			projekter.addProject(navn, projektLeder, startUge, slutUge);
-			}
-			catch ( NullPointerException e)
+		String projektNummer;
+		if (ServControll.getProjekter().getProjektListLength() > 0)
+		{
+			// Sidste oprettede projekts fulde nummer
+			String s = ServControll.getProjekter().getProjects().get(ServControll.getProjekter().getProjektListLength() - 1).getProjektNummer();
+			if ( s.substring(0, 4).equals(Integer.toString(ServControll.getDato().getYear())))
 			{
-				System.out.println(e);
-				return 1;
+				if ( s.substring(4, 10).equals("999999") )
+				{
+					throw new NullPointerException("No more room for projects this year");
+				}
+				else
+					projektNummer = Integer.toString(ServControll.getDato().getYear()) + nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
 			}
+			else 
+			{
+				projektNummer = "" + ServControll.getDato().getYear() + "000000";
+			}
+		}
+		else projektNummer = "" + ServControll.getDato().getYear() + "000000";
+		ServControll.projekter.addProject(new Project(navn, projektLeder, startUge, slutUge, projektNummer));
 		return 0;
+	}
+	
+	private static String nulStuff(String s) {
+		for ( int i = 6 - s.length(); i > 0; i--)
+		{
+			s = "0" + s;
+		}
+		return s;
 	}
 	
 	public static int addMedarbToProj (String initialer, String projekt) {
