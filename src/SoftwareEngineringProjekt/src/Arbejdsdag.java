@@ -60,7 +60,7 @@ public class Arbejdsdag {
 		return s;
 	}
 	
-	public int findProjInd(String projekt) {
+	private int findProjInd(String projekt) {
 		for (String p : projekter)
 		{
 			if (p.equals(projekt))
@@ -69,7 +69,7 @@ public class Arbejdsdag {
 		return -1;
 	}
 	
-	public int findAktInd(String aktivitet, int p) {
+	private int findAktInd(String aktivitet, int p) {
 		for (String a : aktiviteter.get(p))
 		{
 			if (a.equals(aktivitet))
