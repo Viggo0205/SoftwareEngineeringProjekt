@@ -104,5 +104,9 @@ public class ServControll {
 		return -1;
 	}
 	
+	private void newMedarbejder(String initialer) {
+		medarbejdere.newMedarbejder(initialer);
+	}
+	
 	
 }
