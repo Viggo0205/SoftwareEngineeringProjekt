@@ -1,13 +1,15 @@
 import io.cucumber.java.en.Given;
 import org.junit.Test;
 
+import SoftwareEngineringProjekt.src.Dato;
+
 import static org.junit.Assert.*;
 
 public class DatoTest {
 
 
-    @Given("Cunts er for tabers")
+	@Test
     public void beregnUge() {
-
+		
     }
 }
