@@ -1,3 +1,4 @@
+#Skrevet af Eigil Sejer Larsen - s194282
 @tag
 Feature: Tilfoej tid til en aktivitet
 
