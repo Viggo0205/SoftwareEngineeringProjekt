@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//
 public class RegistrerTimer extends JFrame implements ActionListener {
 	private JLabel ProjektLabel = new JLabel("Projekt");
 	private JComboBox projekter = new JComboBox();

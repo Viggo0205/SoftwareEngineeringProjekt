@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//
 public class TidBrugtAktivitet extends JFrame implements ActionListener{
 	private JComboBox projekter = new JComboBox();
 	private JComboBox aktivitet =new JComboBox();

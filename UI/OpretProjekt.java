@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class OpretProjekt extends JFrame implements ActionListener  {
-
+//
     private JPanel mainPanel;
     private JLabel navnPåUdviklingsLeder;
     private JLabel startDatoLabel;

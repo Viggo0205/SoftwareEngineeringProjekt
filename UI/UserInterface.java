@@ -1,7 +1,7 @@
 /*
  * Klasse til klientens grund-menu
  */
-
+//
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

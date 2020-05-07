@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//
 public class soegHjaelp extends JFrame implements ActionListener {
 	private JComboBox aktivitet =new JComboBox();
 	private JComboBox projekter =new JComboBox();

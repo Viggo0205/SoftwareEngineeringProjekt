@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-
+//
 public class Communicator implements Runnable {
 
 	static Socket s = null;

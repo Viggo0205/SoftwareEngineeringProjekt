@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//
 public class RetTimer extends JFrame implements ActionListener {
     private JLabel LabelDato = new JLabel("Dato");
     private JTextField dato = new JTextField();

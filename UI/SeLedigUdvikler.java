@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//
 public class SeLedigUdvikler extends JFrame implements ActionListener {
     private JLabel startDatoLabel = new JLabel("Start dato");
     private JTextField startDato = new JTextField();

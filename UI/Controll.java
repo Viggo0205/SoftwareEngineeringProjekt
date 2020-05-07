@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import SoftwareEngineringProjekt.src.Dato; // skal fjernes senere, når server og klient adskilles
-
+//
 public class Controll {
 
 	
