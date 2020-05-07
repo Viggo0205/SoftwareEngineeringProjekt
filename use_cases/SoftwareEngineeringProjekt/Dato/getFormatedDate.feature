@@ -1,12 +1,9 @@
 @tag
-Feature: der bliver fundet en dag
+Feature: datoen bliver printet ud på en streng
 
   @tag1
-  Scenario: Title of your scenario
-    Given I want to write a step with precondition
-    And some other precondition
-    When I complete action
-    And some other action
-    And yet another action
-    Then I validate the outcomes
-    And check more outcomes
+  Scenario: Den oenskede dato bliver printet ud på en streng
+    Given der eksisterer en dato, f.eks. dag 24 maaned 1 aar 2020
+    When datoen bliver skrevet på en streng 
+    Then bliver der printet "24-1-2020"
+    
