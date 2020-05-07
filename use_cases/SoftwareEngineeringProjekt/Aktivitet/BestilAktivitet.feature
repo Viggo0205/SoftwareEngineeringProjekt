@@ -3,7 +3,7 @@ Feature: Bestil Aktivitet
   Actor: Udviklingsleder
 #Main Scenario
   Scenario: Udviklingsleder bestiller ny aktivitet
-    Given Brugeren er logget ind med gyldige "initialer"
+    Given Brugeren er logget ind med gyldige initialer "ADM"
     When Bruger bestiller aktivitet og er udviklingsleder
     And Bruger tilfoejer gyldig "tidsramme"
     And Bruger tilfoejer gyldig "arbejdstimer"
