@@ -14,4 +14,4 @@ Feature: Soege hjaelp fra andre
       When Der er ikke nogen der kan hjaelpe
       And Brugeren forsoeger at faa hjaelp
       And Angivet projektet eksisterer
-      Then Print fejl besked "Der er ingen hjaelp at faa lige nu"
+      Then Print fejl besked Der er ingen hjaelp at faa lige nu

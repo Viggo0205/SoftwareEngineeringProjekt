@@ -16,8 +16,8 @@ Feature: Skaf rapport
       And Brugeren tilfoejere tidsrammer
       And Brugeren tilfoejere arbejdstimer
       And Angivet projektet eksisterer
-      Then Print fejl besked "Du er ikke udviklingsleder"
+      Then Print fejl besked Du er ikke udviklingsleder
 #fail2      
      	Scenario: Anmodet om ikke eksisterende rapport
      	When Brugeren er udviklingsleder og anmoder om en ikke eksisterende rapport
-     	Then Print fejlbesked "Du har anmodet om en ikke eksisterende rapport"
+     	Then Print fejlbesked Du har anmodet om en ikke eksisterende rapport

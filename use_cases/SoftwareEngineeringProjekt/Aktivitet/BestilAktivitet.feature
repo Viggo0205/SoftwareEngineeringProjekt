@@ -16,7 +16,7 @@ Feature: Bestil Aktivitet
     And Bruger tilfoejer tidsramme
     And Bruger tilfoejer arbejdstimer
     And Angivet projektet eksisterer
-    Then Print fejl besked "Du er ikke udviklingsleder"
+    Then Print fejl besked Du er ikke udviklingsleder
 #Fail scenario 2
   Scenario: Angivet en ugyldig tidsramme
     Given Brugeren er logget ind
@@ -24,4 +24,4 @@ Feature: Bestil Aktivitet
     And Bruger tilfoejer tidsramme
     And Bruger tilfoejer arbejdstimer
     And Angivet projektet eksisterer
-    Then Print fejl besked "Du er ikke udviklingsleder"
+    Then Print fejl besked Du er ikke udviklingsleder
