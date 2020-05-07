@@ -6,12 +6,13 @@ public class RetTimer extends JFrame implements ActionListener {
     private JLabel LabelDato = new JLabel("Dato");
     private JTextField dato = new JTextField();
     private JLabel TimerLabel = new JLabel("Antal timer");
-    private JTextField AntalTimer = new JTextField();
+    private JTextField antalTimer = new JTextField();
     private JButton retTimerButton = new JButton("Ret timer");
     private JPanel mainPanel = new JPanel();
+    private JFrame frame;
 
     public RetTimer() {
-        JFrame frame = new JFrame("Ret timer");
+        frame = new JFrame("Ret timer");
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
 
@@ -23,7 +24,7 @@ public class RetTimer extends JFrame implements ActionListener {
         mainPanel.add(dato);
 
         mainPanel.add(TimerLabel);
-        mainPanel.add(AntalTimer);
+        mainPanel.add(antalTimer);
 
         mainPanel.add(retTimerButton);
         retTimerButton.addActionListener(this);
@@ -39,6 +40,10 @@ public class RetTimer extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+    	if(e.getSource() == retTimerButton) {
+    		Communicator.sendRetterTimer(dato.getText(), antalTimer.getText());
+    		frame.setVisible(false);
+    		frame.dispose();
+    	}
     }
 }

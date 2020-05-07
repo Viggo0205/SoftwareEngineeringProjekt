@@ -18,10 +18,11 @@ public class OpretProjekt extends JFrame implements ActionListener  {
     private JButton opretProjektButton;
     private JComboBox comboBox3;
     private JLabel projektLeder;
+    private JFrame frame;
 
 
     public OpretProjekt() {
-        JFrame frame = new JFrame("Opret projekt");
+        frame = new JFrame("Opret projekt");
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
@@ -64,6 +65,11 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+    	if(e.getSource() == opretProjektButton) {
+    		Communicator.sendOpretPro((String) Medarbejdere.getSelectedItem(), projektBeskrivelse.getText(), startUge.getText(), slutUge.getText());
+    		frame.setVisible(false);
+    		frame.dispose();
+    	}
 
 
     }

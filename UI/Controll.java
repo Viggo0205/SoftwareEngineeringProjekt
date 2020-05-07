@@ -4,21 +4,26 @@
  */
 
 import java.util.ArrayList;
-//import SoftwareEngineringProjekt.src.Dato;
+import java.util.List;
+
+import SoftwareEngineringProjekt.src.Dato; // skal fjernes senere, når server og klient adskilles
 
 public class Controll {
 
+	
 	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"}; // test array
 	public static boolean ready;
 	private static String[] sQueue;
 //	public static String[] projektListe = new String[] {"CHJA", "CLLO", "EILA", "RANY", "VIOL"};
-	public static ArrayList<String> projektListe = new ArrayList<String>();
-	public static ArrayList<ArrayList<String>> aktivListe = new ArrayList<ArrayList<String>>();
-	public static ArrayList<String> choiseAktivListe = new ArrayList<String>();
+	public static List<String> projektListe = new ArrayList<String>();
+	public static List<ArrayList<String>> aktivListe = new ArrayList<ArrayList<String>>();
+	public static List<String> choiseAktivListe = new ArrayList<String>();
+	public static List<String> medarbejderListe = new ArrayList<String>();
 	private static String[] loginModt;
 	public static Dato currentDag;
 	private static String[] datoArray = new String[3];
 	private static String[] ledigMedarbListe;
+	private static String[] aktMedaLists = new String[2];
 
 
 	public static void main(String[] args) {	
@@ -47,11 +52,18 @@ public class Controll {
 					}
 				} else if(sQueue[0].equals("placeholder")) {	// modtagelse af projekt liste
 					lavProListe(sQueue[1]);
-//					projektListe = sQueue[1].split(";");
 					proListModt();
 				} else if(sQueue[0].equals("placeholder2")) {	// modtagelse af aktiviteter
 					lavAktListe(sQueue[1]);
 					aktListModt();
+				} else if(sQueue[0].equals("placeholder3")) {	// modtagelse af medarbejderliste
+					lavMedarbListe(sQueue[1]);
+					medarbListModt();
+				} else if(sQueue[0].equals("placeholder4")) {	// modtagelse af aktiv+medarb lister
+					aktMedaLists = sQueue[1].split("-");
+					lavAktListe(aktMedaLists[0]);
+					lavMedarbListe(aktMedaLists[1]);
+					aktMedaListsModt();
 				} else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
 					ledigMedarbListe = sQueue[1].split(";");
 					UserInterface.log.append("Ledige medarbejdere i perioden er: " + ledigMedarbListe.toString());
@@ -65,6 +77,12 @@ public class Controll {
 		}
 	}
 
+	private static void lavMedarbListe(String s) {
+		String[] ss = s.split(";");
+		for( int i = 0; i < ss.length; i++)
+			medarbejderListe.add(ss[i]);
+	}
+
 
 	private static void lavAktListe(String s) {
 		String[] ssPro = s.split(";");
@@ -76,13 +94,14 @@ public class Controll {
 	private static void lavAktListe2(int i, String[] ssPro) {
 		String[] ssAkt = ssPro[i].split(":");
 		projektListe.add(ssAkt[0]);
-		ArrayList<String> tempAktList = new ArrayList<String>();
+		List<String> tempAktList = new ArrayList<String>();
 		for(int j = 0; j < ssAkt.length; j++)
 			tempAktList.add(ssAkt[j]);
-		aktivListe.add(tempAktList);
+		aktivListe.add((ArrayList<String>) tempAktList);
 	}
 
-	private static void chooseAktiv(int i) {
+	public static void chooseAktiv(int i) {
+		choiseAktivListe.clear();
 		for(int j = 1; j<aktivListe.get(i).size(); j++)
 			choiseAktivListe.add(aktivListe.get(i).get(j));
 	}
@@ -90,7 +109,7 @@ public class Controll {
 	private static void lavProListe(String s) {
 		String[] ss = s.split(";");
 		for(int i = 0; i < ss.length; i++)
-			projektListe.add(ss[1]);
+			projektListe.add(ss[i]);
 	}
 
 
@@ -142,5 +161,17 @@ public class Controll {
 		} else if(UserInterface.windowWait.equals("leAkt4")) {	// se tidsbrug 
 			TidBrugtAktivitet.popup();
 		}
+	}
+	private static void medarbListModt() {
+		if(UserInterface.windowWait.equals("maAkt5"))
+			OpretProjekt.popup();
+	}
+	private static void aktMedaListsModt() {
+		if(UserInterface.windowWait.equals("leAkt2")) {
+			TildelAktivitet.popup();
+		} else if(UserInterface.windowWait.equals("maAkt4")) {
+			soegHjaelp.popup();
+		}
+		
 	}
 }

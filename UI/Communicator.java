@@ -78,6 +78,15 @@ public class Communicator implements Runnable {
 		pw.print("2");
 		pw.flush();
 	}
+	// sender forespørgsel om medarbejderliste
+	public static void sendMedarbAccess() {
+		pw.print("3");
+		pw.flush();
+	}
+	public static void sendMedAktAccess() {
+		pw.print("4");
+		pw.flush();
+	}
 	
 	// metoder for at sende beskeder til serveren afhængig af hvilket event.
 	public static void sendOpretAktiv(String projekt, String startUge, String slutUge, String timer) {
@@ -146,4 +155,6 @@ public class Communicator implements Runnable {
 		pw.flush();
 		sendMsg = null;
 	}
+
+
 }

@@ -19,7 +19,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
     private JLabel startUge;
     private JLabel slutUge;
     private JLabel BudgeteretTid;
-    public  JFrame frame = new JFrame("Bestil Aktivitet");
+    private JFrame frame;
 
 
     //Metode der laver selve UI til BestilAktivitet popupen.
@@ -27,7 +27,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
     {
 
 //    	String[] testliste = {"1243","3456","1714","9334","2463","5211","6132",};
-        JFrame frame = new JFrame("Bestil aktivitet");
+        frame = new JFrame("Bestil aktivitet");
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
         frame.add(panel1);
@@ -48,7 +48,6 @@ public class BestilAktvitet extends JFrame implements ActionListener {
         panel1.add(projekter);
         for(int i = 0; i < Controll.projektListe.size(); i++) {
         	projekter.addItem(Controll.projektListe.get(i));
-
         }
         projekter.addActionListener(this);
 
@@ -87,10 +86,13 @@ public class BestilAktvitet extends JFrame implements ActionListener {
     }
 
     //Tilføjer funktionalitet til knapper
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {		// ved klik på knap
         if(e.getSource() == bestilButton) {
-
-        } else if(e.getSource()== projekter) {
+        	Communicator.sendOpretAktiv((String) projekter.getSelectedItem(),textField3.getText(),textField4.getText(),textField1.getText());
+        	System.out.println("knap trykket");
+        	frame.setVisible(false);
+        	frame.dispose();
+        } else if(e.getSource()== projekter) { // brugt til tests
         	System.out.println("valgt i projekter: " + projekter.getSelectedItem());
         	System.out.println("valgt i projekter: " + projekter.getSelectedIndex());
         }

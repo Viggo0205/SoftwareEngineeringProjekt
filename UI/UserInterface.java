@@ -128,25 +128,25 @@ public class UserInterface extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == maAkt4) {		// Søg hjælp fra anden udvikler
 			windowWait = "maAkt4";
-			Communicator.sendAktivAccess();
+			Communicator.sendMedAktAccess();
 		}
 		if(e.getSource() == maAkt5) {		// Opret projekt
-			OpretProjekt.popup();
+			windowWait = "maAkt5";
+			Communicator.sendMedarbAccess();
 		}
 		if(e.getSource() == maAkt6) {		// indmeld brugt tid
 			windowWait = "maAkt6";
 			Communicator.sendAktivAccess();
 		}
 		if(e.getSource() == leAkt1) {		// Bestil ny aktivitet
-			BestilAktvitet.popup();
-//			windowWait = "leAkt1";
-//			Communicator.sendProjAccess();
+			BestilAktvitet.popup(); 		// test til comm virker
+//			windowWait = "leAkt1"; 			// * rigtig kode, når comm virker
+//			Communicator.sendProjAccess();	//*
 			
 		}
 		if(e.getSource() == leAkt2) {		// Tildel opgaver til udviklere
-			// ehm.... rip. Den her kræver en del. Fuld medarb liste??
 			windowWait = "leAkt2";
-			Communicator.sendAktivAccess();
+			Communicator.sendMedAktAccess();
 		}
 		if(e.getSource() == leAkt3) {		// Se ledige udviklere for perioder
 			SeLedigUdvikler.popup();

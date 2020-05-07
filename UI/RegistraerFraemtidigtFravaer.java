@@ -11,10 +11,11 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
     private JTextField slutDato = new JTextField();
     private JButton registrer = new JButton("Registrer");
     private JPanel mainPanel;
+    private JFrame frame;
 
     public RegistraerFraemtidigtFravaer()
     {
-        JFrame frame = new JFrame("Registrer fraemtidigt fravaer");
+        frame = new JFrame("Registrer fraemtidigt fravaer");
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
@@ -37,7 +38,11 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+    	if(e.getSource() == registrer) {
+    		Communicator.sendRegistrerFerie(startDato.getText(),slutDato.getText());
+    		frame.setVisible(false);
+    		frame.dispose();
+    	}
     }
 
     public static void popup() {

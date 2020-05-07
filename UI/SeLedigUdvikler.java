@@ -9,9 +9,10 @@ public class SeLedigUdvikler extends JFrame implements ActionListener {
     private JTextField slutDato = new JTextField();
     private JButton registrer = new JButton("Se udviklere");
     private JPanel mainPanel;
+    private JFrame frame;
 
     public SeLedigUdvikler() {
-        JFrame frame = new JFrame("Se ledige udviklere");
+        frame = new JFrame("Se ledige udviklere");
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         frame.add(mainPanel);
@@ -37,6 +38,10 @@ public class SeLedigUdvikler extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+    	if(e.getSource() == registrer) {
+    		Communicator.sendErLedig(startDato.getText());
+    		frame.setVisible(false);
+    		frame.dispose();
+    	}
     }
 }
