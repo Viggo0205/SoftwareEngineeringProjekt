@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class AktivitetSteps {
+
 	private Aktivitet aktivitet;
 
 	@Given("Aktiviteten {string} eksisterer")
@@ -21,9 +22,10 @@ public class AktivitetSteps {
 	    this.aktivitet.addTid(int1);
 	}
 
-	@Then("Aktiviteten staar registreret for den korrekte tidsmaengde")
-	public void aktivitetenStaarRegistreretForDenKorrekteTidsmaengde() throws Exception {
-		assertEquals(5, this.aktivitet.getTime());
+	@Then("Aktiviteten staar registreret for den korrekte tidsmaengde {int}")
+	public void aktivitetenStaarRegistreretForDenKorrekteTidsmaengde(Integer int1) throws Exception {
+	    assertEquals((int) int1, this.aktivitet.getTime());
 	}
+
 
 }

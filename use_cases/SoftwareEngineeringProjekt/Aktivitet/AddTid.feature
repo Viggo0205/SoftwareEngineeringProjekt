@@ -5,4 +5,4 @@ Feature: Tilfoej tid til en aktivitet
   Scenario: En bruger tilfoejer tid til en eksisterende aktivitet
     Given Aktiviteten "aktivitet" eksisterer
     When Brugeren tilfoejer en tidsmaengde 5
-    Then Aktiviteten staar registreret for den korrekte tidsmaengde
+    Then Aktiviteten staar registreret for den korrekte tidsmaengde 5
