@@ -1,4 +1,4 @@
-Feature: Indmeld tid brugt
+ Feature: Indmeld tid brugt
   Description: En bruger indmelder et tidsforbrug
   Actors: Udvikler
 

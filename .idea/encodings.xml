@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/UI/Communicator.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/UI/Login.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/UI/UserInterface.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/test/ArbejdsdagTest.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/test/stepDefinitions/StepDefs_SoftIngi.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/use_cases/SoftwareEngineeringProjekt/RetTimer.feature" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/use_cases/SoftwareEngineeringProjekt/SoegeHjaelp.feature" charset="windows-1252" />
