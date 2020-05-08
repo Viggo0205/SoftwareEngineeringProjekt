@@ -8,7 +8,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "use_cases/SoftwareEngineeringProjekt",
+@CucumberOptions(features = "use_cases/SoftwareEngineeringProjekt/MedarbejderManager",
 	plugin = { "html:target/cucumber/wikipedia.html"},
 	snippets = SnippetType.CAMELCASE,
 	glue = { "stepDefinitions"},

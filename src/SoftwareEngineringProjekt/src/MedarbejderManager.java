@@ -7,8 +7,8 @@ public class MedarbejderManager {
 	private ArrayList<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
 	private int nextMedarbejderID;
 	
-	MedarbejderManager () {
-		this.medarbejdere.add(new Medarbejder("ADM", 0));
+	public MedarbejderManager () {
+		this.medarbejdere.add(new Medarbejder("ADMN", 0));
 		this.nextMedarbejderID = 1;
 	}
 	
