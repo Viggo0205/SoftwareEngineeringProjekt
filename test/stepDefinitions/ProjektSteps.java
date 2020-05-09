@@ -41,12 +41,17 @@ public class ProjektSteps {
 //	    throw new io.cucumber.java.PendingException();
 //	}
     // Der er kun et projekt så derfor kan .get(0) bruges i dette tilfælde
-	@Then("Aktiviteten er tilfoejet til det oenskede projekt")
-	public void aktivitetenErTilfoejetTilDetOenskedeProjekt(String string) {
-	    System.out.println(projekt.getAktiviteter().get(0).getNavn());
+	
+
+	@Then("Aktiviteten {string} er tilfoejet til det oenskede projekt {string}")
+	public void aktivitetenErTilfoejetTilDetOenskedeProjekt(String string, String string2) {
+		System.out.println(projekt.getAktiviteter().get(0).getNavn() + " er tilføjet til " + projekt.getNavn());
 	    assertEquals(string, projekt.getAktiviteter().get(0).getNavn());
 	}
 
+
+	 //     System.out.println(projekt.getAktiviteter().get(0).getNavn());
+    //assertEquals(string, projekt.getAktiviteter().get(0).getNavn());
 //	@Given("At projektet {string} eksisterer")
 //	public void atProjektetEksisterer(String string) {
 //	    // Write code here that turns the phrase above into concrete actions

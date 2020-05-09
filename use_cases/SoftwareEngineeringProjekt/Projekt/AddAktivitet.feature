@@ -7,6 +7,6 @@ Feature: Tilfoej en aktivitet til et projekt
     Given At projektet "projekt" eksisterer
     When En aktivitet "aktivitet" er tilfoejet til et projekt "projekt"
     #And Aktiviteten modtager et navn
-    Then Aktiviteten er tilfoejet til det oenskede projekt
+    Then Aktiviteten "aktivitet" er tilfoejet til det oenskede projekt "projekt"
   
 
