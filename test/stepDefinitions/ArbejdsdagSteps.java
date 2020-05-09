@@ -32,7 +32,7 @@ public class ArbejdsdagSteps {
     @When("bruger tilfoejer halvetimer {int} til given arbejdsdag, projekt {string} og aktivitet {string}")
     public void bruger_tilfoejer_halvetimer_til_given_arbejdsdag_projekt_og_aktivitet(Integer int1, String string, String string2) {
         arbejdsdag.addTid(string,string2,int1);
-        System.out.println("Tid er tilføjest til arbejdsdag");
+        System.out.println("Tid er tilfoejest til arbejdsdag");
     }
 
 
