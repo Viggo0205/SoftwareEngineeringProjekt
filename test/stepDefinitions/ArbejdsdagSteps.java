@@ -1,5 +1,5 @@
 package stepDefinitions;
-
+//Lavet af Victor Tadeusz Ulstrup Olszowski
 import SoftwareEngineringProjekt.src.*;
 import io.cucumber.core.gherkin.Step;
 import io.cucumber.java.en.Given;
@@ -21,18 +21,17 @@ public class ArbejdsdagSteps {
 
     //addTid
 
-    @Given("Brugeren er tilknyttet det givende aktivitet {string}")
-    public void brugeren_er_tilknyttet_det_givende_aktivitet(String string) {
-        projekt.addMedarbejder(medarbejder);
-        projekt.addAktivitet("katjakaj",startUge,slutUge,70);
-        aktivitet.addMedarbejder(medarbejder);
-    }
+    //scenarie 1
+    @Given("en arbejdsdag eksisterer")
+    public void en_arbejdsdag_eksisterer() {
+        arbejdsdag = new Arbejdsdag(dato);
 
+    }
 
     @When("bruger tilfoejer halvetimer {int} til given arbejdsdag, projekt {string} og aktivitet {string}")
     public void bruger_tilfoejer_halvetimer_til_given_arbejdsdag_projekt_og_aktivitet(Integer int1, String string, String string2) {
         arbejdsdag.addTid(string,string2,int1);
-        System.out.println("Tid er tilfoejest til arbejdsdag");
+        System.out.println("Tid er tilfoejet til arbejdsdag");
     }
 
 
@@ -43,6 +42,15 @@ public class ArbejdsdagSteps {
         assertEquals(docString,k);
 
     }
+
+    //Scenarie 2
+    
+    @Given("arbejdsdag som modtager projekt {string} aktivitet {string} og en maengde af tid i halvetimer {int} allerede har tilfoejet tid")
+    public void arbejdsdag_som_modtager_projekt_aktivitet_og_en_maengde_af_tid_i_halvetimer_allerede_har_tilfoejet_tid(String string, String string2, Integer int1) {
+        arbejdsdag.addTid(string,string2,int1);
+    }
+
+
 
 
 }
