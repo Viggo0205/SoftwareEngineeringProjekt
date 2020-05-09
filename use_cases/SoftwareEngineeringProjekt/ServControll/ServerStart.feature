@@ -4,7 +4,7 @@ Feature: Server opstart
 
   @tag1
   Scenario: Serveren startes fra bunden
-    Given Serveren startes d. <9-5-2020>
+    Given Serveren startes d. 9 . 5 . 2020 test
     When Der bedes om startdata fra serveren
     Then Dataen indebaerer en nuvaerende dato 9-5-2020
     And Dataen indebaerer en tom projektManager
