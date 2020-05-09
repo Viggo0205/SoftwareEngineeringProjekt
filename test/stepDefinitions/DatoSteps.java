@@ -15,10 +15,10 @@ public class DatoSteps {
 		this.dato = new Dato(int1, int2, int3);
 	}
 
-//	@When("datoen oenskes oplyst")
-//	public void datoenOenskesOplyst() {
-//		this.dato.Dato();
-//	}
+	@When("datoen oenskes oplyst")
+	public void datoenOenskesOplyst() {
+		this.dato.Dato();
+	}
 
 	@Then("datoen bliver printet ud, paa formen {string}")
 	public void datoenBliverPrintetUdPFormen(String string) {
