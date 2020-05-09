@@ -1,4 +1,4 @@
-package stepDefsPlaceholder;
+/*package stepDefsPlaceholder;
 
 
 import static org.junit.Assert.assertEquals;
@@ -116,4 +116,4 @@ public class MedarbejderManagerSteps {
 	    throw new io.cucumber.java.PendingException();
 	}
 
-}
+}*/

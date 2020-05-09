@@ -96,7 +96,7 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 				} else if(Integer.parseInt(slutUge.getText().substring(2, 4)) < 1 || Integer.parseInt(slutUge.getText().substring(2, 4)) > 12) {
 					UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
 					slutUge.setText("");
-				} else if()
+				} //else if()
 				
 				
 				

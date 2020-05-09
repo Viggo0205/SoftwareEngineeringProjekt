@@ -126,7 +126,7 @@ public class ServControll {
 	}
 	
 	private void newMedarbejder(String initialer) {
-		medarbejdere.newMedarbejder(initialer);
+		//medarbejdere.newMedarbejder(initialer);
 	}
 	
 	
