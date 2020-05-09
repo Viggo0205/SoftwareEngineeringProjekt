@@ -4,6 +4,6 @@ Feature: Tilfoej et projekt til en projektmanager
 
   @tag1
   Scenario: Et projekt tilfoejes til projektmanageren
-    Given Projektmanageren eksisterer med plads til flere projekter dette aar
+    Given Projektmanageren eksisterer
     When Projektet "projekt" tilfoejes til projektmanageren
-    Then Projektmanageren indeholder projektet "projekt"
+    Then Projektmanageren indeholder projektet "projekt" 
