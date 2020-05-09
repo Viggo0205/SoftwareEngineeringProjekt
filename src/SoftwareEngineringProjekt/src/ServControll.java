@@ -129,7 +129,6 @@ public class ServControll {
 	}
 	
 	private void newMedarbejder(String initialer) {
-<<<<<<< HEAD
 		try {
 			medarbejdere.newMedarbejder(initialer);
 		} catch (InitialsWrongLengthException e) {
@@ -139,8 +138,5 @@ public class ServControll {
 			System.out.println("whatWeDo?");
 			e.printStackTrace();
 		}
-=======
-		//medarbejdere.newMedarbejder(initialer);
->>>>>>> branch 'master' of https://github.com/Viggo0205/SoftwareEngineeringProjekt.git
 	}
 }
