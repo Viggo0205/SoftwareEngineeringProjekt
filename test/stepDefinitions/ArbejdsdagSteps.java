@@ -5,6 +5,7 @@ import io.cucumber.core.gherkin.Step;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import static org.junit.Assert.assertEquals;
 
 public class ArbejdsdagSteps {
 
@@ -28,38 +29,20 @@ public class ArbejdsdagSteps {
     }
 
 
-
-
-    @When("bruger tilfoejer timer {int} til given arbejdsdag og aktivitet {string}")
-    public void bruger_tilfoejer_timer_til_given_arbejdsdag_og_aktivitet(Integer int1, String string) {
-        arbejdsdag.addTid("Bente",string,int1);
-        System.out.println("Bruger har tilfoejet timer til given aktivitet på given arbejdsdag");
+    @When("bruger tilfoejer halvetimer {int} til given arbejdsdag, projekt {string} og aktivitet {string}")
+    public void bruger_tilfoejer_halvetimer_til_given_arbejdsdag_projekt_og_aktivitet(Integer int1, String string, String string2) {
+        arbejdsdag.addTid(string,string2,int1);
+        System.out.println("Tid er tilføjest til arbejdsdag");
     }
 
 
+    @Then("timer er registreret paa given arbejdsdag og der bliver noteret projekt, aktivtet og tiden der er registrert til dagen printes")
+    public void timer_er_registreret_paa_given_arbejdsdag_og_der_bliver_noteret_projekt_aktivtet_og_tiden_der_er_registrert_til_dagen_printes(String docString) {
+        String k = arbejdsdag.getTid();
 
+        assertEquals(docString,k);
 
-    @Then("timer er registreret paa given arbejdsdag og der bliver noteret projekt {string} og aktivitet {string}")
-    public void timer_er_registreret_paa_given_arbejdsdag_og_der_bliver_noteret_projekt_og_aktivitet(String string, String string2) {
-        arbejdsdag.addTid(string,string2,4);
-        System.out.println("Tid er blevet tilfoejet til dag");
     }
-
-
-
-    //getTid
-    @Given("Arbejdsdagen eksisterer")
-    public void arbejdsdagen_eksisterer() {
-        System.out.println("Arbejdsdagen eksisterer");
-    }
-
-
-
-    @Then("Saa bliver arbejdsdagen og tiden tilhoerende printet")
-    public void saa_bliver_arbejdsdagen_og_tiden_tilhoerende_printet() {
-        System.out.println(arbejdsdag +" "+arbejdsdag.getTid());
-    }
-
 
 
 }
