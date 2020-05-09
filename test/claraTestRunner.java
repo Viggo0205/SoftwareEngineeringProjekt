@@ -6,12 +6,13 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "use_cases/SoftwareEngineeringProjekt",
-    plugin = { "html:target/cucumber/wikipedia.html"},
-    snippets = SnippetType.CAMELCASE,
-    glue = { "stepDefinitions"},
-    strict = true)
+@CucumberOptions(features = "use_cases/SoftwareEngineeringProjekt/Dato",
+	plugin = { "html:target/cucumber/wikipedia.html"},
+	snippets = SnippetType.CAMELCASE,
+	glue = { "stepDefinitions"},
+	strict = true)
 
 public class claraTestRunner {
+
 
 }
