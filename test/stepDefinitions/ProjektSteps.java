@@ -1,7 +1,6 @@
 //Skrevet af Christian S. Jakobsen
 package stepDefinitions;
 
-import SoftwareEngineringProjekt.src.Aktivitet;
 import SoftwareEngineringProjekt.src.Dato;
 import SoftwareEngineringProjekt.src.Medarbejder;
 import SoftwareEngineringProjekt.src.Project;
@@ -16,11 +15,10 @@ public class ProjektSteps {
 	
 	
 
-    private Dato startUge = new Dato(20,2020);
-    private Dato slutUge= new Dato(4,2020);
-    private Medarbejder medarbejder = new Medarbejder("VO",5);
+    private Dato startUge = new Dato(21,1,2020);
+    private Dato slutUge= new Dato(2,2,2020);
+    private Medarbejder medarbejder = new Medarbejder("Jumbo", 4);
     private Project projekt;
-    private Aktivitet aktivitet = new Aktivitet("eddedogEddy",startUge,slutUge,60);
     private ProjectManager projektmanager;
 	
 	
@@ -30,13 +28,11 @@ public class ProjektSteps {
 	@Given("At projektet {string} eksisterer")
 	public void atProjektetEksisterer(String string) {
 		 projekt = new Project(string, medarbejder, slutUge, slutUge, "4");	    	
-	    throw new io.cucumber.java.PendingException();
 	}
 
-	@When("En aktivitet {string} er tilfoejet til et projekt")
-	public void enAktivitetErTilfoejetTilEtProjekt(String string) {
-		projekt.addAktivitet("eddedogEddy", startUge, slutUge, 60);
-	    throw new io.cucumber.java.PendingException();
+	@When("En aktivitet {string} er tilfoejet til et projekt {string}")
+	public void enAktivitetErTilfoejetTilEtProjekt(String string, String string2) {
+		projekt.addAktivitet(string, startUge, slutUge, 60);
 	}
 
 //	@When("Aktiviteten modtager et navn")
@@ -44,12 +40,11 @@ public class ProjektSteps {
 //	    aktivitet.
 //	    throw new io.cucumber.java.PendingException();
 //	}
-
+    // Der er kun et projekt så derfor kan .get(0) bruges i dette tilfælde
 	@Then("Aktiviteten er tilfoejet til det oenskede projekt")
 	public void aktivitetenErTilfoejetTilDetOenskedeProjekt(String string) {
-	    System.out.println(aktivitet.getNavn() + "Er tilføjet");
-	    assertEquals(string, aktivitet.getNavn());
-	    throw new io.cucumber.java.PendingException();
+	    System.out.println(projekt.getAktiviteter().get(0).getNavn());
+	    assertEquals(string, projekt.getAktiviteter().get(0).getNavn());
 	}
 
 //	@Given("At projektet {string} eksisterer")
