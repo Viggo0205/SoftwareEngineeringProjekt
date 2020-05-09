@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//
+// Lavet af Victor Tadeusz Ulstrup Olszowski s194281 og Rasmus nyhus s194285
 public class BestilAktvitet extends JFrame implements ActionListener {
 
 	private JComboBox projekter;
