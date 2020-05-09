@@ -20,8 +20,8 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 	private JLabel slutUge;
 	private JLabel BudgeteretTid;
 	private JFrame frame;
-	private String[] startUgeInput = new String[]{"WTFFFF","213"};
-	private String[] slutUgeInput = new String[]{"sda","2323412"};
+	private String[] startUgeInput = new String[]{"",""};
+	private String[] slutUgeInput = new String[]{"",""};
 
 
 	//Metode der laver selve UI til BestilAktivitet popupen.
