@@ -174,4 +174,70 @@ public class Controll {
 		}
 		
 	}
+	
+	public static boolean isValidWeek(String weekString) {
+		String[] weekArray = weekString.split("\\.");
+		try {
+			if(weekArray.length != 2) {
+				return false;
+			} else if (Integer.parseInt(weekArray[0]) > 2050 || Integer.parseInt(weekArray[0]) < 1990 
+					|| Integer.parseInt(weekArray[1]) > 54 || Integer.parseInt(weekArray[1]) < 0) {
+				return false;
+			}else { 
+				return true;
+			}
+		} catch(NumberFormatException err){
+			 UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\nFormat for tid er tal\n");
+			 return false;
+		}
+		
+		 
+	}
+	public static boolean isWeekOrdered(String weekString1, String weekString2) {
+		String[] weekArray1 = weekString1.split("\\.");
+		String[] weekArray2 = weekString2.split("\\.");
+		try {
+			Dato dato1 = new Dato(Integer.parseInt(weekArray1[1]), Integer.parseInt(weekArray1[0]) );
+			Dato dato2 = new Dato(Integer.parseInt(weekArray2[1]), Integer.parseInt(weekArray2[0]) );
+			if(dato1.getDeltaDag(dato2) < 0) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (NumberFormatException err){
+			 UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\nFormat for tid er tal\n");
+			 return false;
+		}
+		
+	}
+	public static boolean isValidDato(String datoString) {
+		try {
+			if(datoString.length() != 8 || datoString.length() != 8 ) {
+				return false;
+			} else if(Integer.parseInt(datoString.substring(4, 8)) < 1990 || Integer.parseInt(datoString.substring(5, 8)) > 2050 
+					|| Integer.parseInt(datoString.substring(0, 2)) < 1 || Integer.parseInt(datoString.substring(0, 2)) > 31
+					|| Integer.parseInt(datoString.substring(2, 4)) < 1 || Integer.parseInt(datoString.substring(2, 4)) > 12) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (NumberFormatException err) {
+			UserInterface.log.append("Fejl i input. Format for dato 5. april 2018: 05042018\n");
+			return false;
+		}
+	}
+	public static boolean isDagOrdered(String dag1, String dag2) {
+		try {
+			Dato dato1 = new Dato(Integer.parseInt(dag1.substring(0,2)), Integer.parseInt(dag1.substring(2,4)), Integer.parseInt(dag1.substring(4,8)));
+			Dato dato2 = new Dato(Integer.parseInt(dag2.substring(0,2)), Integer.parseInt(dag2.substring(2,4)), Integer.parseInt(dag2.substring(4,8)));
+			if(dato1.getDeltaDag(dato2) < 0) {
+				return false;
+			} else {
+				return true;
+			}	
+		} catch (NumberFormatException err) {
+			UserInterface.log.append("Fejl i input. Format for dato 5. april 2018: 05042018\n");
+			return false;
+		}
+	}
 }
