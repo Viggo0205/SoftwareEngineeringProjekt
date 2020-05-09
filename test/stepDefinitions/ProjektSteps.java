@@ -70,15 +70,27 @@ public class ProjektSteps {
 //	    throw new io.cucumber.java.PendingException();
 //	}
 
-	@When("En aktivitet {string} ekstraheres fra et projekt {string}")
-	public void enAktivitetEkstraheresFraEtProjekt(String string, String string2) {
+	@When("En aktivitet {string} paa plads {int} ekstraheres fra et projekt {string}")
+	public void enAktivitetEkstraheresFraEtProjekt(String string, Integer int1, String string2) {
 		projekt.addAktivitet(string, startUge, slutUge, 30);
+		projekt.getCertainAkt(string);
 	}
 
-	@Then("Aktiviteten {string} er extraheret fra projekt {string}")
-	public void aktivitetenErExtraheretFraProjekt(String string, String string2) {
-	    System.out.println(projekt.getAktiviteter().get(0).getNavn() + " er nu tilgået fra projektet " +projekt.getNavn());
-	    assertEquals(string, projekt.getAktiviteter().get(0).getNavn());
+	@Then("Aktiviteten {string} paa plads {int} er extraheret fra projekt {string}")
+	public void aktivitetenErExtraheretFraProjekt(String string, Integer int1, String string2) {
+	    System.out.println(projekt.getCertainAkt(string) + " er den pladsde den tilgået aktivitet har i projektet " + projekt.getNavn());
+	    assertEquals((int) int1, projekt.getCertainAkt(string));
+	}
+	
+	@When("En aktivitet {string} ikke findes")
+	public void ForsoegerAtEkstrahereEnAktivitetSomIkkeFindesFraEtProjekt(String string) {
+		projekt.getCertainAkt(string);
+	}
+
+	@Then("Saa henvises der til plads {int} i projektet {string}")
+	public void SaaHenvisesDerTilPlads(Integer int1, String string) {
+		System.out.println("Der findes ikke en aktivitet med det navn i " + projekt.getNavn());
+	    assertEquals((int) int1, projekt.getCertainAkt(string));
 	}
 
 //	@Given("At projektet {string} eksisterer")
