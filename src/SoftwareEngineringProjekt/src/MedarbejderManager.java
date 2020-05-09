@@ -21,17 +21,13 @@ public class MedarbejderManager {
 	}
 	
 	public void newMedarbejder(String initialer) throws InitialsWrongLengthException, EmployeeAlreadyExistsException {
-		System.out.println("Eigil told me to");
 		if(initialer.length() != 4) {
-			System.out.println("Eigil told me to1");
 			throw new InitialsWrongLengthException();
 			
 		} else if (medarbExists(initialer)) {
-			System.out.println("Eigil told me to2");
 			throw new EmployeeAlreadyExistsException();
 			
 		} else {
-			System.out.println("Eigil told me to3");
 			this.medarbejdere.add(new Medarbejder(initialer, this.nextMedarbejderID));
 			this.nextMedarbejderID += 1;
 			
