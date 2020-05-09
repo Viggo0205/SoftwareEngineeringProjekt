@@ -53,9 +53,17 @@ public class RegistrerTimer extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == registrerTimerButton) {
+			if(!Controll.isValidDato(dato.getText())) {
+				UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
+				dato.setText("");	
+			} else if(Integer.parseInt(timer.getText()) < 0 || Integer.parseInt(timer.getText()) > 1000000 ) {
+				UserInterface.log.append("Fejl i antal timer\n");
+				timer.setText("");
+			} else {
 			Communicator.sendIndmeldTid((String)projekter.getSelectedItem(), (String)aktiviteter.getSelectedItem(), dato.getText(), timer.getText());
 			frame.setVisible(false);
 			frame.dispose();
+			}
 		} else if(e.getSource() == projekter) {							// valg af projekt skal indsætte aktiviteter i dropdown
 			for( int i = 0; i < aktiviteter.getItemCount();i++)			// ryder dropdown
 				aktiviteter.removeItemAt(0);							//

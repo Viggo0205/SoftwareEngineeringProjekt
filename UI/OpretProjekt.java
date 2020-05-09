@@ -69,52 +69,23 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 		System.out.println(startUge.getText());
 		System.out.println(slutUge.getText());
 
-
 		if(e.getSource() == opretProjektButton) {
+			if(!Controll.isValidDato(startUge.getText())) {
+				UserInterface.log.append("Fejl i input af startdato. Format for dato 5. april 2018: 05042018\n");
+				startUge.setText("");
 
-			try {
-				if(startUge.getText().length() != 8 || slutUge.getText().length() != 8 ) {
-					UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
-					startUge.setText("");
-					slutUge.setText("");
-				} else if(Integer.parseInt(startUge.getText().substring(4, 8)) < 1990 || Integer.parseInt(startUge.getText().substring(5, 8)) > 2050) {
-					UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
-					startUge.setText("");
-				} else if(Integer.parseInt(slutUge.getText().substring(4, 8)) < 1990 || Integer.parseInt(slutUge.getText().substring(5, 8)) > 2050) {
-					UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
-					slutUge.setText("");
-					
-				} else if(Integer.parseInt(startUge.getText().substring(0, 2)) < 1 || Integer.parseInt(startUge.getText().substring(0, 2)) > 31) {
-					UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
-					startUge.setText("");
-				} else if(Integer.parseInt(slutUge.getText().substring(0, 2)) < 1 || Integer.parseInt(slutUge.getText().substring(0, 2)) > 31) {
-					UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
-					slutUge.setText("");
-				} else if(Integer.parseInt(startUge.getText().substring(2, 4)) < 1 || Integer.parseInt(startUge.getText().substring(2, 4)) > 12) {
-					UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
-					startUge.setText("");
-				} else if(Integer.parseInt(slutUge.getText().substring(2, 4)) < 1 || Integer.parseInt(slutUge.getText().substring(2, 4)) > 12) {
-					UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
-					slutUge.setText("");
-				} //else if()
-				
-				
-				
-				
-				
-				
-				else {
-					Communicator.sendOpretPro((String) Medarbejdere.getSelectedItem(), projektBeskrivelse.getText(), startUge.getText(), slutUge.getText());
-					frame.setVisible(false);
-					frame.dispose();
-				}
-
-			} catch(NumberFormatException err){
-				UserInterface.log.append("Fejl i input. Format for dato 5. april 2018: 05042018\n");
+			} else if(!Controll.isValidDato(slutUge.getText())) {
+				UserInterface.log.append("Fejl i input af slutdato. Format for dato 5. april 2018: 05042018\n");
+				slutUge.setText("");
+			} else if (Controll.isDagOrdered(startUge.getText(), slutUge.getText())) {
+				UserInterface.log.append("Startdato er efter slutdato. Format for dato 5. april 2018: 05042018\n");
+				startUge.setText("");
+				slutUge.setText("");
+			} else {
+				Communicator.sendOpretPro((String) Medarbejdere.getSelectedItem(), projektBeskrivelse.getText(), startUge.getText(), slutUge.getText());
+				frame.setVisible(false);
+				frame.dispose();
 			}
-
 		}
-
-
 	}
 }
