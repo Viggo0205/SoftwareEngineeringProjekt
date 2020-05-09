@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefsPlaceholder;
 
 
 import static org.junit.Assert.assertEquals;
@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import SoftwareEngineringProjekt.src.MedarbejderManager;
+import dtu.library.app.OperationNotAllowedException;
 import SoftwareEngineringProjekt.src.Medarbejder;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,10 +15,8 @@ import io.cucumber.java.en.When;
 public class MedarbejderManagerSteps {
 
 	private MedarbejderManager medarbejdere;
-	private Medarbejder nyMedarbejder1 = new Medarbejder("TEST", 1);
-	private Medarbejder nyMedarbejder2 = new Medarbejder("TESTER", 1);
-	private Medarbejder nyMedarbejder3 = new Medarbejder("glMA", 1);
 	private boolean acceptinit = true;
+	private String errorMessage;
 	
 	// scenarie 1
 	@Given("Der eksistrere en medarbejderManager")
@@ -68,9 +67,13 @@ public class MedarbejderManagerSteps {
 
 	@When("der tilfoejes en medarbejder med initialer {String}, der bruges and anden medarbejder i medarbejderManager")
 	public void derTilfoejesEnMedarbejderMedInitialerDerBrugesAndAndenMedarbejderIMedarbejderManager(String string) {
-		this.medarbejdere.newMedarbejder(string); // hvordan skriver jeg ind, stringen er forkert??
 		
-	    throw new io.cucumber.java.PendingException();
+		try {
+			this.medarbejdere.newMedarbejder(string);
+		} catch (EmployeeAlreadyExistsException e) {
+			errorMessage = "fejl";
+		}
+		
 	}
 
 	@Then("Der er sendt fejlbesked")
@@ -99,12 +102,15 @@ public class MedarbejderManagerSteps {
 
 	@When("der tilfoejes en medarbejder med for lange initialer {String}")
 	public void derTilfoejesEnMedarbejderMedForLangeInitialerTESTER(String string) {
-		this.medarbejdere.newMedarbejder(string);
-	    throw new io.cucumber.java.PendingException();
+		try {
+			this.medarbejdere.newMedarbejder(string);
+		} catch (InitialsTooShortException e) {
+			errorMessage = "fejl";
+		}
 	}
 
-	@Then("Der er sendt fejlbesked")
-	public void derErSendtFejlbesked1() {
+	@Then("Der er sendt fejlbesked {String}")
+	public void derErSendtFejlbesked1(String string) {
 		System.out.println("fejl"); // ? kast exception ?
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
