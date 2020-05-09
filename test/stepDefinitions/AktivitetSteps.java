@@ -1,4 +1,4 @@
-//Skrevet ak
+//Skrevet af Eigil Sejer Larsen
 
 package stepDefinitions;
 
@@ -38,7 +38,7 @@ public class AktivitetSteps {
 
 	@Then("Aktiviteten {string} har medarbejderen {string} registreret")
 	public void aktivitetenHarMedarbejderenRegistreret(String string, String string2) throws Exception {
-	    assertEquals("Medarbejdere:\n" + string2, this.aktivitet.getMedarbejdere());
+	    assertEquals("Medarbejdere:\n" + string2, this.aktivitet.getMedarbejdereFormated());
 	}
 
 	@When("Slutugen tilhoerende Aktiviteten {string} aendres til en anden uge med ugenummer {int} og aarstal {int}")

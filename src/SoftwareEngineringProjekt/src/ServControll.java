@@ -130,7 +130,7 @@ public class ServControll {
 		return -1;
 	}
 	
-	private void newMedarbejder(String initialer) {
+	public void newMedarbejder(String initialer) {
 		try {
 			medarbejdere.newMedarbejder(initialer);
 		} catch (InitialsWrongLengthException e) {
@@ -144,5 +144,9 @@ public class ServControll {
 	
 	public ArrayList<Medarbejder> getMedarbejdere() {
 		return this.medarbejdere.getMedarbejdere();
+	}
+	
+	public void nyDato(int day, int month, int year) {
+		this.currentDate = new Dato(day, month, year);
 	}
 }
