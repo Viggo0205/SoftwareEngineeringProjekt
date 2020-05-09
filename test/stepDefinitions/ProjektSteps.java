@@ -1,6 +1,7 @@
 //Skrevet af Christian S. Jakobsen
 package stepDefinitions;
 
+import SoftwareEngineringProjekt.src.Aktivitet;
 import SoftwareEngineringProjekt.src.Dato;
 import SoftwareEngineringProjekt.src.Medarbejder;
 import SoftwareEngineringProjekt.src.Project;
@@ -17,9 +18,11 @@ public class ProjektSteps {
 
     private Dato startUge = new Dato(21,1,2020);
     private Dato slutUge= new Dato(2,2,2020);
-    private Medarbejder medarbejder = new Medarbejder("Jumbo", 4);
+    private Medarbejder medarbejder = new Medarbejder("BigG", 4);
     private Project projekt;
-    private ProjectManager projektmanager;
+//    private ProjectManager projektmanager;
+//    private Aktivitet aktivitet = new Aktivitet("aktivitet", startUge, slutUge, 50);
+    //private Udviklingsleder udviklingsleder;
 	
 	
 	
@@ -34,15 +37,9 @@ public class ProjektSteps {
 	public void enAktivitetErTilfoejetTilEtProjekt(String string, String string2) {
 		projekt.addAktivitet(string, startUge, slutUge, 60);
 	}
-
-//	@When("Aktiviteten modtager et navn")
-//	public void aktivitetenModtagerEtNavn() {
-//	    aktivitet.
-//	    throw new io.cucumber.java.PendingException();
-//	}
+	
     // Der er kun et projekt så derfor kan .get(0) bruges i dette tilfælde
 	
-
 	@Then("Aktiviteten {string} er tilfoejet til det oenskede projekt {string}")
 	public void aktivitetenErTilfoejetTilDetOenskedeProjekt(String string, String string2) {
 		System.out.println(projekt.getAktiviteter().get(0).getNavn() + " er tilføjet til " + projekt.getNavn());
@@ -50,150 +47,111 @@ public class ProjektSteps {
 	}
 
 
-	 //     System.out.println(projekt.getAktiviteter().get(0).getNavn());
-    //assertEquals(string, projekt.getAktiviteter().get(0).getNavn());
+//	@Given("At projektet {string} eksisterer")
+//	public void atProjektetEksisterer(String string) {
+//		projekt = new Project(string, medarbejder, slutUge, slutUge, "4");
+//	    throw new io.cucumber.java.PendingException();
+//	}
+
+	@When("En medarbjeder med initialer {string} tilfoejes til et projekt {string}")
+	public void enMedarbjederTilfoejesTilEtProjekt(String string, String string2) {
+	    projekt.addMedarbejder(medarbejder);
+	}
+
+	@Then("Medarbejderen med initialer {string} er nu tilknyttet projekt {string}")
+	public void medarbejderenErNuTilknyttetProjekt(String string, String string2) {
+	   System.out.println(projekt.getMedarbejdere().get(0).getInitialer() + " er tilføjet til " + projekt.getNavn());
+	   assertEquals(string2, projekt.getNavn());
+	}
+
+//	@Given("At projektet {string} eksistere")
+//	public void atProjektetEksistere(String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
+
+	@When("En aktivitet {string} ekstraheres fra et projekt {string}")
+	public void enAktivitetEkstraheresFraEtProjekt(String string, String string2) {
+		projekt.addAktivitet(string, startUge, slutUge, 30);
+	}
+
+	@Then("Aktiviteten {string} er extraheret fra projekt {string}")
+	public void aktivitetenErExtraheretFraProjekt(String string, String string2) {
+	    System.out.println(projekt.getAktiviteter().get(0).getNavn() + " er nu tilgået fra projektet " +projekt.getNavn());
+	    assertEquals(string, projekt.getAktiviteter().get(0).getNavn());
+	}
+
 //	@Given("At projektet {string} eksisterer")
 //	public void atProjektetEksisterer(String string) {
 //	    // Write code here that turns the phrase above into concrete actions
 //	    throw new io.cucumber.java.PendingException();
 //	}
-//
-//	@Given("Medarbejderen {string} ikke allerede er tilknyttet projektet {string}")
-//	public void medarbejderenIkkeAlleredeErTilknyttetProjektet(String string, String string2) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@When("En medarbjeder tilfoejes til et projekt {string}")
-//	public void enMedarbjederTilfoejesTilEtProjekt(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Then("Medarbejderen er nu tilknyttet projekt {string}")
-//	public void medarbejderenErNuTilknyttetProjekt(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Given("I want to write a step with precondition")
-//	public void iWantToWriteAStepWithPrecondition() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Given("some other precondition")
-//	public void someOtherPrecondition() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@When("I complete action")
-//	public void iCompleteAction() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@When("some other action")
-//	public void someOtherAction() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@When("yet another action")
-//	public void yetAnotherAction() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Then("I validate the outcomes")
-//	public void iValidateTheOutcomes() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Then("check more outcomes")
-//	public void checkMoreOutcomes() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
+
+	@When("En leder {string} tilknyttes projektet {string}")
+	public void enLederTilknyttesProjektet(String string, String string2) {
+		projekt.setLeder(medarbejder);
+	}
+
+	@Then("En leder {string} er nu tilknyttet projektet {string}")
+	public void enLederErNuTilknyttetProjektet(String string, String string2) {
+		System.out.println(projekt.getLeder().getInitialer() + " er projektleder for " + projekt.getNavn());
+		assertEquals(string, projekt.getLeder().getInitialer());
+	}
+
 //	@Given("At projektet {string} eksisterer")
 //	public void atProjektetEksisterer(String string) {
 //	    // Write code here that turns the phrase above into concrete actions
 //	    throw new io.cucumber.java.PendingException();
 //	}
-//
-//	@When("En leder tilknyttes projektet {string}")
-//	public void enLederTilknyttesProjektet(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Then("En leder er nu tilknyttet projektet {string}")
-//	public void enLederErNuTilknyttetProjektet(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
+
+	@Given("Projektet {string} allerede har et navn")
+	public void projektetAlleredeHarEtNavn(String string) {
+	    projekt.getNavn();
+	}
+
+	@When("Projektets {string} navn aendres til {string}")
+	public void projektetsNavnAendres(String string, String string2) {
+		projekt.setNavn(string2);
+	}
+
+	@Then("Projektets {string} navn opdateres til {string}")
+	public void projektetsNavnOpdateres(String string, String string2) {
+	    System.out.println(projekt.getNavn() + " er projektets nye navn");
+	    assertEquals(string2, projekt.getNavn());
+	}
+
 //	@Given("At projektet {string} eksisterer")
 //	public void atProjektetEksisterer(String string) {
 //	    // Write code here that turns the phrase above into concrete actions
 //	    throw new io.cucumber.java.PendingException();
 //	}
-//
-//	@Given("Projektet {string} allerede har et navn")
-//	public void projektetAlleredeHarEtNavn(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@When("Projektets {string} navn aendres")
-//	public void projektetsNavnAendres(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Then("Projektets {string} navn opdateres")
-//	public void projektetsNavnOpdateres(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
+
+	@When("Projektet {string} faar en slut uge {int} {int}")
+	public void projektetFaaREnSlutUge(String string, Integer int1, Integer int2) {
+	   projekt.setSlutUge(int1, int2);
+	}
+
+	@Then("Projektet {string} har en slut uge {int} {int}")
+	public void projektetHarEnSlutUge(String string, Integer int1, Integer int2) {
+	    System.out.println("" + projekt.getSlutUge()[0] + " " + projekt.getSlutUge()[1] + " er slut ugen for " + projekt.getNavn());
+	    assertEquals((int) int1, projekt.getSlutUge()[0] & (int) int2, projekt.getSlutUge()[1]);
+	}
+
 //	@Given("At projektet {string} eksisterer")
 //	public void atProjektetEksisterer(String string) {
 //	    // Write code here that turns the phrase above into concrete actions
 //	    throw new io.cucumber.java.PendingException();
 //	}
-//
-//	@When("Projektet {string} f?r en slut uge")
-//	public void projektetFREnSlutUge(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Then("Projektet {string} har en slut uge")
-//	public void projektetHarEnSlutUge(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Given("At projektet {string} eksisterer")
-//	public void atProjektetEksisterer(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@When("Projektet {string} f?r en start uge")
-//	public void projektetFREnStartUge(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Then("Projektet {string} har en start uge")
-//	public void projektetHarEnStartUge(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
+
+	@When("Projektet {string} faar en start uge {int} {int}")
+	public void projektetFREnStartUge(String string, Integer int1, Integer int2) {
+		projekt.setStartUge(int1, int2);
+	}
+
+	@Then("Projektet {string} har en start uge {int} {int}")
+	public void projektetHarEnStartUge(String string, Integer int1, Integer int2) {
+		System.out.println("" + projekt.getStartUge()[0] + " " + projekt.getStartUge()[1] + " er start ugen for " + projekt.getNavn());
+	    assertEquals((int) int1, projekt.getStartUge()[0] & (int) int2, projekt.getStartUge()[1]);
+	}
 
 }
