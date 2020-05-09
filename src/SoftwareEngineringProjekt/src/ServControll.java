@@ -7,16 +7,16 @@ import Exceptions.EmployeeAlreadyExistsException;
 import Exceptions.InitialsWrongLengthException;
 
 public class ServControll {
-	private static ProjectManager projekter;
-	private static MedarbejderManager medarbejdere;
-	private static Dato currentDate;
-
+	private ProjectManager projekter;
+	private MedarbejderManager medarbejdere;
+	private Dato currentDate;
+	private ConnectionManager connectionManager;
 	
-	public static void ServerStart() {
+	public void ServerStart(int day, int month, int year) {
 		projekter = new ProjectManager();
 		medarbejdere = new MedarbejderManager();
-		currentDate = new Dato(8, 4, 2020);
-		
+		currentDate = new Dato(day, month, year);
+/*
 		newProjekt("test0", medarbejdere.getMedarbejdere().get(0), new Dato(4, 2020), new Dato(9, 2020));
 		newProjekt("test1", medarbejdere.getMedarbejdere().get(0), new Dato(1, 2020), new Dato(34, 2020));
 		newProjekt("test2", medarbejdere.getMedarbejdere().get(0), new Dato(29, 2020), new Dato(52, 2020));
@@ -35,30 +35,32 @@ public class ServControll {
 		newAktivitet("test0", "aktivitets test", new Dato(1, 2020), new Dato(3, 2020), 7);
 		addMedarbToAkt("ADMN", "test0", "aktivitets test");
 		System.out.println("Aktivitetsdata for projekt test0: " + projekter.getProjects().get(0).getAktiviteter().get(0).getAllData());
-		
-		ConnectionManager.openCon();
+*/
+		connectionManager = new ConnectionManager();
+		//connectionManager.openCon();
+
 	}
 	
-	public static ProjectManager getProjekter() {
-		return ServControll.projekter;
+	public ArrayList<Project> getProjekter() {
+		return this.projekter.getProjects();
 	}
 	
-	public static Dato getDato() {
-		return ServControll.currentDate;
+	public Dato getDato() {
+		return this.currentDate;
 	}
 	
 	
 	
 	// RELEVANS TIL AKTIVITETER
-	public static int newAktivitet(String projekt, String navn, Dato startUge, Dato slutUge, int budgetTid) {
-		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).addAktivitet(navn, startUge, slutUge, budgetTid);
+	public int newAktivitet(String projekt, String navn, Dato startUge, Dato slutUge, int budgetTid) {
+		this.projekter.getCertainProject(findProjektVedNavn(projekt)).addAktivitet(navn, startUge, slutUge, budgetTid);
 		return 0;
 	}
 	
-	public static int addMedarbToAkt (String initialer, String projekt, String aktivitet) {
-		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).getAktiviteter()
-		.get(ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).getCertainAkt(aktivitet))
-		.addMedarbejder(ServControll.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
+	public int addMedarbToAkt (String initialer, String projekt, String aktivitet) {
+		this.projekter.getCertainProject(findProjektVedNavn(projekt)).getAktiviteter()
+		.get(this.projekter.getCertainProject(findProjektVedNavn(projekt)).getCertainAkt(aktivitet))
+		.addMedarbejder(this.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
 		return 0;
 	}
 	
@@ -68,40 +70,40 @@ public class ServControll {
 	}
 	*/
 	
-	private static int findMedarbVedInit (String init) {
-		for (Medarbejder m : medarbejdere.getMedarbejdere())
+	private int findMedarbVedInit (String init) {
+		for (Medarbejder m : this.medarbejdere.getMedarbejdere())
 		{
 			if (m.getInitialer().equalsIgnoreCase(init))
-				return ServControll.medarbejdere.getMedarbejdere().indexOf(m);
+				return this.medarbejdere.getMedarbejdere().indexOf(m);
 		}
 		return -1;
 	}
 	
 	// RELEVANS TIL PROJEKTER
 	
-	public static int newProjekt(String navn, Medarbejder projektLeder, Dato startUge, Dato slutUge) {
+	public int newProjekt(String navn, Medarbejder projektLeder, Dato startUge, Dato slutUge) {
 		System.out.println(projektLeder.getInitialer() + " tries to create project " + navn);
 		String projektNummer;
-		if (ServControll.getProjekter().getProjektListLength() > 0)
+		if (this.projekter.getProjektListLength() > 0)
 		{
 			// Sidste oprettede projekts fulde nummer
-			String s = ServControll.getProjekter().getProjects().get(ServControll.getProjekter().getProjektListLength() - 1).getProjektNummer();
-			if ( s.substring(0, 4).equals(Integer.toString(ServControll.getDato().getYear())))
+			String s = this.projekter.getProjects().get(this.projekter.getProjektListLength() - 1).getProjektNummer();
+			if ( s.substring(0, 4).equals(Integer.toString(this.currentDate.getYear())))
 			{
 				if ( s.substring(4, 10).equals("999999") )
 				{
 					throw new NullPointerException("No more room for projects this year");
 				}
 				else
-					projektNummer = Integer.toString(ServControll.getDato().getYear()) + nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
+					projektNummer = Integer.toString(this.currentDate.getYear()) + nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
 			}
 			else 
 			{
-				projektNummer = "" + ServControll.getDato().getYear() + "000000";
+				projektNummer = "" + this.currentDate.getYear() + "000000";
 			}
 		}
-		else projektNummer = "" + ServControll.getDato().getYear() + "000000";
-		ServControll.projekter.addProject(new Project(navn, projektLeder, startUge, slutUge, projektNummer));
+		else projektNummer = "" + this.currentDate.getYear() + "000000";
+		this.projekter.addProject(new Project(navn, projektLeder, startUge, slutUge, projektNummer));
 		return 0;
 	}
 	
@@ -113,17 +115,17 @@ public class ServControll {
 		return s;
 	}
 	
-	public static int addMedarbToProj (String initialer, String projekt) {
-		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt))
-		.addMedarbejder(ServControll.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
+	public int addMedarbToProj (String initialer, String projekt) {
+		this.projekter.getCertainProject(findProjektVedNavn(projekt))
+		.addMedarbejder(this.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
 		return 0;
 	}
 	
-	private static int findProjektVedNavn(String navn) {
-		for (Project p : projekter.getProjects())
+	private int findProjektVedNavn(String navn) {
+		for (Project p : this.projekter.getProjects())
 		{
 			if (p.getNavn().equalsIgnoreCase(navn))
-				return ServControll.projekter.getProjects().indexOf(p);
+				return this.projekter.getProjects().indexOf(p);
 		}
 		return -1;
 	}
@@ -138,5 +140,9 @@ public class ServControll {
 			System.out.println("whatWeDo?");
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Medarbejder> getMedarbejdere() {
+		return this.medarbejdere.getMedarbejdere();
 	}
 }

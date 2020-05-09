@@ -8,7 +8,7 @@ public class ConnectionManager {
 	
 	static int port = 8084;
 	
-	public static void openCon()
+	public void openCon()
 	{
 		ServerSocket serverSocket  = null;
 		Socket socket = null;
