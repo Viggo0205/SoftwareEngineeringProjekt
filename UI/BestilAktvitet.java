@@ -20,14 +20,16 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 	private JLabel slutUge;
 	private JLabel BudgeteretTid;
 	private JFrame frame;
-	private String[] startUgeInput = new String[2];
-	private String[] slutUgeInput = new String[2];
+	private String[] startUgeInput = new String[]{"WTFFFF","213"};
+	private String[] slutUgeInput = new String[]{"sda","2323412"};
 
 
 	//Metode der laver selve UI til BestilAktivitet popupen.
 	public BestilAktvitet()
 	{
 
+		System.out.println(startUgeInput[0] + "  " + startUgeInput[1]);
+		System.out.println(slutUgeInput[0] + "  " + slutUgeInput[1]);
 		//    	String[] testliste = {"1243","3456","1714","9334","2463","5211","6132",};
 		frame = new JFrame("Bestil aktivitet");
 		JPanel panel1 = new JPanel();
@@ -90,17 +92,21 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 	//Tilføjer funktionalitet til knapper
 	public void actionPerformed(ActionEvent e) {		// ved klik på knap
 		if(e.getSource() == bestilButton) {
-			startUgeInput = textField3.getText().split(":");
-			slutUgeInput = textField4.getText().split(":");
+			startUgeInput = textField3.getText().split("\\.",2);
+			slutUgeInput = textField4.getText().split("\\.",2);
 			
 			System.out.println(textField3.getText());
 			System.out.println(textField4.getText());
 			
-			System.out.println(startUgeInput.toString());
-			System.out.println(slutUgeInput.toString());
+//			System.out.println(startUgeInput[0] + "  " + startUgeInput[1]);
+//			System.out.println(slutUgeInput[0] + "  " + slutUgeInput[1]);
 			
 			try {										// tjek for diverse fejl af input
-				if(Integer.parseInt(startUgeInput[0]) > 2050 || Integer.parseInt(startUgeInput[0]) < 1990
+				if(startUgeInput.length < 2 || slutUgeInput.length < 2 ){
+					UserInterface.log.append("Fejl i input af uge. Format for uge 5 i år 2018: 2018.5\n");
+					textField3.setText("");
+					textField4.setText("");
+				}else if(Integer.parseInt(startUgeInput[0]) > 2050 || Integer.parseInt(startUgeInput[0]) < 1990
 						|| Integer.parseInt(startUgeInput[1]) > 54 || Integer.parseInt(startUgeInput[1]) < 0) {
 					UserInterface.log.append("Fejl i input af startuge. Format for uge 5 i år 2018: 2018.5\n");
 					textField3.setText("");
@@ -130,8 +136,8 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 				}
 				
 			} catch(NumberFormatException err){
-				 UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\n");
-				 textField3.setText("");
+				 UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\nFormat for tid er tal\n");
+				 
 			}
 			
 		} else if(e.getSource()== projekter) { // brugt til tests
