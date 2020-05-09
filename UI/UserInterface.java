@@ -96,7 +96,7 @@ public class UserInterface extends JFrame implements ActionListener{
 		
 		// log tekstfelt tilføjes
 //		log = new JTextArea("Dags dato: " + Controll.currentDag.getFormatedDate()); 
-		log = new JTextArea("Dags dato: " + "02 92 1032");
+		log = new JTextArea("Dags dato: " + "02 92 1032" + "\n");
 		log.setLineWrap(true);
 		log.setEditable(false);
 		JScrollPane logScroll = new JScrollPane(log);

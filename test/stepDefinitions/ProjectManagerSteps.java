@@ -30,5 +30,24 @@ public class ProjectManagerSteps {
 	}
 
 
+	
+	
+	@Given("Der findes mindst et Project {string} i ProjectManager med indeks {int}")
+	public void derFindesMindstEtProjectIProjectManagerMedIndeks(String string, Integer int1) throws Exception {
+		if(this.projektManager.getProjects().size() == 0)
+			projektManager.addProject(new Project(string, new Medarbejder("TEST", 0), new Dato(2,2020), new Dato(5,2020), "2020000000"));
+	    			
+	}
+
+	@When("der kaldes et projekt ud fra et indeks {int} i ProjectManager")
+	public void derKaldesEtProjektUdFraEtIndeksIProjectManager(Integer int1) {
+	    
+		this.projektManager.getCertainProject(int1);
+	}
+
+	@Then("projektet med indeks {int} er returnet")
+	public void projektetMedIndeksErReturnet(Integer int1) {
+	    assertEquals((int)int1, this.projektManager.getProjects().indexOf(this.projektManager.getCertainProject(int1)));
+	}
 
 }

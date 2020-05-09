@@ -10,10 +10,8 @@ public class ProjectManager {
 		return this.projekter;
 	}
 	
-	public int addProject(Project projekt)
-	{
+	public void addProject(Project projekt)	{
 		this.projekter.add(projekt);
-		return 200;
 	}
 	
 	public int getProjektListLength() {
