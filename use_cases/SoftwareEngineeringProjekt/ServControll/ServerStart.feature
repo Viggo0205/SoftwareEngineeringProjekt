@@ -3,8 +3,10 @@
 Feature: Server opstart
 
   @tag1
-  Scenario: Title of your scenario
-    Given Serveren eksisterer
+  Scenario: Serveren startes fra bunden
+    Given Serveren startes d. <9-5-2020>
     When Der bedes om startdata fra serveren
-    Then Dataen indebærer en nuvaerende dato
+    Then Dataen indebaerer en nuvaerende dato 9-5-2020
+    And Dataen indebaerer en tom projektManager
+    And Dataen indebaerer en medarbejderManager med en medarbejder: "ADMN"
 

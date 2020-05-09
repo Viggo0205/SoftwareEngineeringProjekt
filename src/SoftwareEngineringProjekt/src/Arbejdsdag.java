@@ -40,7 +40,7 @@ public class Arbejdsdag {
 		}
 		else
 		{
-			this.halveTimerTotal =- this.aktivitetstider.get(p).get(a);
+			this.halveTimerTotal -= this.aktivitetstider.get(p).get(a);
 			this.aktivitetstider.get(p).set(a, halveTimer);
 			this.halveTimerTotal += halveTimer;
 		}
