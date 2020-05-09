@@ -14,5 +14,4 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 
 public class claraTestRunner {
 
-
 }
