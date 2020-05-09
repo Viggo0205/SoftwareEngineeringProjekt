@@ -27,7 +27,7 @@ public class Communicator implements Runnable {
 		
 		// der forsøges at oprette kontakt til serveren
 		try {
-			s = new Socket("localhost", 8080);
+			s = new Socket("localhost", 8085);
 		} catch (IOException ioe) {
 			System.err.println("Socket not opened");
 		}

@@ -36,8 +36,10 @@ public class ServControll {
 		addMedarbToAkt("ADMN", "test0", "aktivitets test");
 		System.out.println("Aktivitetsdata for projekt test0: " + projekter.getProjects().get(0).getAktiviteter().get(0).getAllData());
 */
-		connectionManager = new ConnectionManager();
+//		connectionManager = new ConnectionManager();
 		//connectionManager.openCon();
+		Thread t = new Thread(new ConnectionManager());
+		t.start();
 
 	}
 	
