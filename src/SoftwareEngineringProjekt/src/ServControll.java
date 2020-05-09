@@ -3,6 +3,9 @@ package SoftwareEngineringProjekt.src;
 
 import java.util.ArrayList;
 
+import Exceptions.EmployeeAlreadyExistsException;
+import Exceptions.InitialsWrongLengthException;
+
 public class ServControll {
 	private static ProjectManager projekter;
 	private static MedarbejderManager medarbejdere;
@@ -30,7 +33,7 @@ public class ServControll {
 		System.out.println("Dags dato: " + currentDate.getFormatedDate());
 		
 		newAktivitet("test0", "aktivitets test", new Dato(1, 2020), new Dato(3, 2020), 7);
-		addMedarbToAkt("ADM", "test0", "aktivitets test");
+		addMedarbToAkt("ADMN", "test0", "aktivitets test");
 		System.out.println("Aktivitetsdata for projekt test0: " + projekter.getProjects().get(0).getAktiviteter().get(0).getAllData());
 		
 		ConnectionManager.openCon();
@@ -126,8 +129,14 @@ public class ServControll {
 	}
 	
 	private void newMedarbejder(String initialer) {
-		medarbejdere.newMedarbejder(initialer);
+		try {
+			medarbejdere.newMedarbejder(initialer);
+		} catch (InitialsWrongLengthException e) {
+			System.out.println("whatWeDo?");
+			e.printStackTrace();
+		} catch (EmployeeAlreadyExistsException e) {
+			System.out.println("whatWeDo?");
+			e.printStackTrace();
+		}
 	}
-	
-	
 }
