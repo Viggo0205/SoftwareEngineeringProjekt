@@ -1,3 +1,4 @@
+#Skrevet af Clara M. Lorenzen - s180350
 @tag
 Feature: datoen bliver printet ud på en streng
 
