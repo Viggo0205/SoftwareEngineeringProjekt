@@ -48,27 +48,18 @@ public class ArbejdsdagSteps {
 
 
     //getTid
-    @Given("Dagen Arbejdsdag har timer tilknyttet")
-    public void dagen_Arbejdsdag_har_timer_tilknyttet() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Given("Arbejdsdagen eksisterer")
+    public void arbejdsdagen_eksisterer() {
+        System.out.println("Arbejdsdagen eksisterer");
     }
 
 
 
-    @When("getTid bruges på den givene dag")
-    public void gettid_bruges_på_den_givene_dag() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("Saa bliver arbejdsdagen og tiden tilhoerende printet")
+    public void saa_bliver_arbejdsdagen_og_tiden_tilhoerende_printet() {
+        System.out.println(arbejdsdag +" "+arbejdsdag.getTid());
     }
 
-
-   
-    @Then("Saa bliver tiden printet Arbejdsdagen har {double} {int}")
-    public void saa_bliver_tiden_printet_Arbejdsdagen_har(Double double1, Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 
 
 }
