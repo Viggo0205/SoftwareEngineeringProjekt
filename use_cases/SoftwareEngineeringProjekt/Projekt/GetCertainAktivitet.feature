@@ -1,14 +1,9 @@
 #Skrevet af Christian S. Jakobsen__S194307
 @tag
-Feature: Title of your feature
-  I want to use this template for my feature file
+Feature: Ekstrahere en specifik aktivitet fra et projekt
 
   @tag1
-  Scenario: Title of your scenario
-    Given I want to write a step with precondition
-    And some other precondition
-    When I complete action
-    And some other action
-    And yet another action
-    Then I validate the outcomes
-    And check more outcomes
+  Scenario: Ekstrahere en specifik aktivitet "aktivitet" fra et eksisterende projekt "projekt"
+    Given At projektet "projekt" eksisterer
+    When En aktivitet "aktivitet" ekstraheres fra et projekt "projekt"
+    Then Aktiviteten "aktivitet" er extraheret fra projekt "projekt"

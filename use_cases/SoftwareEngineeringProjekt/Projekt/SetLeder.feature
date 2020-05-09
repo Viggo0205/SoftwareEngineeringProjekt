@@ -6,7 +6,7 @@ Feature: Tilknytter en leder til projekt "projekt"
   Scenario: Der tilknyttes en leder til et projekt "projekt"
     Given At projektet "projekt" eksisterer
     #And At projektet "projekt" ikke allerede har en leder
-    When En leder tilknyttes projektet "projekt"
-    Then En leder er nu tilknyttet projektet "projekt"
+    When En leder "BigG" tilknyttes projektet "projekt"
+    Then En leder "BigG" er nu tilknyttet projektet "projekt"
 
 

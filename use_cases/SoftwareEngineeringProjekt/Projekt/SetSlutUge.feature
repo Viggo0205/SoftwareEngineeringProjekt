@@ -6,6 +6,6 @@ Feature: Saetter den uge projektet afsluttes i
   Scenario: Projektets "projekt" start uge indskrives
     Given At projektet "projekt" eksisterer
     #And At projektet "projekt" ikke allerede har en slut uge
-    When Projektet "projekt" faar en slut uge
-    Then Projektet "projekt" har en slut uge
+    When Projektet "projekt" faar en slut uge 12 2020
+    Then Projektet "projekt" har en slut uge 12 2020
 
