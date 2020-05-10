@@ -33,7 +33,7 @@ public class ProjectManager {
 			s = ";";
 		return s;
 	}
-	
+
 	public String pakStringMedAkt() {
 		String s = "";
 		if(this.projekter.size() > 0)
@@ -47,5 +47,54 @@ public class ProjectManager {
 					}
 			}
 		return s;
+	}
+
+	public String pakStringTake2(String init) {
+		String s = "";
+		if(this.projekter.size() > 0)
+			for (Project p : this.projekter)
+			{
+				if (findMedarbVedInit(init, p) >= 0)
+					s += ";" + p.getProjektNummer() + "|" + p.getNavn();
+			}
+		else
+			s = ";";
+		return s;
+	}
+
+	public String pakStringMedAktTake2(String init) {
+		String s = "";
+		if(this.projekter.size() > 0)
+			for (Project p : this.projekter)
+			{
+				if (findMedarbVedInit(init, p) >= 0)
+				{
+					s += ";" + p.getProjektNummer() + "|" + p.getNavn();
+					if (p.getAktiviteter().size() > 0)
+						for (Aktivitet a : p.getAktiviteter())
+						{
+							if ( findMedarbVedInit(init, p, a) >= 0)
+							s += ":" + a.getNavn();
+						}
+				}
+			}
+		return s;
+	}
+
+	private static int findMedarbVedInit (String init, Project p) {
+		for (Medarbejder m : p.getMedarbejdere())
+		{
+			if (m.getInitialer().equalsIgnoreCase(init))
+				return p.getMedarbejdere().indexOf(m);
+		}
+		return -1;
+	}
+	private static int findMedarbVedInit (String init, Project p, Aktivitet a) {
+		for (Medarbejder m : p.getMedarbejdere())
+		{
+			if (m.getInitialer().equalsIgnoreCase(init))
+				return p.getMedarbejdere().indexOf(m);
+		}
+		return -1;
 	}
 }

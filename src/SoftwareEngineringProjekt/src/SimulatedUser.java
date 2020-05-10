@@ -25,8 +25,8 @@ public class SimulatedUser {
 		
 		byte b[] = {(byte) 'a', (byte) 's', (byte) 'd', (byte) 'f'};
 		try {
-			dout.writeUTF("2;ADMN");
-			dout.writeUTF("2;test2");
+			dout.writeUTF("3;ADMN");
+			dout.writeUTF("3;test2");
 			dout.flush();
 		} catch (IOException e) {
 			e.printStackTrace();

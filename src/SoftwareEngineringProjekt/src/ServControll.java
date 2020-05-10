@@ -33,6 +33,7 @@ public class ServControll {
 		System.out.println("Projekter: ");
 		for (Project p : projekter.getProjects())
 		{
+			p.addMedarbejder(medarbejdere.getMedarbejdere().get(0));
 			System.out.println(p.getNavn() + " " + p.getProjektNummer() + " med startuge: " + p.getStartUge() + " og slutuge: " + p.getSlutUge());
 			System.out.println(new Dato(9,2020).getFormatedDate());
 		}
@@ -73,16 +74,21 @@ public class ServControll {
 	
 	
 	// RELEVANS TIL AKTIVITETER
-	public static int newAktivitet(String projekt, String navn, Dato startUge, Dato slutUge, int budgetTid) {
-		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).addAktivitet(navn, startUge, slutUge, budgetTid);
-		return 0;
+	public static String newAktivitet(String projekt, String navn, Dato startUge, Dato slutUge, int budgetTid) {
+		if ( projekter.getCertainProject(findProjektVedNavn(projekt)).getCertainAkt(navn) == -1 )
+		{
+			ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).addAktivitet(navn, startUge, slutUge, budgetTid);
+			return "ok";
+		}
+		else
+			return "no";
 	}
 	
-	public static int addMedarbToAkt (String initialer, String projekt, String aktivitet) {
+	public static String addMedarbToAkt (String initialer, String projekt, String aktivitet) {
 		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).getAktiviteter()
 		.get(ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).getCertainAkt(aktivitet))
 		.addMedarbejder(ServControll.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
-		return 0;
+		return "ok";
 	}
 	
 	/*
@@ -186,6 +192,28 @@ public class ServControll {
 	
 	public static String packagedProjMedAkt() {
 		return projekter.pakStringMedAkt();
+	}
+
+	public static String packagedProjTake2(String init) {
+		return projekter.pakStringTake2(init);
+	}
+	
+	public static String packagedProjMedAktTake2(String init) {
+		return projekter.pakStringMedAktTake2(init);
+	}
+	
+	public static String packagedMedarb() {
+		String s = "";
+		for (Medarbejder m : medarbejdere.getMedarbejdere())
+			s += ";" + m.getInitialer();
+		return s;
+	}
+	
+	// Til protokol 4
+	public static String packagedAkt() {
+		String s = "";
+		
+		return s;
 	}
 	
 //public static void msgHandling() {
