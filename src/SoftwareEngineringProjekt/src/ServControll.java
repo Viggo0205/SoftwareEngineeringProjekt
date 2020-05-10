@@ -82,7 +82,6 @@ public class ServControll {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//System.out.println("yayy");
 		}
 		
 	}
@@ -331,95 +330,4 @@ public class ServControll {
 				return medarbejdere.getMedarbejdere().get(medarbInd).getKalender().getCertainArbejdsdag(arbejdsInd).packagedTid();
 		}
 	}
-
-	//public static void msgHandling() {
-	//		
-	//		System.out.println("Starter");
-	//		running = true;
-	//		while (running)
-	//		{
-	//			if (ServControll.msgQueue.size() > 0)
-	//			{
-	//				request = ServControll.msgQueue.get(0);
-	//				ServControll.msgQueue.remove(0);
-	//				if (request[0].equals("0"))
-	//				{
-	//					System.out.println("yay");
-	//				}
-	//				else if (request[0].equals("0"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("1"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("2"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("3"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("4"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("a"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("b"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("c"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("d"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("e"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("f"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("g"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("h"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("i"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("j"))
-	//				{
-	//					
-	//				}
-	//				else if (request[0].equals("k"))
-	//				{
-	//					
-	//				}
-	//				else
-	//				{
-	//					
-	//				}
-	//			}
-	//			try {
-	//				 TimeUnit.MILLISECONDS.sleep(50);
-	//	        } catch (InterruptedException e) {
-	//	            e.printStackTrace();
-	//	        }
-	//		}
-	//	}
 }

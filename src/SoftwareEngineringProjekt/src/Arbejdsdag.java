@@ -18,6 +18,30 @@ public class Arbejdsdag {
 		this.halveTimerTotal = 0;
 	}
 
+
+	
+	// Finder et projekts indeks i projekt-listen
+	private int findProjInd(String projekt) {
+		for (String p : projekter)
+		{
+			if (p.equals(projekt))
+				return projekter.indexOf(p);
+		}
+		return -1;
+	}
+	
+	// Finder en aktivitets indeks i projekt-listen
+	private int findAktInd(String aktivitet, int p) {
+		for (String a : aktiviteter.get(p))
+		{
+			if (a.equals(aktivitet))
+				return aktiviteter.get(p).indexOf(a);
+		}
+		return -1;
+	}
+
+			//Getters, setters & adders
+	
 	// Tilføj eller erstat registreret tid til en aktivitet på givne dag
 	public int addTid(String projekt, String aktivitet, int halveTimer) {
 		int originalTid = this.halveTimerTotal;
@@ -84,26 +108,6 @@ public class Arbejdsdag {
 		return s;
 	}
 	
-	// Finder et projekts indeks i projekt-listen
-	private int findProjInd(String projekt) {
-		for (String p : projekter)
-		{
-			if (p.equals(projekt))
-				return projekter.indexOf(p);
-		}
-		return -1;
-	}
-	
-	// Finder en aktivitets indeks i projekt-listen
-	private int findAktInd(String aktivitet, int p) {
-		for (String a : aktiviteter.get(p))
-		{
-			if (a.equals(aktivitet))
-				return aktiviteter.get(p).indexOf(a);
-		}
-		return -1;
-	}
-
 	public Dato getDag() {
 		return this.dag;
 	}
