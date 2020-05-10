@@ -20,12 +20,11 @@ public class UserConnection extends Thread {
 	}
 
 	public void run() {
+		// Initiation
 		System.out.println("Starting UserConnection thread " + Thread.currentThread().getId());
 		InputStream inps = null;
 		DataInputStream dinp = null;
 		doutp = null;
-
-
 
 		try {
 			inps = socket.getInputStream();
@@ -40,6 +39,8 @@ public class UserConnection extends Thread {
 
 		String inputData;
 		Boolean moreData = false;
+		
+		// Lyter efter efterspørgsler fra bundne klient, og svar fra servercontrolleren
 		while (true)
 		{
 			try {
@@ -51,6 +52,7 @@ public class UserConnection extends Thread {
 
 			if ( moreData )
 			{
+				//Klient input
 				try {
 					inputData = dinp.readUTF();
 					System.out.print("From thread " + Thread.currentThread().getId() + ": " + inputData);
@@ -60,18 +62,19 @@ public class UserConnection extends Thread {
 				} catch (IOException e) { e.printStackTrace(); }
 			}
 
-			//Ny
 			try {
 				TimeUnit.MILLISECONDS.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
+			//Server svar
 			msgHandling();
 
 		}
 	}
 
+	//Sender beskeder til klienten
 	public static void sendBesked(String sendMessage) {
 		try {
 			doutp.writeUTF(sendMessage);
@@ -86,10 +89,12 @@ public class UserConnection extends Thread {
 		running = true;
 		if (ServControll.msgQueue.size() > 0)
 		{
+			// Hvis denne thread er næste i køen hos servercontrolleren
 			if ( ServControll.queue.get(0) == Thread.currentThread().getId() )
 			{
 				request = ServControll.msgQueue.get(0);
 
+				//Svarer klienten på anmodning om indlogning
 				if (request[0].equals("0"))
 				{
 					if (ServControll.findMedarbVedInit(request[1]) > -1)
@@ -100,30 +105,37 @@ public class UserConnection extends Thread {
 					else
 						sendBesked("0;no");
 				}
+				//Svarer på hvilke projekter klienten er leder af
 				else if (request[0].equals("1"))
 				{
 					sendBesked("1" + ServControll.packagedProjTake3(initials));
 				}
+				//Svarer på hvilke aktiviteter klienten er tilmældt
 				else if (request[0].equals("2"))
 				{
 					sendBesked("2" + ServControll.packagedProjMedAktTake2(initials));
 				}
+				//Svarer på hvilke medarbejdere der findes
 				else if (request[0].equals("3"))
 				{
 					sendBesked("3" + ServControll.packagedMedarb());
 				}
+				//Svarer på hvilke aktiviteter klienten er tilmældt samt hvilke medarbejdere der findes samlet i 1 linje
 				else if (request[0].equals("4"))
 				{
 					sendBesked("4" + ServControll.packagedProjMedAktTake2(initials) + "|" + ServControll.packagedMedarb());
 				}
+				//Svarer på hvilke projekter klienten er leder af, og hvilke aktiviteter der eksistere tilknyttet disse
 				else if (request[0].equals("5"))
 				{
 					sendBesked("5" + ServControll.packagedProjMedAktTake3(initials));
 				}
+				//Svarer på hvilke projekter klienten er leder af, og hvilke aktiviteter der eksistere tilknyttet disse, samt en liste over alle medarbejdere i en string uden linjeskifte
 				else if (request[0].equals("6"))
 				{
 					sendBesked("6" + ServControll.packagedProjMedAktTake3(initials) + "|" + ServControll.packagedMedarb());
 				}
+				// Beder serverControlleren oprette en ny aktivitet tilknyttet 
 				else if (request[0].equals("a"))
 				{
 					pend = request[1].split(";");

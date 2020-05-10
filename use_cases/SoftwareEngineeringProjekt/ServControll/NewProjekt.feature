@@ -12,7 +12,7 @@ Feature: At tilfoeje nye projekter
   @tag2
   Scenario: Der er ikke plads til flere projekter dette aar
     Given Serveren koerer
-    And Der er allerede oprettet 1000000 projekter dette aar
+    And Der er allerede oprettet 999999 projekter dette aar
     When Et nyt projekt "projekt" forsoeges tilfoejet
     Then En error "java.lang.NullPointerException: No more room for projects this year" modtages
     

@@ -7,5 +7,5 @@ Feature: Tilfoej medarbejder til projekt paa serverniveau
     Given Serveren koerer
     And Der eksisterer et projekt "projekt"
     And En medarbejder med initialerne "INIT" eksisterer
-    When Medarbejderen med initialerne "INIT" tilfoejes til projektet "projekt"
-    Then Medarbejderen med initialerne "INIT" er en del af projektet "projekt"
+    When Medarbejderen med initialerne "INIT" tilfoejes til projektet "2020000001"
+    Then Medarbejderen med initialerne "INIT" er en del af projektet "2020000001"
