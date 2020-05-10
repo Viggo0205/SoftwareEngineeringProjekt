@@ -75,13 +75,13 @@ public class Login extends JFrame implements ActionListener {
 		logInput.setEnabled(false);
 		logInBut.setEnabled(false);
 		
-//		Communicator.sendLogin(initialer); 			// sender login forespørgsel
+		Communicator.sendLogin(initialer); 			// sender login forespørgsel
 		
-		if(Controll.isEmployee(initialer)) { 					// testkode indtil comm virker
-			Controll.loggedIn();								// *
-		} else { 												// *
-			failed();											// *
-		}														// *
+//		if(Controll.isEmployee(initialer)) { 					// testkode indtil comm virker
+//			Controll.loggedIn();								// *
+//		} else { 												// *
+//			failed();											// *
+//		}														// *
 	}
 
 	// Ved fejlet login / forkerte initialer

@@ -3,16 +3,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //
 public class RetTimer extends JFrame implements ActionListener {
-	private JLabel LabelDato = new JLabel("Dato");
+	private JLabel ProjektLabel = new JLabel("Projekt");
+	private JComboBox projekter = new JComboBox();
+	private JLabel aktivitetLabel = new JLabel("Aktivitet");
+	private JComboBox aktiviteter =new JComboBox();
+	private JLabel datoLabel = new JLabel("Dato");
 	private JTextField dato = new JTextField();
-	private JLabel TimerLabel = new JLabel("Antal timer");
-	private JTextField antalTimer = new JTextField();
-	private JButton retTimerButton = new JButton("Ret timer");
-	private JPanel mainPanel = new JPanel();
+	private JLabel timerLabel = new JLabel("Timer brugt");
+	private JTextField timer = new JTextField();
+	private JButton registrerTimerButton = new JButton("Registrer timer");
+	private JPanel mainPanel;
 	private JFrame frame;
 
 	public RetTimer() {
-		frame = new JFrame("Ret timer");
+		frame = new JFrame("Registrer timer");
+		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		frame.add(mainPanel);
 
@@ -20,15 +25,27 @@ public class RetTimer extends JFrame implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
-		mainPanel.add(LabelDato);
+
+		mainPanel.add(ProjektLabel);
+		mainPanel.add(projekter);
+		for(int i = 0; i < Controll.projektListe.size(); i++) {
+			projekter.addItem(Controll.projektListe.get(i));
+		}
+		projekter.addActionListener(this);
+
+		mainPanel.add(aktivitetLabel);
+		mainPanel.add(aktiviteter);
+
+
+		mainPanel.add(datoLabel);
 		mainPanel.add(dato);
 
-		mainPanel.add(TimerLabel);
-		mainPanel.add(antalTimer);
+		mainPanel.add(timerLabel);
+		mainPanel.add(timer);
 
-		mainPanel.add(retTimerButton);
-		retTimerButton.addActionListener(this);
-		frame.setSize(400, 500);
+		mainPanel.add(registrerTimerButton);
+		registrerTimerButton.addActionListener(this);
+		frame.setSize(200, 500);
 
 	}
 
@@ -40,19 +57,25 @@ public class RetTimer extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == retTimerButton) {
+		if(e.getSource() == registrerTimerButton) {
 			if(!Controll.isValidDato(dato.getText())) {
 				UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
-				dato.setText("");
-			} else if(Integer.parseInt(antalTimer.getText()) < 0 || Integer.parseInt(antalTimer.getText()) > 1000000 ) {
+				dato.setText("");	
+			} else if(Integer.parseInt(timer.getText()) < 0 || Integer.parseInt(timer.getText()) > 1000000 ) {
 				UserInterface.log.append("Fejl i antal timer\n");
-				antalTimer.setText("");
-			} else {    		
-				Communicator.sendRetterTimer(dato.getText(), antalTimer.getText());
-				frame.setVisible(false);
-				frame.dispose();
+				timer.setText("");
+			} else {
+			Communicator.sendRetterTimer((String)projekter.getSelectedItem(), (String)aktiviteter.getSelectedItem(), dato.getText(), timer.getText());
+			frame.setVisible(false);
+			frame.dispose();
 			}
-
+		} else if(e.getSource() == projekter) {							// valg af projekt skal indsætte aktiviteter i dropdown
+			for( int i = 0; i < aktiviteter.getItemCount();i++)			// ryder dropdown
+				aktiviteter.removeItemAt(0);							//
+			Controll.chooseAktiv(projekter.getSelectedIndex());			// vælger korrekt liste at trække aktiviteter fra
+			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {	// trækker aktiviteter og indsætter i dropdown
+				aktiviteter.addItem(Controll.choiseAktivListe.get(i));
+			}
 		}
 	}
 }

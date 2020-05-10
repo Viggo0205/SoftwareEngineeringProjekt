@@ -29,7 +29,7 @@ public class UserInterface extends JFrame implements ActionListener{
 		UserInterface window = new UserInterface();
 		window.setTitle("Software company. Velkommen " + Login.initialer.toUpperCase());
 		window.setSize(600, 600);
-//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 	}
@@ -74,7 +74,7 @@ public class UserInterface extends JFrame implements ActionListener{
 		// knapper tilføjes
 		leAkt1 = new JButton("Bestil ny aktivitet");
 		leAkt2 = new JButton("Tildel opgaver til udviklere");
-		leAkt3 = new JButton("Se ledige udviklere for perioder");
+		leAkt3 = new JButton("Se ledige udviklere for perioder");leAkt3.setEnabled(false); // OoO
 		leAkt4 = new JButton("Se udvikling af timer på aktivitet");
 		leAkt5 = new JButton("Skaf rapporter");
 		leAkt6 = new JButton("");leAkt6.setEnabled(false); // der er endnu kun behov for 5 knapper
@@ -116,12 +116,7 @@ public class UserInterface extends JFrame implements ActionListener{
 			RegistraerFraemtidigtFravaer.popup();
 		}
 		if(e.getSource() == maAkt2) {		// Se timer brugt i dag
-			// usikker på, om denne skal have popup eller bare tjekke nuværende dag
-			/*
-			 * Medarbejderen skal enkelt kunne se, 
-			 * om han/hun har registreret alle timer
-			 * man har arbejdet i dag.
-			 */
+			Communicator.sendSeArbejde();			
 		}
 		if(e.getSource() == maAkt3) {		// Ret registrerede timer
 			RetTimer.popup();

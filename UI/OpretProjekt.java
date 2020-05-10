@@ -9,9 +9,9 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 	private JLabel navnPåUdviklingsLeder;
 	private JLabel startDatoLabel;
 	private JLabel slutDatoLabel;
-	private JLabel projektBeskrivelseLabel;
+	private JLabel projektNavnLabel;
 	private JComboBox Medarbejdere;
-	private JTextField projektBeskrivelse;
+	private JTextField projektNavn;
 	private JTextField startUge;
 	private JTextField slutUge;
 	private JComboBox comboBox2;
@@ -36,11 +36,11 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 		Medarbejdere = new JComboBox();
 		mainPanel.add(Medarbejdere);
 
-		projektBeskrivelseLabel = new JLabel("Projekt Beksrivelse");
-		mainPanel.add(projektBeskrivelseLabel);
+		projektNavnLabel = new JLabel("Projektets navn");
+		mainPanel.add(projektNavnLabel);
 
-		projektBeskrivelse = new JTextField();
-		mainPanel.add(projektBeskrivelse);
+		projektNavn = new JTextField();
+		mainPanel.add(projektNavn);
 
 		startDatoLabel = new JLabel("Start dato");
 		mainPanel.add(startDatoLabel);
@@ -82,7 +82,7 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 				startUge.setText("");
 				slutUge.setText("");
 			} else {
-				Communicator.sendOpretPro((String) Medarbejdere.getSelectedItem(), projektBeskrivelse.getText(), startUge.getText(), slutUge.getText());
+				Communicator.sendOpretPro((String) Medarbejdere.getSelectedItem(), startUge.getText(), slutUge.getText(), projektNavn.getText());
 				frame.setVisible(false);
 				frame.dispose();
 			}

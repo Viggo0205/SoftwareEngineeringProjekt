@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// Lavet af Victor Tadeusz Ulstrup Olszowski s194281 og Rasmus nyhus s194285
+// Lavet af Victor Tadeusz Ulstrup Olszowski s194281 og Rasmus Nyhus s194285
 public class BestilAktvitet extends JFrame implements ActionListener {
 
 	private JComboBox projekter;
@@ -13,7 +13,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 	private JTextField textField4;
 	private JTextField NavnTextField;
 	private JButton bestilButton;
-	private JLabel Beskrivelse;
+//	private JLabel Beskrivelse;
 	private JLabel NavnAktivitet;
 	private JLabel VaelgProj;
 	private JLabel startUge;
@@ -55,11 +55,11 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 		}
 		projekter.addActionListener(this);
 
-		Beskrivelse = new JLabel("Beskrivelse af aktivitet");
-		panel1.add(Beskrivelse);
+//		Beskrivelse = new JLabel("Beskrivelse af aktivitet");
+//		panel1.add(Beskrivelse);
 
-		textField2 = new JTextField();
-		panel1.add(textField2);
+//		textField2 = new JTextField();
+//		panel1.add(textField2);
 
 		startUge = new JLabel("Start Uge");
 		panel1.add(startUge);
@@ -147,7 +147,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 
 			} else {								// gyldige inputs
 				System.out.println("good");
-				Communicator.sendOpretAktiv((String) projekter.getSelectedItem(),textField3.getText(),textField4.getText(),textField1.getText());
+				Communicator.sendOpretAktiv((String) projekter.getSelectedItem(),textField3.getText(),textField4.getText(),textField1.getText(),NavnTextField.getText());
 				System.out.println("knap trykket");
 				frame.setVisible(false);
 				frame.dispose();

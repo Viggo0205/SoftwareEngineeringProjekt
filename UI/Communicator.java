@@ -89,6 +89,7 @@ public class Communicator implements Runnable {
 	
 	// sender ønske om login med brugerens initialer
 	public static void sendLogin(String initialer) {	
+		System.out.println("sender login som: " + "0;" + initialer);
 		sendBesked("0;" + initialer);
 	}
 	// sender besked om, klienten vil kende sine projekter
@@ -108,8 +109,8 @@ public class Communicator implements Runnable {
 	}
 	
 	// metoder for at sende beskeder til serveren afhængig af hvilket event.
-	public static void sendOpretAktiv(String projekt, String startUge, String slutUge, String timer) {
-		sendMsg = "a;" + projekt + ";" + startUge  + ";" + slutUge + ";" + timer;
+	public static void sendOpretAktiv(String projekt, String startUge, String slutUge, String timer, String navn) {
+		sendMsg = "a;" + projekt + ";" + startUge  + ";" + slutUge + ";" + timer + ";" + navn;
 		sendBesked(sendMsg);
 	}
 	public static void sendTildelAkt(String projekt, String aktivitet, String udvikler) {
@@ -128,12 +129,13 @@ public class Communicator implements Runnable {
 		sendMsg = "e;" + projekt + ";" + aktivitet + ";" + udvikler;
 		sendBesked(sendMsg);
 	}
-	public static void sendRetterTimer(String dato, String timer) {
-		sendMsg = "f;" + dato + ";" + timer;
+	public static void sendRetterTimer(String projekt, String aktivitet, String dag, String timer) {
+		sendMsg = "f;" + projekt + ";" + aktivitet + ";" + dag + ";" + timer;
+		sendMsg = "f;" + dag + ";" + timer + ";" + projekt + ";" + aktivitet;
 		sendBesked(sendMsg);
 	}
-	public static void sendOpretPro(String leder, String beskrivelse, String startDato, String slutDato) {
-		sendMsg = "g;" + leder + ";" + beskrivelse + ";" + startDato + ";" + slutDato;
+	public static void sendOpretPro(String leder, String startDato, String slutDato, String navn) {
+		sendMsg = "g;" + leder + ";" + startDato + ";" + slutDato + ";" + navn;
 		sendBesked(sendMsg);
 	}
 	public static void sendIndmeldTid(String projekt, String aktivitet, String dag, String timer) {
@@ -148,8 +150,8 @@ public class Communicator implements Runnable {
 		sendMsg = "j;" + projekt + ";" + aktivitet;
 		sendBesked(sendMsg);
 	}
-	public static void sendSeArbejde(String startDato, String slutDato) {
-		sendMsg = "k;" + startDato + ";" + slutDato;
+	public static void sendSeArbejde() {
+		sendMsg = "k";
 		sendBesked(sendMsg);
 	}
 	
