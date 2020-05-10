@@ -152,7 +152,7 @@ public class UserConnection extends Thread {
 				}
 				else if (request[0].equals("h"))
 				{
-					sendBesked("10;" + ServControll.registrerTimer(pend[2], pend[3], Integer.parseInt(pend[1]), initials, stringTilDato(pend[0])));
+					sendBesked("12;" + ServControll.registrerTimer(pend[2], pend[3], Integer.parseInt(pend[1]), initials, stringTilDato(pend[0])));
 				}
 				else if (request[0].equals("i"))
 				{
@@ -165,11 +165,11 @@ public class UserConnection extends Thread {
 				}
 				else if (request[0].equals("k"))
 				{
-
+					sendBesked("15;" + ServControll.packagedArbejdsDag(initials));
 				}
 				else
 				{
-
+					
 				}
 				ServControll.msgQueue.remove(0);
 				ServControll.queue.remove(0);
