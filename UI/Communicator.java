@@ -9,9 +9,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 //
 public class Communicator implements Runnable {
@@ -74,6 +72,7 @@ public class Communicator implements Runnable {
 				if (moreData) {
 					try {
 						ca = dinp.readUTF().split(";",2);
+						Controll.msgQueue(ca);
 					} catch (IOException e) { 
 						e.printStackTrace(); 
 					}
