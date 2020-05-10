@@ -96,7 +96,7 @@ public class UserInterface extends JFrame implements ActionListener{
 		
 		// log tekstfelt tilføjes
 //		log = new JTextArea("Dags dato: " + Controll.currentDag.getFormatedDate()); 
-		log = new JTextArea("Dags dato: " + "02 92 1032" + "\n");
+		log = new JTextArea("Dags dato: " + Controll.currentDag.getFormatedDate() + "\n");
 		log.setLineWrap(true);
 		log.setEditable(false);
 		JScrollPane logScroll = new JScrollPane(log);
@@ -141,14 +141,14 @@ public class UserInterface extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == leAkt2) {		// Tildel opgaver til udviklere
 			windowWait = "leAkt2";
-			Communicator.sendMedAktAccess();
+			Communicator.sendAktLedMedAccess();
 		}
 		if(e.getSource() == leAkt3) {		// Se ledige udviklere for perioder
 			SeLedigUdvikler.popup();
 		}
 		if(e.getSource() == leAkt4) {		// Se udvikling af timer på aktivitet
 			windowWait = "leAkt4";
-			Communicator.sendAktivAccess();
+			Communicator.sendAktLedAccess();
 		}
 		if(e.getSource() == leAkt5) {		// Skaf rapporter
 			windowWait = "leAkt6";

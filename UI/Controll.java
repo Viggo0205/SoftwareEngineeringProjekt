@@ -5,6 +5,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import SoftwareEngineringProjekt.src.Dato; // skal fjernes senere, når server og klient adskilles
 //
@@ -13,7 +14,7 @@ public class Controll {
 	
 	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"}; // test array
 	public static boolean ready;
-	private static String[] sQueue;
+	private static String[] sQueue = new String[2];
 //	public static String[] projektListe = new String[] {"CHJA", "CLLO", "EILA", "RANY", "VIOL"};
 	public static List<String> projektListe = new ArrayList<String>();
 	public static List<ArrayList<String>> aktivListe = new ArrayList<ArrayList<String>>();
@@ -42,7 +43,7 @@ public class Controll {
 		while(true) {
 			
 			if(!ready) {
-				System.out.println("in loop not rdy");
+//				System.out.println("in loop not rdy");
 				if(sQueue[0].equals("0")) {						// login svar
 					System.out.println("modtaget svar på login");
 					loginModt = sQueue[1].split(",");
@@ -56,30 +57,49 @@ public class Controll {
 						Login.failed();
 						// fejlet loggin
 					}
-				} else if(sQueue[0].equals("placeholder")) {	// modtagelse af projekt liste
+				} else if(sQueue[0].equals("1")) {	// modtagelse af projekt liste
+					System.out.println("prjektliste modtaget");
 					lavProListe(sQueue[1]);
 					proListModt();
-				} else if(sQueue[0].equals("placeholder2")) {	// modtagelse af aktiviteter
+				} else if(sQueue[0].equals("2")) {	// modtagelse af aktiviteter
 					lavAktListe(sQueue[1]);
 					aktListModt();
-				} else if(sQueue[0].equals("placeholder3")) {	// modtagelse af medarbejderliste
+				} else if(sQueue[0].equals("3")) {	// modtagelse af medarbejderliste
 					lavMedarbListe(sQueue[1]);
 					medarbListModt();
-				} else if(sQueue[0].equals("placeholder4")) {	// modtagelse af aktiv+medarb lister
+				} else if(sQueue[0].equals("4")) {	// modtagelse af aktiv+medarb lister
 					aktMedaLists = sQueue[1].split("-");
 					lavAktListe(aktMedaLists[0]);
 					lavMedarbListe(aktMedaLists[1]);
 					aktMedaListsModt();
-				} else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
+				} else if(sQueue[0].equals("5")) {
+					lavAktListe(sQueue[1]);
+					aktLedModt();
+				} else if(sQueue[0].equals("6")) {
+					aktMedaLists = sQueue[1].split("-");
+					lavAktListe(aktMedaLists[0]);
+					lavMedarbListe(aktMedaLists[1]);
+					aktLedMedModt();
+				}
+				
+				else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
 					ledigMedarbListe = sQueue[1].split(";");
 					UserInterface.log.append("Ledige medarbejdere i perioden er: " + ledigMedarbListe.toString());
 				} else {					// mange flere...
 					System.out.println("ukendt protokolkode: " + sQueue[0]);
+					System.out.println("besked: " + sQueue[1]);
 				}
 
-			} else { // fejl i protokolkode
-				System.out.println("in loop rdy");
+			} else { 
+				System.out.print("");
 			}
+			
+//			try {
+//				TimeUnit.MILLISECONDS.sleep(250);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+			
 		}
 	}
 
@@ -113,9 +133,12 @@ public class Controll {
 	}
 	
 	private static void lavProListe(String s) {
+		System.out.println(s);
 		String[] ss = s.split(";");
-		for(int i = 0; i < ss.length; i++)
+		for(int i = 0; i < ss.length; i++) {
 			projektListe.add(ss[i]);
+//			System.out.print(ss[i] + "    ");
+		}
 	}
 
 
@@ -138,8 +161,10 @@ public class Controll {
 	// metode kaldes, når der modtages en nu besked med krav på, klienten var klar til at modtage den
 	public static void msgQueue(String[] sa) {
 		ready = false;
-		System.out.println(sa[0] + sa[1] + "sat i msgQueue");
+		System.out.println("sa længde " + sa.length);
+		System.out.println(sa[0] + "    " + sa[1] + "sat i msgQueue");
 		sQueue = sa;
+		System.out.println("sQueue er" + sQueue[0] + "    " + sQueue[1]);
 	}
 
 //	
@@ -152,35 +177,45 @@ public class Controll {
 	 * aktivitetsliste fra serveren.
 	 * Det sidst efterspurgte popup åbnes.
 	 */
-	public static void proListModt() {
+	public static void proListModt() { // 1
 		if(UserInterface.windowWait.equals("leAkt1")) {			// Bestil ny aktivitet
 			BestilAktvitet.popup();
 		} else if(UserInterface.windowWait.equals("leAkt5")) {	// skaf rapport
 			SkafRapport.popup();
 		} 
+		ready = true;
 	}
-	public static void aktListModt() {
+	public static void aktListModt() { // 2
 		if(UserInterface.windowWait.equals("leAkt2")) {			// Tildel opgaver til udvikler
 			TildelAktivitet.popup();
 		} else if(UserInterface.windowWait.equals("maAkt4")) {	// Søg hjælp fra anden udvikler
 			soegHjaelp.popup();
 		} else if(UserInterface.windowWait.equals("maAkt3")) {	// Ret registrerede timer
 			RegistrerTimer.popup();
-		} else if(UserInterface.windowWait.equals("leAkt4")) {	// se tidsbrug 
-			TidBrugtAktivitet.popup();
 		}
+		ready = true;
 	}
-	private static void medarbListModt() {
+	private static void medarbListModt() { // 3
 		if(UserInterface.windowWait.equals("maAkt5"))
 			OpretProjekt.popup();
 	}
-	private static void aktMedaListsModt() {
-		if(UserInterface.windowWait.equals("leAkt2")) {
-			TildelAktivitet.popup();
-		} else if(UserInterface.windowWait.equals("maAkt4")) {
+	private static void aktMedaListsModt() { // 4
+		if(UserInterface.windowWait.equals("maAkt4")) {
 			soegHjaelp.popup();
 		}
-		
+		ready = true;
+	}
+	private static void aktLedModt() { // 5
+		if(UserInterface.windowWait.equals("leAkt4")) {	// se tidsbrug 
+			TidBrugtAktivitet.popup();
+		}
+		ready = true;
+	}
+	private static void aktLedMedModt() { // 6
+		if(UserInterface.windowWait.equals("leAkt2")) {
+			TildelAktivitet.popup();
+		}
+		ready = true;
 	}
 	
 	public static boolean isValidWeek(String weekString) {

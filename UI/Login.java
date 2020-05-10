@@ -89,5 +89,6 @@ public class Login extends JFrame implements ActionListener {
 		bund.setText("Forkerte initialer");
 		logInput.setEnabled(true);
 		logInBut.setEnabled(true);
+		Controll.ready = true;
 	}
 }

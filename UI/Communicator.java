@@ -74,7 +74,7 @@ public class Communicator implements Runnable {
 				if (moreData) {
 					try {
 						ca = dinp.readUTF().split(";",2);
-						System.out.println(ca.toString());
+						System.out.println("ca længde " + ca.length);
 						Controll.msgQueue(ca);
 					} catch (IOException e) { 
 						e.printStackTrace(); 
@@ -95,20 +95,30 @@ public class Communicator implements Runnable {
 		System.out.println("sender login som: " + "0;" + initialer);
 		sendBesked("0;" + initialer);
 	}
-	// sender besked om, klienten vil kende sine projekter
+	// sender besked om, klienten vil kende projekter, han er leder for
 	public static void sendProjAccess() {
+		System.out.println("sender ønske om en prjektliste med besked 1");
 		sendBesked("1");
 	}
 	// sender besked om, klienten vil kende sine projekter og aktiviteter
 	public static void sendAktivAccess() {
 		sendBesked("2");
 	}
-	// sender forespørgsel om medarbejderliste
+	// sender forespørgsel om medarbejderliste for hele firmaet
 	public static void sendMedarbAccess() {
 		sendBesked("3");
 	}
+	// sender forespørgsel for sine aktiviteter samt fuld medarbejderliste
 	public static void sendMedAktAccess() {
 		sendBesked("4");
+	}
+	// sender besked om, klienten vil kende aktiviteter, han er leder for
+	public static void sendAktLedAccess() {
+		sendBesked("5");
+	}
+	// sender besked om, klienten vil kende projekter, han er leder for samt fuld medarb liste
+	public static void sendAktLedMedAccess() {
+		sendBesked("6");
 	}
 	
 	// metoder for at sende beskeder til serveren afhængig af hvilket event.
