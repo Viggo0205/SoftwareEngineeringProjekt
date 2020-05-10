@@ -310,24 +310,32 @@ public class ServControll {
 		return projekter.getCertainProject(projekter.findProjVedId(projId)).getPackagedRapport();
 	}
 	
-	// Finder data om et projekt til en klient
+	//Finder alle projekter til klienten
 	public static String packagedProj() {
 		return projekter.pakString();
 	}
 
-	// finder data om et projekt og dets aktiviteter til en klient
+	//Finder alle projekter til klienten, samt tilhørende aktiviteter
 	public static String packagedProjMedAkt() {
 		return projekter.pakStringMedAkt();
 	}
-
+	//Finder de projekter klienten selv er medlem af til vedkommende
 	public static String packagedProjTake2(String init) {
 		return projekter.pakStringTake2(init);
 	}
-
+	//Finder de projekter klienten er medlem af, samt tilhørende aktiviteter, til vedkommende
 	public static String packagedProjMedAktTake2(String init) {
 		return projekter.pakStringMedAktTake2(init);
 	}
-
+	// Finder de projekter klienten er leder af til vedkommende
+	public static String packagedProjTake3(String init) {
+		return projekter.pakStringTake3(init);
+	}
+	//Finder de projekter klienten er leder af, samt tilhørende aktiviteter, til vedkommende
+	public static String packagedProjMedAktTake3(String init) {
+		return projekter.pakStringMedAktTake3(init);
+	}
+	
 	// Pakker data om alle medarbejdere til en klient
 	public static String packagedMedarb() {
 		String s = "";

@@ -102,7 +102,7 @@ public class UserConnection extends Thread {
 				}
 				else if (request[0].equals("1"))
 				{
-					sendBesked("1" + ServControll.packagedProjTake2(initials));
+					sendBesked("1" + ServControll.packagedProjTake3(initials));
 				}
 				else if (request[0].equals("2"))
 				{
@@ -114,7 +114,15 @@ public class UserConnection extends Thread {
 				}
 				else if (request[0].equals("4"))
 				{
-					sendBesked("4" + "TBD");
+					sendBesked("4" + ServControll.packagedProjMedAktTake2(initials) + "|" + ServControll.packagedMedarb());
+				}
+				else if (request[0].equals("5"))
+				{
+					sendBesked("5" + ServControll.packagedProjMedAktTake3(initials));
+				}
+				else if (request[0].equals("6"))
+				{
+					sendBesked("6" + ServControll.packagedProjMedAktTake3(initials) + "|" + ServControll.packagedMedarb());
 				}
 				else if (request[0].equals("a"))
 				{
