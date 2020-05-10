@@ -42,8 +42,8 @@ public class Controll {
 			if(!ready) {
 				if(sQueue[0].equals("0")) {						// login svar
 					loginModt = sQueue[1].split(";");
-					if(loginModt[0].equals("200")) { 		// godkendt login, indstil dato
-						datoArray = sQueue[1].split(",");
+					if(loginModt[0].equals("ok")) { 		// godkendt login, indstil dato
+						datoArray = sQueue[1].split("-");
 						currentDag = new Dato(Integer.parseInt(datoArray[0]),Integer.parseInt(datoArray[1]),Integer.parseInt(datoArray[2]));
 						loggedIn();
 					} else {
