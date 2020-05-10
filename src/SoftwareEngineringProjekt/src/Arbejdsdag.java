@@ -21,7 +21,6 @@ public class Arbejdsdag {
 	// Tilføj eller erstat registreret tid til en aktivitet på givne dag
 	public int addTid(String projekt, String aktivitet, int halveTimer) {
 		int originalTid = this.halveTimerTotal;
-		int deltaTid;
 		int p = findProjInd(projekt);
 		int a;
 		if (p == -1)
@@ -68,6 +67,20 @@ public class Arbejdsdag {
 			}
 		}
 		s += "Totaltid: " + halveTimerTotal;
+		return s;
+	}
+	
+	public String packagedTid() {
+		String s = "";
+		for (String p : projekter)
+		{
+			s += ";" + p;
+			for (String a : aktiviteter.get(findProjInd(p)))
+			{
+				s += ":" + a + "|" + aktivitetstider.get(findProjInd(p)).get(findAktInd(a, findProjInd(p)));
+			}
+		}
+		s += ";" + halveTimerTotal;
 		return s;
 	}
 	
