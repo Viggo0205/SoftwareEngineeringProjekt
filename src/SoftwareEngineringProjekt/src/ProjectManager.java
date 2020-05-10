@@ -6,6 +6,19 @@ import java.util.ArrayList;
 public class ProjectManager {
 	private ArrayList<Project> projekter = new ArrayList<Project>();
 
+
+	private static int findMedarbVedInit (String init, Project p, Aktivitet a) {
+		for (Medarbejder m : p.getMedarbejdere())
+		{
+			if (m.getInitialer().equalsIgnoreCase(init))
+				return p.getMedarbejdere().indexOf(m);
+		}
+		return -1;
+	}
+	
+	
+	//Getters, setters, adders & finders
+	
 	public ArrayList<Project> getProjects() {
 		return this.projekter;
 	}
@@ -31,6 +44,17 @@ public class ProjectManager {
 		return -1;
 	}
 
+	private static int findMedarbVedInit (String init, Project p) {
+		for (Medarbejder m : p.getMedarbejdere())
+		{
+			if (m.getInitialer().equalsIgnoreCase(init))
+				return p.getMedarbejdere().indexOf(m);
+		}
+		return -1;
+	}
+	
+	
+	//Pakker data til klienten
 	public String pakString() {
 		String s = "";
 		if(this.projekter.size() > 0)
@@ -88,22 +112,5 @@ public class ProjectManager {
 				}
 			}
 		return s;
-	}
-
-	private static int findMedarbVedInit (String init, Project p) {
-		for (Medarbejder m : p.getMedarbejdere())
-		{
-			if (m.getInitialer().equalsIgnoreCase(init))
-				return p.getMedarbejdere().indexOf(m);
-		}
-		return -1;
-	}
-	private static int findMedarbVedInit (String init, Project p, Aktivitet a) {
-		for (Medarbejder m : p.getMedarbejdere())
-		{
-			if (m.getInitialer().equalsIgnoreCase(init))
-				return p.getMedarbejdere().indexOf(m);
-		}
-		return -1;
 	}
 }

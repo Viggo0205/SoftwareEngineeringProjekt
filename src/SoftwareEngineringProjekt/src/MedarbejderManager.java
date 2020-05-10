@@ -11,15 +11,22 @@ public class MedarbejderManager {
 	private List<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
 	private int nextMedarbejderID;
 	
+	//Konstruktor, der findes altid en administratorbruger ADMN
 	public MedarbejderManager () {
 		this.medarbejdere.add(new Medarbejder("ADMN", 0));
 		this.nextMedarbejderID = 1;
 	}
 	
-	public ArrayList<Medarbejder> getMedarbejdere() {
-		return (ArrayList<Medarbejder>) this.medarbejdere;
+	//Bestemmer hvorvidt en medarbejder eksisterer i listen
+	private boolean medarbExists(String initialer) {
+		for(Medarbejder q : medarbejdere){
+			if(q.getInitialer().equals(initialer))
+				return true;
+		}
+		return false;
 	}
 	
+	//Adders and getters
 	public void newMedarbejder(String initialer) throws InitialsWrongLengthException, EmployeeAlreadyExistsException {
 		if(initialer.length() != 4) {
 			throw new InitialsWrongLengthException();
@@ -33,13 +40,9 @@ public class MedarbejderManager {
 			
 		}
 	}
-
-	private boolean medarbExists(String initialer) {
-		for(Medarbejder q : medarbejdere){
-			if(q.getInitialer().equals(initialer))
-				return true;
-		}
-		return false;
+	
+	public ArrayList<Medarbejder> getMedarbejdere() {
+		return (ArrayList<Medarbejder>) this.medarbejdere;
 	}
 	
 }

@@ -11,51 +11,32 @@ import java.io.Serializable;
 	Start- og slut-uger er egentligt datoer, men kan blot returneres som med .beregnUge()
 */
 
-public class Project implements Serializable {
+public class Project {
 	private ArrayList<Aktivitet> aktiviteter = new ArrayList<Aktivitet>();
 	private ArrayList<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
 	private Medarbejder projektleder;
 	private Dato startDato, slutDato;
 	private String navn, projektNummer;
 	
+	// Konstruktor
 	public Project(String navn, Medarbejder projektleder, Dato startDato, Dato slutDato, String projektNummer) {
 		this.navn = navn;
 		this.projektleder = projektleder;
-		// Behandl lovlige uger client-side
 		this.startDato = startDato;
 		this.slutDato = slutDato;
 		this.projektNummer = projektNummer;
 		addMedarbejder(projektleder);
-//		if (ServControll.getProjekter().getProjektListLength() > 0)
-//		{
-//			// Sidste oprettede projekts fulde nummer
-//			String s = ServControll.getProjekter().getProjects().get(ServControll.getProjekter().getProjektListLength() - 1).getProjektNummer();
-//			if ( s.substring(4, 10).equals("999999") )
-//			{
-//				throw new NullPointerException("No more room for projects this year");
-//			}
-//			if ( s.substring(0, 4).equals(Integer.toString(ServControll.getDato().getYear())))
-//			{
-//				this.projektNummer = Integer.toString(ServControll.getDato().getYear()) + nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
-//			}
-//			else 
-//			{
-//				this.projektNummer = ServControll.getDato().getYear() + "000000";
-//			}
-//		}
-//		else this.projektNummer = "" + ServControll.getDato().getYear() + "000000";
-		
-		System.out.println("User " + this.projektleder.getInitialer() + " succesfully creates project " + this.navn + " with project number " + this.projektNummer);
 	}
 	
-	// Anvendes til nulstuffing af projektnumre under 6 decimaler
-//	private String nulStuff(String s) {
-//		for ( int i = 6 - s.length(); i > 0; i--)
-//		{
-//			s = "0" + s;
-//		}
-//		return s;
-//	}
+	//Finder en aktivitets indeks i projektets aktivitetsliste ved aktivitetens navn
+	public int findAktVedNavn(String navn) {
+		for (Aktivitet a : this.aktiviteter)
+		{
+			if (a.getNavn().equalsIgnoreCase(navn))
+				return this.aktiviteter.indexOf(a);
+		}
+		return -1;
+	}
 	
 	// Getters, setters & adders
 	
@@ -111,15 +92,7 @@ public class Project implements Serializable {
 		return this.aktiviteter;
 	}
 	
-	public int findAktVedNavn(String navn) {
-		for (Aktivitet a : this.aktiviteter)
-		{
-			if (a.getNavn().equalsIgnoreCase(navn))
-				return this.aktiviteter.indexOf(a);
-		}
-		return -1;
-	}
-	
+	//Formaterer projektets 
 	public String getPackagedRapport() {
 		String s = "";
 		int tid = 0;

@@ -14,6 +14,7 @@ public class Medarbejder {
 		this.kalender = new Kalender();
 	}
 	
+	//Getters
 	public String getInitialer() {
 		return this.initialer;
 	}

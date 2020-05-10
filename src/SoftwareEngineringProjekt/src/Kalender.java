@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Kalender {
 	private ArrayList<Arbejdsdag> arbejdsdage = new ArrayList<Arbejdsdag>();
 
+	//Finder en arbejdsdags indeks i kallenderen ud fra dens dato
 	public int findArbejdsagIndVedDato(Dato dag) {
 		if (arbejdsdage.size() > 0)
 		{
@@ -21,7 +22,7 @@ public class Kalender {
 		else 
 			return -1;
 	}
-
+	//Getters & adders
 	public Arbejdsdag getCertainArbejdsdag(int i) {
 		return this.arbejdsdage.get(i);
 	}

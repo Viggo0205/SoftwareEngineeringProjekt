@@ -1,4 +1,6 @@
 // Skrevet af Eigil Sejer Larsen - s194282
+//
+// Åbner for forbindelse til serveren
 package SoftwareEngineringProjekt.src;
 
 import java.io.IOException;

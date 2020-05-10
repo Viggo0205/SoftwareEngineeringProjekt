@@ -20,7 +20,34 @@ public class Aktivitet {
 		this.realTid = 0;
 	}
 	
-	public void addTid (int tid) {
+
+
+
+	// Returnerer alle aktivitetens medarbejdere formateret til 1 string
+	public String getMedarbejdereFormated() {
+		String s = "Medarbejdere:";
+		for (Medarbejder m : medarbejdere)
+			s += "\n" + m.getInitialer();
+		return s;
+	}
+	
+	public ArrayList<Medarbejder> getMedarbejdere() {
+		return (ArrayList<Medarbejder>) this.medarbejdere;
+	}
+
+	// Finder indekset for en medarbejder, -1, hvis ikke medarbejderen eksisterer
+	public int findMedarbVedInit (String init) {
+		for (Medarbejder m : this.medarbejdere)
+		{
+			if (m.getInitialer().equalsIgnoreCase(init))
+				return this.medarbejdere.indexOf(m);
+		}
+		return -1;
+	}
+	
+			//Getters, setters & adders
+	
+		public void addTid (int tid) {
 		this.realTid += tid;
 	}
 	
@@ -29,14 +56,15 @@ public class Aktivitet {
 		this.medarbejdere.add(medarbejder);
 	}
 	
-	// Returnerer aktivitetens data formateret til 1 string
+	
+		// Returnerer aktivitetens data formateret til 1 string
 	public String getAllData() {
 		String s = "Aktivitets navn: " + this.navn + "\nstartuge: " + this.startDato.beregnUge() + "-" + this.startDato.getYear() + "\nslutuge: " + this.slutDato.beregnUge() + "-" + this.slutDato.getYear() + "\nbudgettid: " + this.budgetTid + "\nrealtid: " + this.realTid + "\nmedarbejdere:";
 		for (Medarbejder m : this.medarbejdere)
 			s += "\n" + m.getInitialer();
 		return s;
 		}
-	
+		
 	public String getNavn() {
 		return this.navn;
 	}
@@ -56,29 +84,8 @@ public class Aktivitet {
 	public void setSlutUge(int uge, int year) {
 		this.slutDato = new Dato(uge, year);
 	}
-
-	// Returnerer alle aktivitetens medarbejdere formateret til 1 string
-	public String getMedarbejdereFormated() {
-		String s = "Medarbejdere:";
-		for (Medarbejder m : medarbejdere)
-			s += "\n" + m.getInitialer();
-		return s;
-	}
 	
-	public ArrayList<Medarbejder> getMedarbejdere() {
-		return (ArrayList<Medarbejder>) this.medarbejdere;
-	}
-
 	public int getTime() {
 		return this.realTid;
-	}
-	
-	public int findMedarbVedInit (String init) {
-		for (Medarbejder m : this.medarbejdere)
-		{
-			if (m.getInitialer().equalsIgnoreCase(init))
-				return this.medarbejdere.indexOf(m);
-		}
-		return -1;
 	}
 }
