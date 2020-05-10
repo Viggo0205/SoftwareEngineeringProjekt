@@ -102,19 +102,19 @@ public class UserConnection extends Thread {
 				}
 				else if (request[0].equals("1"))
 				{
-					sendBesked("1;" + ServControll.packagedProjTake2(request[1]));
+					sendBesked("1" + ServControll.packagedProjTake2(request[1]));
 				}
 				else if (request[0].equals("2"))
 				{
-					sendBesked("2;" + ServControll.packagedProjMedAktTake2(request[1]));
+					sendBesked("2" + ServControll.packagedProjMedAktTake2(request[1]));
 				}
 				else if (request[0].equals("3"))
 				{
-					sendBesked("3;" + ServControll.packagedMedarb());
+					sendBesked("3" + ServControll.packagedMedarb());
 				}
 				else if (request[0].equals("4"))
 				{
-					sendBesked("4;" + "TBD");
+					sendBesked("4" + "TBD");
 				}
 				else if (request[0].equals("a"))
 				{
