@@ -102,27 +102,27 @@ public class UserConnection extends Thread {
 				}
 				else if (request[0].equals("1"))
 				{
-					sendBesked("1" + ServControll.packagedProjTake3(initials));
+					sendBesked("1;" + ServControll.packagedProjTake3(initials));
 				}
 				else if (request[0].equals("2"))
 				{
-					sendBesked("2" + ServControll.packagedProjMedAktTake2(initials));
+					sendBesked("2;" + ServControll.packagedProjMedAktTake2(initials));
 				}
 				else if (request[0].equals("3"))
 				{
-					sendBesked("3" + ServControll.packagedMedarb());
+					sendBesked("3;" + ServControll.packagedMedarb());
 				}
 				else if (request[0].equals("4"))
 				{
-					sendBesked("4" + ServControll.packagedProjMedAktTake2(initials) + "|" + ServControll.packagedMedarb());
+					sendBesked("4;" + ServControll.packagedProjMedAktTake2(initials) + "|" + ServControll.packagedMedarb());
 				}
 				else if (request[0].equals("5"))
 				{
-					sendBesked("5" + ServControll.packagedProjMedAktTake3(initials));
+					sendBesked("5;" + ServControll.packagedProjMedAktTake3(initials));
 				}
 				else if (request[0].equals("6"))
 				{
-					sendBesked("6" + ServControll.packagedProjMedAktTake3(initials) + "|" + ServControll.packagedMedarb());
+					sendBesked("6;" + ServControll.packagedProjMedAktTake3(initials) + "|" + ServControll.packagedMedarb());
 				}
 				else if (request[0].equals("a"))
 				{
