@@ -7,8 +7,10 @@ package SoftwareEngineringProjekt.src;
 
 
 public class Dato {
+	// Klassevariabler
 	private int year, month, day, uge;
 
+	// Konstruktører
 	public Dato(int day, int month, int year) {
 		this.day = day;
 		this.month = month;
