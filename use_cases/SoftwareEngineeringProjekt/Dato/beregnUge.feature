@@ -4,7 +4,9 @@ Feature: Beregner hvilken uge den angivne dato er i
 
 	@tag1
   Scenario: ugenummeret for den givne uge bliver beregnet
-    Given en dato eksisterer, f.eks. dag 24 maaned 1 aar 2020
-    And datoen har et ugenummer
-    When dag 24 maaned 1 aar 2020 bliver angivet
-    Then ugenummeret 4 bliver fundet
+    Given en dato eksisterer i uge 4
+    When datoens ugenummer bliver eftersourgt
+    Then ugenummeret 4 bliver returneret
+
+    
+    
