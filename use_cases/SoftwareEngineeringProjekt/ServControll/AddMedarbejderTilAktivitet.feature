@@ -10,4 +10,3 @@ Feature: Tilfoej medarbejder til aktivitet paa serverniveau
     And En medarbejder med initialerne "INIT" eksisterer
     When Medarbejderen med initialerne "INIT" tilfoejes til aktiviteten "aktivitet" i projektet "projekt"
     Then Medarbejderen med initialerne "INIT" er en del af aktiviteten "aktivitet" i projektet "projekt"
-

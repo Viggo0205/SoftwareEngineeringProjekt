@@ -126,5 +126,16 @@ public class ServControllSteps {
 	    assertEquals(string, actualInitialer);
 	}
 	
+	@When("Medarbejderen med initialerne {string} tilfoejes til projektet {string}")
+	public void medarbejderenMedInitialerneTilfoejesTilProjektet(String string, String string2) {
+	    // Write code here that turns the phrase above into concrete actions
+		servControll.addMedarbToProj(string, string2);
+	}
+
+	@Then("Medarbejderen med initialerne {string} er en del af projektet {string}")
+	public void medarbejderenMedInitialerneErEnDelAfProjektet(String string, String string2) {
+		actualInitialer = servControll.getProjekter().get(0).getMedarbejdere().get(0).getInitialer();
+		assertEquals(string, actualInitialer);
+	}
 	
 }

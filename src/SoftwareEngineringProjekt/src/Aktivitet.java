@@ -1,14 +1,17 @@
 // Skrevet af Eigil Sejer Larsen - s194282
 package SoftwareEngineringProjekt.src;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class Aktivitet {
-	private ArrayList<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
+	// Klassevariabler
+	private List<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
 	private String navn;
 	private int budgetTid, realTid;
 	private Dato startDato, slutDato;
 	
+	// Konstrukter
 	public Aktivitet (String navn, Dato startUge, Dato slutUge, int budgetTid) {
 		this.navn = navn;
 		this.startDato = startUge;
@@ -21,10 +24,12 @@ public class Aktivitet {
 		this.realTid += tid;
 	}
 	
+	// Tilføj medarbejder til aktiviteten
 	public void addMedarbejder (Medarbejder medarbejder) {
 		this.medarbejdere.add(medarbejder);
 	}
 	
+	// Returnerer aktivitetens data formateret til 1 string
 	public String getAllData() {
 		String s = "Aktivitets navn: " + this.navn + "\nstartuge: " + this.startDato.beregnUge() + "-" + this.startDato.getYear() + "\nslutuge: " + this.slutDato.beregnUge() + "-" + this.slutDato.getYear() + "\nbudgettid: " + this.budgetTid + "\nrealtid: " + this.realTid + "\nmedarbejdere:";
 		for (Medarbejder m : this.medarbejdere)
@@ -52,6 +57,7 @@ public class Aktivitet {
 		this.slutDato = new Dato(uge, year);
 	}
 
+	// Returnerer alle aktivitetens medarbejdere formateret til 1 string
 	public String getMedarbejdereFormated() {
 		String s = "Medarbejdere:";
 		for (Medarbejder m : medarbejdere)
@@ -60,7 +66,7 @@ public class Aktivitet {
 	}
 	
 	public ArrayList<Medarbejder> getMedarbejdere() {
-		return this.medarbejdere;
+		return (ArrayList<Medarbejder>) this.medarbejdere;
 	}
 
 	public int getTime() {
