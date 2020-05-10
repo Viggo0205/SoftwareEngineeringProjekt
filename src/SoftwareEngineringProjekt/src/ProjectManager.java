@@ -124,7 +124,7 @@ public class ProjectManager {
 		if(this.projekter.size() > 0)
 			for (Project p : this.projekter)
 			{
-				if (p.getLeder().getInitialer().equals(init))
+				if (p.getLeder().getInitialer().equalsIgnoreCase(init))
 					s += ";" + p.getProjektNummer() + "|" + p.getNavn();
 			}
 		else
@@ -141,7 +141,7 @@ public class ProjectManager {
 				if (findMedarbVedInit(init, p) >= 0)
 				{
 					s += ";" + p.getProjektNummer() + "|" + p.getNavn();
-					if (p.getLeder().getInitialer().equals(init))
+					if (p.getLeder().getInitialer().equalsIgnoreCase(init))
 						for (Aktivitet a : p.getAktiviteter())
 						{
 							if ( findMedarbVedInit(init, p, a) >= 0)

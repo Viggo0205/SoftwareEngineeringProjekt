@@ -21,7 +21,7 @@ public class ServControll {
 	public static List<String[]> msgQueue = new ArrayList<String[]>();
 	public static List<Long> queue = new ArrayList<Long>();
 
-	public static void ServerStart(int day, int month, int year) {
+	public static void ServerStart(int day, int month, int year, Boolean listen) {
 		projekter = new ProjectManager();
 		medarbejdere = new MedarbejderManager();
 		currentDate = new Dato(day, month, year);
@@ -75,7 +75,7 @@ public class ServControll {
 
 		//msgHandling();
 		
-		while (true)
+		while (listen)
 		{
 			try {
 				TimeUnit.MILLISECONDS.sleep(500);
