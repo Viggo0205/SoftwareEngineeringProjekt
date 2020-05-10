@@ -73,24 +73,24 @@ public class ProjektSteps {
 	@When("En aktivitet {string} paa plads {int} ekstraheres fra et projekt {string}")
 	public void enAktivitetEkstraheresFraEtProjekt(String string, Integer int1, String string2) {
 		projekt.addAktivitet(string, startUge, slutUge, 30);
-		projekt.getCertainAkt(string);
+		projekt.findAktVedNavn(string);
 	}
 
 	@Then("Aktiviteten {string} paa plads {int} er extraheret fra projekt {string}")
 	public void aktivitetenErExtraheretFraProjekt(String string, Integer int1, String string2) {
-	    System.out.println(projekt.getCertainAkt(string) + " er den pladsde den tilgået aktivitet har i projektet " + projekt.getNavn());
-	    assertEquals((int) int1, projekt.getCertainAkt(string));
+	    System.out.println(projekt.findAktVedNavn(string) + " er den pladsde den tilgået aktivitet har i projektet " + projekt.getNavn());
+	    assertEquals((int) int1, projekt.findAktVedNavn(string));
 	}
 	
 	@When("En aktivitet {string} ikke findes")
 	public void ForsoegerAtEkstrahereEnAktivitetSomIkkeFindesFraEtProjekt(String string) {
-		projekt.getCertainAkt(string);
+		projekt.findAktVedNavn(string);
 	}
 
 	@Then("Saa henvises der til plads {int} i projektet {string}")
 	public void SaaHenvisesDerTilPlads(Integer int1, String string) {
 		System.out.println("Der findes ikke en aktivitet med det navn i " + projekt.getNavn());
-	    assertEquals((int) int1, projekt.getCertainAkt(string));
+	    assertEquals((int) int1, projekt.findAktVedNavn(string));
 	}
 
 //	@Given("At projektet {string} eksisterer")

@@ -12,6 +12,7 @@ public class UserConnection extends Thread {
 	private static Boolean running;
 	private static String[] request;
 	private static String[] pend;
+	private static String initials;
 
 	public UserConnection ( Socket clientSocket )
 	{
@@ -92,7 +93,10 @@ public class UserConnection extends Thread {
 				if (request[0].equals("0"))
 				{
 					if (ServControll.findMedarbVedInit(request[1]) > -1)
+					{
+						initials = request[1];
 						sendBesked("0;ok," + ServControll.getDato().getFormatedDate());
+					}
 					else
 						sendBesked("0;ellers tak");
 				}
@@ -115,57 +119,49 @@ public class UserConnection extends Thread {
 				else if (request[0].equals("a"))
 				{
 					pend = request[1].split(";");
-					sendBesked("5;" + 
-							ServControll.newAktivitet(
-								pend[0],
-								pend[4],
-								new Dato(Integer.parseInt(pend[1].split("-")[0]),
-										Integer.parseInt(pend[1].split("-")[1]),
-										Integer.parseInt(pend[1].split("-")[2])),
-								new Dato(Integer.parseInt(pend[2].split("-")[0]),
-										Integer.parseInt(pend[2].split("-")[1]),
-										Integer.parseInt(pend[2].split("-")[2])),
-								Integer.parseInt(pend[3]))
-					);
+					sendBesked("5;" + ServControll.newAktivitet(pend[0], pend[4], stringTilDato(pend[1]), stringTilDato(pend[2]), Integer.parseInt(pend[3])));
 				}
 				else if (request[0].equals("b"))
 				{
 					pend = request[1].split(";");
-					sendBesked("6;" + 
-							ServControll.addMedarbToAkt(pend[2], pend[0], pend[1])
-					);
+					sendBesked("6;" + ServControll.addMedarbToAkt(pend[2], pend[0], pend[1]));
 				}
 				else if (request[0].equals("c"))
 				{
-
+					sendBesked("7;" + ServControll.packagedRap(request[1]));
 				}
 				else if (request[0].equals("d"))
 				{
-
+					pend = request[1].split(";");
+					sendBesked("8;" + ServControll.registrerFerie(initials, pend[0], pend[1]));
 				}
 				else if (request[0].equals("e"))
 				{
-
+					pend = request[1].split(";");
+					sendBesked("9;" + ServControll.addMedarbToAkt(pend[2], pend[0], pend[1]));
 				}
 				else if (request[0].equals("f"))
 				{
-
+					pend = request[1].split(";");
+					sendBesked("10;" + ServControll.registrerTimer(pend[2], pend[3], Integer.parseInt(pend[1]), initials, stringTilDato(pend[0])));
 				}
 				else if (request[0].equals("g"))
 				{
-
+					pend = request[1].split(";");
+					sendBesked("11;" + ServControll.newProjekt(pend[4], pend[0], stringTilDato(pend[2]), stringTilDato(pend[3])));
 				}
 				else if (request[0].equals("h"))
 				{
-
+					sendBesked("10;" + ServControll.registrerTimer(pend[2], pend[3], Integer.parseInt(pend[1]), initials, stringTilDato(pend[0])));
 				}
 				else if (request[0].equals("i"))
 				{
-
+					
 				}
 				else if (request[0].equals("j"))
 				{
-
+					pend = request[1].split(";");
+					sendBesked("14;" + ServControll.packagedAktivitetTid(pend[0], pend[1]));
 				}
 				else if (request[0].equals("k"))
 				{
@@ -179,5 +175,13 @@ public class UserConnection extends Thread {
 				ServControll.queue.remove(0);
 			}
 		}
+	}
+
+	private static Dato stringTilDato(String s)
+	{
+		return new Dato
+				(Integer.parseInt(s.split("-")[0]),
+						Integer.parseInt(s.split("-")[1]),
+						Integer.parseInt(s.split("-")[2]));
 	}
 }

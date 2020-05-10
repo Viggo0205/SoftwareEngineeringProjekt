@@ -27,15 +27,15 @@ public class ServControllSteps {
 	public void serverenStartesDTest(Integer int1, Integer int2, Integer int3) {
 		System.out.println("Server starter");
 		//this.servControll = new ServControll();
-		this.servControll.ServerStart(9, 5, 2020);
+		ServControll.ServerStart(9, 5, 2020);
 	}
 
 	@When("Der bedes om startdata fra serveren")
 	public void derBedesOmStartdataFraServeren() {
 		System.out.println("Testskridt");
-	    this.projekter = this.servControll.getProjekter();
+	    this.projekter = ServControll.getProjekter();
 	    System.out.println("Længde: " + this.projekter.size());
-	    this.dato = this.servControll.getDato();
+	    this.dato = ServControll.getDato();
 	    System.out.println(this.dato.getFormatedDate());
 	    this.medarbejdere = this.servControll.getMedarbejdere();
 	    System.out.println("Længde: " + this.medarbejdere.size());
@@ -59,13 +59,13 @@ public class ServControllSteps {
 	
 	@Given("Serveren koerer")
 	public void serverenKoerer() {
-		this.servControll.ServerStart(9, 5, 2020);
+		ServControll.ServerStart(9, 5, 2020);
 	}
 
 	@Given("Der er allerede oprettet {int} projekter dette aar")
 	public void derErAlleredeOprettetProjekterDetteAar(Integer int1) {
 	    for (int i = 0; i < int1; i++)
-	    	this.servControll.newProjekt("test", new Medarbejder("ADMN", 0), new Dato(2,2020), new Dato(3,2020));
+	    	ServControll.newProjekt("test", "ADMN", new Dato(2,2020), new Dato(3,2020));
 	}
 
 	@Then("En error {string} modtages")
@@ -76,7 +76,7 @@ public class ServControllSteps {
 	@When("Et nyt projekt {string} forsoeges tilfoejet")
 	public void etNytProjektForsoegesTilfoejet(String string) {
 		try {
-			this.servControll.newProjekt(string, new Medarbejder("ADMN", 0), new Dato(2,2020), new Dato(3,2020));
+			ServControll.newProjekt(string, "ADMN", new Dato(2,2020), new Dato(3,2020));
 		}
 		catch (NullPointerException e) {
 			this.errorMessage = e.toString();
@@ -85,29 +85,29 @@ public class ServControllSteps {
 
 	@Then("Projektet {string} findes i serverens projektManager")
 	public void projektetFindesIServerensProjektManager(String string) {
-		assertEquals(string, this.servControll.getProjekter().get(0).getNavn());
+		assertEquals(string, ServControll.getProjekter().get(0).getNavn());
 	}
 	
 	@Given("Det nuvaerende aar overgaar til et nyt")
 	public void detNuvaerendeAarOvergaarTilEtNyt() {
-		this.dato = this.servControll.getDato();
-	    this.servControll.nyDato(this.dato.getDay(), this.dato.getMonth(), this.dato.getYear() + 1);
+		this.dato = ServControll.getDato();
+	    ServControll.nyDato(this.dato.getDay(), this.dato.getMonth(), this.dato.getYear() + 1);
 	}
 
 	@Then("Projektet har ID'et ved aarstallet og det foerste nummer for det paagaeldende aar")
 	public void projektetHarIDEtVedAarstalletOgDetFoersteNummerForDetPaagaeldendeAar() {
-		actualProjektNummer = this.servControll.getProjekter().get(this.servControll.getProjekter().size() - 1).getProjektNummer();
+		actualProjektNummer = ServControll.getProjekter().get(ServControll.getProjekter().size() - 1).getProjektNummer();
 		assertEquals("2021000000", actualProjektNummer);
 	}
 	
 	@Given("Der eksisterer et projekt {string}")
 	public void derEksistererEtProjekt(String string) {
-	    servControll.newProjekt(string, new Medarbejder("TEST", 0), new Dato(2, 2020), new Dato(3, 2020));
+	    ServControll.newProjekt(string, "TEST", new Dato(2, 2020), new Dato(3, 2020));
 	}
 
 	@Given("Der eksisterer en aktivitet {string} i projektet {string}")
 	public void derEksistererEnAktivitetIProjektet(String string, String string2) {
-	    servControll.newAktivitet(string2, string, new Dato(2, 2020), new Dato(3, 2020), 5);
+	    ServControll.newAktivitet(string2, string, new Dato(2, 2020), new Dato(3, 2020), 5);
 	}
 
 	@Given("En medarbejder med initialerne {string} eksisterer")
@@ -117,12 +117,12 @@ public class ServControllSteps {
 
 	@When("Medarbejderen med initialerne {string} tilfoejes til aktiviteten {string} i projektet {string}")
 	public void medarbejderenMedInitialerneTilfoejesTilAktivitetenIProjektet(String string, String string2, String string3) {
-	    servControll.addMedarbToAkt(string, string3, string2);
+	    ServControll.addMedarbToAkt(string, string3, string2);
 	}
 
 	@Then("Medarbejderen med initialerne {string} er en del af aktiviteten {string} i projektet {string}")
 	public void medarbejderenMedInitialerneErEnDelAfAktivitetenIProjektet(String string, String string2, String string3) {
-		actualInitialer = servControll.getProjekter().get(0).getAktiviteter().get(0).getMedarbejdere().get(0).getInitialer();
+		actualInitialer = ServControll.getProjekter().get(0).getAktiviteter().get(0).getMedarbejdere().get(0).getInitialer();
 	    assertEquals(string, actualInitialer);
 	}
 	
@@ -134,7 +134,7 @@ public class ServControllSteps {
 
 	@Then("Medarbejderen med initialerne {string} er en del af projektet {string}")
 	public void medarbejderenMedInitialerneErEnDelAfProjektet(String string, String string2) {
-		actualInitialer = servControll.getProjekter().get(0).getMedarbejdere().get(0).getInitialer();
+		actualInitialer = ServControll.getProjekter().get(0).getMedarbejdere().get(0).getInitialer();
 		assertEquals(string, actualInitialer);
 	}
 	

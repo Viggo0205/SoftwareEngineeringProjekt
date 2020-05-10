@@ -25,6 +25,7 @@ public class Project implements Serializable {
 		this.startDato = startDato;
 		this.slutDato = slutDato;
 		this.projektNummer = projektNummer;
+		addMedarbejder(projektleder);
 //		if (ServControll.getProjekter().getProjektListLength() > 0)
 //		{
 //			// Sidste oprettede projekts fulde nummer
@@ -110,12 +111,24 @@ public class Project implements Serializable {
 		return this.aktiviteter;
 	}
 	
-	public int getCertainAkt(String navn) {
+	public int findAktVedNavn(String navn) {
 		for (Aktivitet a : this.aktiviteter)
 		{
 			if (a.getNavn().equalsIgnoreCase(navn))
 				return this.aktiviteter.indexOf(a);
 		}
 		return -1;
+	}
+	
+	public String getPackagedRapport() {
+		String s = "";
+		int tid = 0;
+		for (Aktivitet a : this.aktiviteter)
+		{
+			s += ";" + a.getNavn() + "|" + a.getTime();
+			tid += a.getTime();
+		}
+		s += ";TotalTid|" + tid;
+		return s;
 	}
 }

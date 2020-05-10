@@ -19,7 +19,9 @@ public class Arbejdsdag {
 	}
 
 	// Tilføj eller erstat registreret tid til en aktivitet på givne dag
-	public void addTid(String projekt, String aktivitet, int halveTimer) {
+	public int addTid(String projekt, String aktivitet, int halveTimer) {
+		int originalTid = this.halveTimerTotal;
+		int deltaTid;
 		int p = findProjInd(projekt);
 		int a;
 		if (p == -1)
@@ -51,6 +53,7 @@ public class Arbejdsdag {
 			this.aktivitetstider.get(p).set(a, halveTimer);
 			this.halveTimerTotal += halveTimer;
 		}
+		return this.halveTimerTotal - originalTid;
 	}
 	
 	// Returnerer alle registrerede tider i en formateret streng.
@@ -86,6 +89,10 @@ public class Arbejdsdag {
 				return aktiviteter.get(p).indexOf(a);
 		}
 		return -1;
+	}
+
+	public Dato getDag() {
+		return this.dag;
 	}
 	
 }

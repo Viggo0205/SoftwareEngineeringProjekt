@@ -72,4 +72,13 @@ public class Aktivitet {
 	public int getTime() {
 		return this.realTid;
 	}
+	
+	public int findMedarbVedInit (String init) {
+		for (Medarbejder m : this.medarbejdere)
+		{
+			if (m.getInitialer().equalsIgnoreCase(init))
+				return this.medarbejdere.indexOf(m);
+		}
+		return -1;
+	}
 }

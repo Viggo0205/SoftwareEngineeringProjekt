@@ -11,10 +11,15 @@ public class Medarbejder {
 	public Medarbejder(String initialer, int ID) {
 		this.initialer = initialer;
 		this.ID = ID;
+		this.kalender = new Kalender();
 	}
 	
 	public String getInitialer() {
 		return this.initialer;
+	}
+	
+	public Kalender getKalender() {
+		return this.kalender;
 	}
 	
 }

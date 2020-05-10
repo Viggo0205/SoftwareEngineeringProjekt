@@ -21,6 +21,15 @@ public class ProjectManager {
 	public Project getCertainProject(int i) {
 		return projekter.get(i);
 	}
+	
+	public int findProjVedId(String id) {
+		for (Project p : projekter)
+		{
+			if (p.getProjektNummer().equalsIgnoreCase(id))
+				return projekter.indexOf(p);
+		}
+		return -1;
+	}
 
 	public String pakString() {
 		String s = "";
