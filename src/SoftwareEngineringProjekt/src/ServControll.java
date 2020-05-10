@@ -2,21 +2,30 @@
 package SoftwareEngineringProjekt.src;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import Exceptions.EmployeeAlreadyExistsException;
 import Exceptions.InitialsWrongLengthException;
 
 public class ServControll {
-	private ProjectManager projekter;
-	private MedarbejderManager medarbejdere;
-	private Dato currentDate;
-	private ConnectionManager connectionManager;
 	
-	public void ServerStart(int day, int month, int year) {
+	static Boolean running;
+	// private static List<String[]> msgQueue = new ArrayList<String[]>();
+	static String[] request;
+	
+	private static ProjectManager projekter;
+	private static MedarbejderManager medarbejdere;
+	private static Dato currentDate;
+	private ConnectionManager connectionManager;
+	public static List<String[]> msgQueue = new ArrayList<String[]>();
+	public static List<Long> queue = new ArrayList<Long>();
+	
+	public static void ServerStart(int day, int month, int year) {
 		projekter = new ProjectManager();
 		medarbejdere = new MedarbejderManager();
 		currentDate = new Dato(day, month, year);
-/*
+
 		newProjekt("test0", medarbejdere.getMedarbejdere().get(0), new Dato(4, 2020), new Dato(9, 2020));
 		newProjekt("test1", medarbejdere.getMedarbejdere().get(0), new Dato(1, 2020), new Dato(34, 2020));
 		newProjekt("test2", medarbejdere.getMedarbejdere().get(0), new Dato(29, 2020), new Dato(52, 2020));
@@ -35,34 +44,44 @@ public class ServControll {
 		newAktivitet("test0", "aktivitets test", new Dato(1, 2020), new Dato(3, 2020), 7);
 		addMedarbToAkt("ADMN", "test0", "aktivitets test");
 		System.out.println("Aktivitetsdata for projekt test0: " + projekter.getProjects().get(0).getAktiviteter().get(0).getAllData());
-*/
+
 //		connectionManager = new ConnectionManager();
 		//connectionManager.openCon();
 		Thread t = new Thread(new ConnectionManager());
 		t.start();
 
+		//msgHandling();
+		while (true)
+		{
+			try {
+				 TimeUnit.MILLISECONDS.sleep(500);
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+			System.out.println("yayy");
+		}
 	}
 	
-	public ArrayList<Project> getProjekter() {
-		return this.projekter.getProjects();
+	public static ArrayList<Project> getProjekter() {
+		return ServControll.projekter.getProjects();
 	}
 	
-	public Dato getDato() {
-		return this.currentDate;
+	public static Dato getDato() {
+		return ServControll.currentDate;
 	}
 	
 	
 	
 	// RELEVANS TIL AKTIVITETER
-	public int newAktivitet(String projekt, String navn, Dato startUge, Dato slutUge, int budgetTid) {
-		this.projekter.getCertainProject(findProjektVedNavn(projekt)).addAktivitet(navn, startUge, slutUge, budgetTid);
+	public static int newAktivitet(String projekt, String navn, Dato startUge, Dato slutUge, int budgetTid) {
+		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).addAktivitet(navn, startUge, slutUge, budgetTid);
 		return 0;
 	}
 	
-	public int addMedarbToAkt (String initialer, String projekt, String aktivitet) {
-		this.projekter.getCertainProject(findProjektVedNavn(projekt)).getAktiviteter()
-		.get(this.projekter.getCertainProject(findProjektVedNavn(projekt)).getCertainAkt(aktivitet))
-		.addMedarbejder(this.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
+	public static int addMedarbToAkt (String initialer, String projekt, String aktivitet) {
+		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).getAktiviteter()
+		.get(ServControll.projekter.getCertainProject(findProjektVedNavn(projekt)).getCertainAkt(aktivitet))
+		.addMedarbejder(ServControll.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
 		return 0;
 	}
 	
@@ -72,40 +91,40 @@ public class ServControll {
 	}
 	*/
 	
-	private int findMedarbVedInit (String init) {
-		for (Medarbejder m : this.medarbejdere.getMedarbejdere())
+	public static int findMedarbVedInit (String init) {
+		for (Medarbejder m : ServControll.medarbejdere.getMedarbejdere())
 		{
 			if (m.getInitialer().equalsIgnoreCase(init))
-				return this.medarbejdere.getMedarbejdere().indexOf(m);
+				return ServControll.medarbejdere.getMedarbejdere().indexOf(m);
 		}
 		return -1;
 	}
 	
 	// RELEVANS TIL PROJEKTER
 	
-	public int newProjekt(String navn, Medarbejder projektLeder, Dato startUge, Dato slutUge) {
+	public static int newProjekt(String navn, Medarbejder projektLeder, Dato startUge, Dato slutUge) {
 		System.out.println(projektLeder.getInitialer() + " tries to create project " + navn);
 		String projektNummer;
-		if (this.projekter.getProjektListLength() > 0)
+		if (ServControll.projekter.getProjektListLength() > 0)
 		{
 			// Sidste oprettede projekts fulde nummer
-			String s = this.projekter.getProjects().get(this.projekter.getProjektListLength() - 1).getProjektNummer();
-			if ( s.substring(0, 4).equals(Integer.toString(this.currentDate.getYear())))
+			String s = ServControll.projekter.getProjects().get(ServControll.projekter.getProjektListLength() - 1).getProjektNummer();
+			if ( s.substring(0, 4).equals(Integer.toString(ServControll.currentDate.getYear())))
 			{
 				if ( s.substring(4, 10).equals("999999") )
 				{
 					throw new NullPointerException("No more room for projects this year");
 				}
 				else
-					projektNummer = Integer.toString(this.currentDate.getYear()) + nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
+					projektNummer = Integer.toString(ServControll.currentDate.getYear()) + nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
 			}
 			else 
 			{
-				projektNummer = "" + this.currentDate.getYear() + "000000";
+				projektNummer = "" + ServControll.currentDate.getYear() + "000000";
 			}
 		}
-		else projektNummer = "" + this.currentDate.getYear() + "000000";
-		this.projekter.addProject(new Project(navn, projektLeder, startUge, slutUge, projektNummer));
+		else projektNummer = "" + ServControll.currentDate.getYear() + "000000";
+		ServControll.projekter.addProject(new Project(navn, projektLeder, startUge, slutUge, projektNummer));
 		return 0;
 	}
 	
@@ -118,16 +137,16 @@ public class ServControll {
 	}
 	
 	public int addMedarbToProj (String initialer, String projekt) {
-		this.projekter.getCertainProject(findProjektVedNavn(projekt))
-		.addMedarbejder(this.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
+		ServControll.projekter.getCertainProject(findProjektVedNavn(projekt))
+		.addMedarbejder(ServControll.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
 		return 0;
 	}
 	
-	private int findProjektVedNavn(String navn) {
-		for (Project p : this.projekter.getProjects())
+	private static int findProjektVedNavn(String navn) {
+		for (Project p : ServControll.projekter.getProjects())
 		{
 			if (p.getNavn().equalsIgnoreCase(navn))
-				return this.projekter.getProjects().indexOf(p);
+				return ServControll.projekter.getProjects().indexOf(p);
 		}
 		return -1;
 	}
@@ -145,10 +164,118 @@ public class ServControll {
 	}
 	
 	public ArrayList<Medarbejder> getMedarbejdere() {
-		return this.medarbejdere.getMedarbejdere();
+		return ServControll.medarbejdere.getMedarbejdere();
 	}
 	
-	public void nyDato(int day, int month, int year) {
-		this.currentDate = new Dato(day, month, year);
+	public static void nyDato(int day, int month, int year) {
+		ServControll.currentDate = new Dato(day, month, year);
 	}
+	
+	public static void queueMsg (String[] s) {
+		msgQueue.add(s);
+	}
+
+	public static void queue(long id) {
+		queue.add(id);
+		
+	}
+
+	public static String packagedProj() {
+		return projekter.pakString();
+	}
+	
+	public static String packagedProjMedAkt() {
+		return projekter.pakStringMedAkt();
+	}
+	
+//public static void msgHandling() {
+//		
+//		System.out.println("Starter");
+//		running = true;
+//		while (running)
+//		{
+//			if (ServControll.msgQueue.size() > 0)
+//			{
+//				request = ServControll.msgQueue.get(0);
+//				ServControll.msgQueue.remove(0);
+//				if (request[0].equals("0"))
+//				{
+//					System.out.println("yay");
+//				}
+//				else if (request[0].equals("0"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("1"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("2"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("3"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("4"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("a"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("b"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("c"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("d"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("e"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("f"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("g"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("h"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("i"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("j"))
+//				{
+//					
+//				}
+//				else if (request[0].equals("k"))
+//				{
+//					
+//				}
+//				else
+//				{
+//					
+//				}
+//			}
+//			try {
+//				 TimeUnit.MILLISECONDS.sleep(50);
+//	        } catch (InterruptedException e) {
+//	            e.printStackTrace();
+//	        }
+//		}
+//	}
 }

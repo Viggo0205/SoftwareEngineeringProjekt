@@ -4,13 +4,13 @@ package SoftwareEngineringProjekt.src;
 import java.io.IOException;
 import java.net.*;
 
-public class ConnectionManager implements Runnable {
+public class ConnectionManager implements Runnable{
 
 	static int port = 8085;
 
 	@SuppressWarnings("resource")
 	public void run()
-	{
+	{	
 		ServerSocket serverSocket  = null;
 		Socket socket = null;
 
