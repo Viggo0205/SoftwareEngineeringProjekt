@@ -151,7 +151,7 @@ public class UserInterface extends JFrame implements ActionListener{
 			Communicator.sendAktLedAccess();
 		}
 		if(e.getSource() == leAkt5) {		// Skaf rapporter
-			windowWait = "leAkt6";
+			windowWait = "leAkt5";
 			Communicator.sendProjAccess();
 		}
 		if(e.getSource() == leAkt6) {		// tom

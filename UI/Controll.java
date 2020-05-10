@@ -178,6 +178,7 @@ public class Controll {
 	 * Det sidst efterspurgte popup åbnes.
 	 */
 	public static void proListModt() { // 1
+		System.out.println(UserInterface.windowWait);
 		if(UserInterface.windowWait.equals("leAkt1")) {			// Bestil ny aktivitet
 			BestilAktvitet.popup();
 		} else if(UserInterface.windowWait.equals("leAkt5")) {	// skaf rapport
