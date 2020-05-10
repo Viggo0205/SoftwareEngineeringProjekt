@@ -86,6 +86,8 @@ public class ServControll {
 		
 	}
 
+			//Getters
+	
 	public static ArrayList<Project> getProjekter() {
 		return ServControll.projekter.getProjects();
 	}
@@ -94,9 +96,13 @@ public class ServControll {
 		return ServControll.currentDate;
 	}
 
+	public ArrayList<Medarbejder> getMedarbejdere() {
+		return ServControll.medarbejdere.getMedarbejdere();
+	}
 
-
-	// RELEVANS TIL AKTIVITETER
+			//Adders
+	
+	// Tilføjer en ny aktivitet til et projekt, såfremt aktiviteten ikke allerede findes i projektet
 	public static String newAktivitet(String projektNr, String navn, Dato startUge, Dato slutUge, int budgetTid) {
 		if ( projekter.getCertainProject(findProjektVedId(projektNr)).findAktVedNavn(navn) == -1 )
 		{
@@ -107,6 +113,7 @@ public class ServControll {
 			return "no";
 	}
 
+	// Tilføjer en eksisterende medarbejder til en aktivitet, såfremt medarbejderen ikke allerede er tilmældt
 	public static String addMedarbToAkt (String initialer, String projektNr, String aktivitet) {
 		if (findProjektVedId(projektNr) >= 0)
 		{
@@ -124,34 +131,8 @@ public class ServControll {
 		else
 			return "no";
 	}
-
-	/*
-	private static int findAktVedNavn(String navn) {
-
-	}
-	 */
-
-	public static int findMedarbVedInit (String init, ArrayList<Medarbejder> mL) {
-		for (Medarbejder m : mL /* ServControll.medarbejdere.getMedarbejdere() */)
-		{
-			if (m.getInitialer().equalsIgnoreCase(init))
-				return mL.indexOf(m);
-		}
-		ServControll.medarbejdere.getMedarbejdere();
-		return -1;
-	}
-
-	public static int findMedarbVedInit (String init) {
-		for (Medarbejder m : ServControll.medarbejdere.getMedarbejdere())
-		{
-			if (m.getInitialer().equalsIgnoreCase(init))
-				return ServControll.medarbejdere.getMedarbejdere().indexOf(m);
-		}
-		return -1;
-	}
-
-	// RELEVANS TIL PROJEKTER
-
+	
+	// Laver et nyt projekt, såfremt de givne argumenter er gyldige
 	public static String newProjekt(String navn, String projektlederInit, Dato startUge, Dato slutUge) {
 		int projektlederInd = findMedarbVedInit(projektlederInit);
 		if (projektlederInd == -1)
@@ -184,7 +165,8 @@ public class ServControll {
 			return "ok";
 		}
 	}
-
+	
+	// anvendes til generering af projektnumre
 	private static String nulStuff(String s) {
 		for ( int i = 6 - s.length(); i > 0; i--)
 		{
@@ -192,13 +174,43 @@ public class ServControll {
 		}
 		return s;
 	}
-
+	
+	// Tilføjer en medarbejder til et projekt
 	public int addMedarbToProj (String initialer, String projektId) {
 		ServControll.projekter.getCertainProject(findProjektVedId(projektId))
 		.addMedarbejder(ServControll.medarbejdere.getMedarbejdere().get(findMedarbVedInit(initialer)));
 		return 0;
 	}
 
+	// Forsøger at lave en ny medarbejder med givne initialer
+	public void newMedarbejder(String initialer) {
+		try {
+			medarbejdere.newMedarbejder(initialer);
+		} catch (InitialsWrongLengthException e) {
+			e.printStackTrace();
+		} catch (EmployeeAlreadyExistsException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// Setter nuværende dato
+	public static void nyDato(int day, int month, int year) {
+		ServControll.currentDate = new Dato(day, month, year);
+	}
+	
+			//Finders
+	
+	// Finder en medarbejders indeks ved vedkommenes initialer (gennerel version)
+	public static int findMedarbVedInit (String init, ArrayList<Medarbejder> mL) {
+		for (Medarbejder m : mL /* ServControll.medarbejdere.getMedarbejdere() */)
+		{
+			if (m.getInitialer().equalsIgnoreCase(init))
+				return mL.indexOf(m);
+		}
+		return -1;
+	}
+
+	// finder et projekts indeks ved dets projektnummer "id"
 	private static int findProjektVedId(String id) {
 		for (Project p : ServControll.projekter.getProjects())
 		{
@@ -208,69 +220,23 @@ public class ServControll {
 		return -1;
 	}
 
-	public void newMedarbejder(String initialer) {
-		try {
-			medarbejdere.newMedarbejder(initialer);
-		} catch (InitialsWrongLengthException e) {
-			System.out.println("whatWeDo?");
-			e.printStackTrace();
-		} catch (EmployeeAlreadyExistsException e) {
-			System.out.println("whatWeDo?");
-			e.printStackTrace();
+	// finder en arbejdsdags indeks i kallenderen den tilhører
+	private static int findArbejdsDagIndvedMedarbIndOgDag(int medarbInd, Dato dag) {
+		return medarbejdere.getMedarbejdere().get(medarbInd).getKalender().findArbejdsagIndVedDato(dag);
+	}
+	
+	// Finder en medarbejders indeks ved vedkommenes initialer (konkret version)
+	public static int findMedarbVedInit (String init) {
+		for (Medarbejder m : ServControll.medarbejdere.getMedarbejdere())
+		{
+			if (m.getInitialer().equalsIgnoreCase(init))
+				return ServControll.medarbejdere.getMedarbejdere().indexOf(m);
 		}
+		return -1;
 	}
 
-	public ArrayList<Medarbejder> getMedarbejdere() {
-		return ServControll.medarbejdere.getMedarbejdere();
-	}
 
-	public static void nyDato(int day, int month, int year) {
-		ServControll.currentDate = new Dato(day, month, year);
-	}
-
-	public static void queueMsg (String[] s) {
-		msgQueue.add(s);
-	}
-
-	public static void queue(long id) {
-		queue.add(id);
-
-	}
-
-	public static String packagedProj() {
-		return projekter.pakString();
-	}
-
-	public static String packagedProjMedAkt() {
-		return projekter.pakStringMedAkt();
-	}
-
-	public static String packagedProjTake2(String init) {
-		return projekter.pakStringTake2(init);
-	}
-
-	public static String packagedProjMedAktTake2(String init) {
-		return projekter.pakStringMedAktTake2(init);
-	}
-
-	public static String packagedMedarb() {
-		String s = "";
-		for (Medarbejder m : medarbejdere.getMedarbejdere())
-			s += ";" + m.getInitialer();
-		return s;
-	}
-
-	// Til protokol 4
-	public static String packagedAkt() {
-		String s = "";
-
-		return s;
-	}
-
-	public static String packagedRap(String projId) {
-		return projekter.getCertainProject(projekter.findProjVedId(projId)).getPackagedRapport();
-	}
-
+	//Registrerer ferie for en medarbejder
 	public static String registrerFerie(String init, String startDatoString, String slutDatoString) {
 		String s = "";
 		Dato startDato = new Dato(Integer.parseInt(startDatoString.split("-")[0]), Integer.parseInt(startDatoString.split("-")[1]), Integer.parseInt(startDatoString.split("-")[2]));
@@ -281,6 +247,7 @@ public class ServControll {
 		return s;
 	}
 
+	//registrerer arbejdstimer for en medarbejder på en specifik aktivitet i et specifikt projekt
 	public static String registrerTimer(String projId, String akt, int tid, String init, Dato dag) {
 		int medarbInd = findMedarbVedInit(init);
 		int arbejdsInd, projInd, aktInd, deltaAktTid;
@@ -299,10 +266,16 @@ public class ServControll {
 			return "no";
 	}
 
-	private static int findArbejdsDagIndvedMedarbIndOgDag(int medarbInd, Dato dag) {
-		return medarbejdere.getMedarbejdere().get(medarbInd).getKalender().findArbejdsagIndVedDato(dag);
-	}
+	
 
+
+	
+	
+	
+	
+			//Packers
+	
+	// Finder registrerede timer brugt på en aktivitet til en klient
 	public static String packagedAktivitetTid(String projId, String akt) {
 		int projInd = projekter.findProjVedId(projId);
 		if ( projInd == -1)
@@ -317,6 +290,7 @@ public class ServControll {
 		}
 	}
 	
+	// Finder Informationer om en arbejdsdag til en klient
 	public static String packagedArbejdsDag(String init) {
 		int medarbInd = findMedarbVedInit(init);
 		if ( medarbInd == -1 )
@@ -329,5 +303,55 @@ public class ServControll {
 			else
 				return medarbejdere.getMedarbejdere().get(medarbInd).getKalender().getCertainArbejdsdag(arbejdsInd).packagedTid();
 		}
+	}
+	
+	// Finder data til en projektrapport til en klient
+	public static String packagedRap(String projId) {
+		return projekter.getCertainProject(projekter.findProjVedId(projId)).getPackagedRapport();
+	}
+	
+	// Finder data om et projekt til en klient
+	public static String packagedProj() {
+		return projekter.pakString();
+	}
+
+	// finder data om et projekt og dets aktiviteter til en klient
+	public static String packagedProjMedAkt() {
+		return projekter.pakStringMedAkt();
+	}
+
+	public static String packagedProjTake2(String init) {
+		return projekter.pakStringTake2(init);
+	}
+
+	public static String packagedProjMedAktTake2(String init) {
+		return projekter.pakStringMedAktTake2(init);
+	}
+
+	// Pakker data om alle medarbejdere til en klient
+	public static String packagedMedarb() {
+		String s = "";
+		for (Medarbejder m : medarbejdere.getMedarbejdere())
+			s += ";" + m.getInitialer();
+		return s;
+	}
+
+	// Til protokol 4
+	public static String packagedAkt() {
+		String s = "";
+
+		return s;
+	}
+	
+	
+	
+	//Queuers
+	public static void queueMsg (String[] s) {
+		msgQueue.add(s);
+	}
+
+	public static void queue(long id) {
+		queue.add(id);
+
 	}
 }
