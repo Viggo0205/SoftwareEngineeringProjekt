@@ -52,14 +52,12 @@ public class DatoSteps {
 
 	@When("dato {int} maaned {int} aar {int} bliver angivet")
 	public void datoMaanedAarBliverAngivet(Integer int1, Integer int2, Integer int3) {
-//		d = this.dato.getDeltaDag();
-		this.dato.getDeltaDag(this.dato);
+		d = this.dato.getDeltaDag(new Dato(int1, int2, int3));
 	}
 
 	@Then("forskellen paa de to dage bliver fundet til at vaere {int}")
 	public void forskellenPDeToDageBliverFundetTilAtVaere(Integer int1) {
-		assertEquals((int) int1, this.dato.getDeltaDag(this.dato));
-		System.out.println(d);
+		assertEquals((int) int1, d);
 	}
 
 	@Given("der eksisterer en dato, f.eks. dag {int} maaned {int} aar {int}")
