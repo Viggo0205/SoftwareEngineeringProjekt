@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class ProjektSteps {
 	
 	
-
+	private String s = new String();
     private Dato startUge = new Dato(21,1,2020);
     private Dato slutUge= new Dato(2,2,2020);
     private Medarbejder medarbejder = new Medarbejder("BigG", 4);
@@ -165,5 +165,24 @@ public class ProjektSteps {
 		System.out.println("" + projekt.getStartUge()[0] + " " + projekt.getStartUge()[1] + " er start ugen for " + projekt.getNavn());
 	    assertEquals((int) int1, projekt.getStartUge()[0] & (int) int2, projekt.getStartUge()[1]);
 	}
+	
+//	@Given("At projektet {string} eksisterer")
+//	public void atProjektetEksisterer(String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 
+	@When("Brugeren efterspoeger en samlet rapport af projekt {string} med en tilknyttet aktivitet {string}")
+	public void brugerenEfterspoegerEnSamletRapportAfProjektMedEnTilknyttetAktivitet(String string, String string2) {
+		projekt = new Project(string, medarbejder, slutUge, slutUge, "7");
+		projekt.addAktivitet("dumle", startUge, slutUge, 65);
+	    s = projekt.getPackagedRapport();
+	}
+
+	@Then("En samlet rapport af projektet {string} genereres og retuneres")
+	public void enSamletRapportAfProjektetGenereresOgRetuneres(String string) {
+	    System.out.println(projekt.getPackagedRapport());
+	    assertEquals(s, projekt.getPackagedRapport());
+	}
 }
+
