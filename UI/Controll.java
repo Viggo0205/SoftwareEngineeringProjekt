@@ -11,11 +11,11 @@ import SoftwareEngineringProjekt.src.Dato; // skal fjernes senere, når server og
 //
 public class Controll {
 
-	
+
 	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"}; // test array
 	public static boolean ready;
-	private static String[] sQueue = new String[2];
-//	public static String[] projektListe = new String[] {"CHJA", "CLLO", "EILA", "RANY", "VIOL"};
+	private static String[] sQueue = new String[]{"",""};
+	//	public static String[] projektListe = new String[] {"CHJA", "CLLO", "EILA", "RANY", "VIOL"};
 	public static List<String> projektListe = new ArrayList<String>();
 	public static List<ArrayList<String>> aktivListe = new ArrayList<ArrayList<String>>();
 	public static List<String> choiseAktivListe = new ArrayList<String>();
@@ -31,19 +31,24 @@ public class Controll {
 		// opretter thread, så communicator kan køre frit og afvente beskeder
 		Thread t = new Thread(new Communicator());
 		t.start();
-		
+
 		// åbner login menuen
 		Login.menu();
-		
+
 		/*
 		 * store loop, der håndterer indgående beskeder.
 		 * Liste over protokolkoder findes i bilag.
 		 */
 		ready = true;
+		try {
+			TimeUnit.MILLISECONDS.sleep(250);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		while(true) {
-			
+
 			if(!ready) {
-//				System.out.println("in loop not rdy");
+				//				System.out.println("in loop not rdy");
 				if(sQueue[0].equals("0")) {						// login svar
 					System.out.println("modtaget svar på login");
 					loginModt = sQueue[1].split(",");
@@ -81,7 +86,7 @@ public class Controll {
 					lavMedarbListe(aktMedaLists[1]);
 					aktLedMedModt();
 				}
-				
+
 				else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
 					ledigMedarbListe = sQueue[1].split(";");
 					UserInterface.log.append("Ledige medarbejdere i perioden er: " + ledigMedarbListe.toString());
@@ -93,13 +98,7 @@ public class Controll {
 			} else { 
 				System.out.print("");
 			}
-			
-//			try {
-//				TimeUnit.MILLISECONDS.sleep(250);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-			
+
 		}
 	}
 
@@ -131,13 +130,13 @@ public class Controll {
 		for(int j = 1; j<aktivListe.get(i).size(); j++)
 			choiseAktivListe.add(aktivListe.get(i).get(j));
 	}
-	
+
 	private static void lavProListe(String s) {
 		System.out.println(s);
 		String[] ss = s.split(";");
 		for(int i = 0; i < ss.length; i++) {
 			projektListe.add(ss[i]);
-//			System.out.print(ss[i] + "    ");
+			//			System.out.print(ss[i] + "    ");
 		}
 	}
 
@@ -154,8 +153,9 @@ public class Controll {
 	public static void loggedIn() {
 		Login.bund.setText("logget ind");
 		UserInterface.menu();
+		sQueue[0] = "";sQueue[1] = "";
 		ready = true;
-		
+
 	}
 
 	// metode kaldes, når der modtages en nu besked med krav på, klienten var klar til at modtage den
@@ -163,15 +163,15 @@ public class Controll {
 		ready = false;
 		System.out.println("sa længde " + sa.length);
 		System.out.println(sa[0] + "    " + sa[1] + "sat i msgQueue");
-		sQueue = sa;
+		sQueue[0] = sa[0]; sQueue[1] = sa[1];
 		System.out.println("sQueue er" + sQueue[0] + "    " + sQueue[1]);
 	}
 
-//	
-//	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
-//		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
-//	}
-	
+	//	
+	//	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
+	//		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
+	//	}
+
 	/*
 	 * Metoder for, hvis der er modtaget en projektliste eller en 
 	 * aktivitetsliste fra serveren.
@@ -217,7 +217,7 @@ public class Controll {
 		}
 		ready = true;
 	}
-	
+
 	public static boolean isValidWeek(String weekString) {
 		String[] weekArray = weekString.split("\\.");
 		try {
@@ -230,11 +230,11 @@ public class Controll {
 				return true;
 			}
 		} catch(NumberFormatException err){
-			 UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\nFormat for tid er tal\n");
-			 return false;
+			UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\nFormat for tid er tal\n");
+			return false;
 		}
-		
-		 
+
+
 	}
 	public static boolean isWeekOrdered(String weekString1, String weekString2) {
 		String[] weekArray1 = weekString1.split("\\.");
@@ -248,10 +248,10 @@ public class Controll {
 				return true;
 			}
 		} catch (NumberFormatException err){
-			 UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\nFormat for tid er tal\n");
-			 return false;
+			UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\nFormat for tid er tal\n");
+			return false;
 		}
-		
+
 	}
 	public static boolean isValidDato(String datoString) {
 		try {

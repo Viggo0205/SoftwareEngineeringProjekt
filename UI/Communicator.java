@@ -75,7 +75,15 @@ public class Communicator implements Runnable {
 					try {
 						ca = dinp.readUTF().split(";",2);
 						System.out.println("ca længde " + ca.length);
-						Controll.msgQueue(ca);
+						if(ca.length == 1) {
+							proListEmpty();
+						} else if (ca.length == 2){
+							System.out.println(ca[1]);
+							Controll.msgQueue(ca);
+						} else {
+							System.out.println("no bueno");
+						}
+						
 					} catch (IOException e) { 
 						e.printStackTrace(); 
 					}
@@ -90,6 +98,11 @@ public class Communicator implements Runnable {
 		
 	}
 	
+	private void proListEmpty() {
+		// TODO Auto-generated method stub
+		System.out.println("tom projektliste");
+	}
+
 	// sender ønske om login med brugerens initialer
 	public static void sendLogin(String initialer) {	
 		System.out.println("sender login som: " + "0;" + initialer);
