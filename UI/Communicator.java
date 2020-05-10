@@ -61,8 +61,10 @@ public class Communicator implements Runnable {
 		while(comModRun) {
 			if (Controll.ready) {
 				try {
-					if (dinp.available() > 0)
+					if (dinp.available() > 0) {
+						System.out.println("der er kommet data");
 						moreData  = true;
+					}
 					else
 						moreData = false;
 				} catch (IOException e) { 
@@ -72,6 +74,7 @@ public class Communicator implements Runnable {
 				if (moreData) {
 					try {
 						ca = dinp.readUTF().split(";",2);
+						System.out.println(ca.toString());
 						Controll.msgQueue(ca);
 					} catch (IOException e) { 
 						e.printStackTrace(); 

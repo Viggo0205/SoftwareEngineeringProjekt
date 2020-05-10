@@ -38,15 +38,21 @@ public class Controll {
 		 * store loop, der håndterer indgående beskeder.
 		 * Liste over protokolkoder findes i bilag.
 		 */
+		ready = true;
 		while(true) {
+			
 			if(!ready) {
+				System.out.println("in loop not rdy");
 				if(sQueue[0].equals("0")) {						// login svar
+					System.out.println("modtaget svar på login");
 					loginModt = sQueue[1].split(",");
 					if(loginModt[0].equals("ok")) { 		// godkendt login, indstil dato
-						datoArray = sQueue[1].split("-");
+						System.out.println("login godkendt");
+						datoArray = loginModt[1].split("-");
 						currentDag = new Dato(Integer.parseInt(datoArray[0]),Integer.parseInt(datoArray[1]),Integer.parseInt(datoArray[2]));
 						loggedIn();
 					} else {
+						System.out.println("login afvist");
 						Login.failed();
 						// fejlet loggin
 					}
@@ -68,11 +74,11 @@ public class Controll {
 					ledigMedarbListe = sQueue[1].split(";");
 					UserInterface.log.append("Ledige medarbejdere i perioden er: " + ledigMedarbListe.toString());
 				} else {					// mange flere...
-
+					System.out.println("ukendt protokolkode: " + sQueue[0]);
 				}
 
 			} else { // fejl i protokolkode
-				System.out.println("ukendt protokolkode: " + sQueue[0]);
+				System.out.println("in loop rdy");
 			}
 		}
 	}
@@ -125,6 +131,8 @@ public class Controll {
 	public static void loggedIn() {
 		Login.bund.setText("logget ind");
 		UserInterface.menu();
+		ready = true;
+		
 	}
 
 	// metode kaldes, når der modtages en nu besked med krav på, klienten var klar til at modtage den
