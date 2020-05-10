@@ -94,5 +94,4 @@ public class Arbejdsdag {
 	public Dato getDag() {
 		return this.dag;
 	}
-	
 }
