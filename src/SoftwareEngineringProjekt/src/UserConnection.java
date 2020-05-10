@@ -98,7 +98,7 @@ public class UserConnection extends Thread {
 						sendBesked("0;ok," + ServControll.getDato().getFormatedDate());
 					}
 					else
-						sendBesked("0;ellers tak");
+						sendBesked("0;no");
 				}
 				else if (request[0].equals("1"))
 				{
