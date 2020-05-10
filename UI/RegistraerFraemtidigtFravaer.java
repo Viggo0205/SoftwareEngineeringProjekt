@@ -51,6 +51,8 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
 				UserInterface.log.append("Startdato er efter slutdato. Format for dato 5. april 2018: 05042018\n");
 				startDato.setText("");
 				slutDato.setText("");
+			} else if(Integer.parseInt(startDato.getText().substring(4, 8)) ==  Integer.parseInt(slutDato.getText().substring(4, 8))) {
+				UserInterface.log.append("Ferie kan kun registreres for et år ad gangen.\n");
 			} else {
 				Communicator.sendRegistrerFerie(startDato.getText(),slutDato.getText());
 				frame.setVisible(false);

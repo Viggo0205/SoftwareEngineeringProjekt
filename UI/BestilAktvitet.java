@@ -72,7 +72,7 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 		textField4 = new JTextField();
 		panel1.add(textField4);
 
-		BudgeteretTid = new JLabel("Budgeteret tid");
+		BudgeteretTid = new JLabel("Budgeteret tid i halve timer");
 		panel1.add(BudgeteretTid);
 		textField1 = new JTextField();
 		panel1.add(textField1);

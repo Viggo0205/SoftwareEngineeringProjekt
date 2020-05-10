@@ -18,30 +18,28 @@ public class Communicator implements Runnable {
 	static InputStream inps = null;
 	static DataInputStream dinp = null;
 	static DataOutputStream doutp = null;
-//	static PrintWriter pw = null;
-//	static Scanner netin = null;
 	public boolean comModRun = false;
 	private boolean listening = true;
 	private String[] ca = new String[2];
 	private static String sendMsg;
+	private static String projektnr;
 
 	@Override
 	public void run() {
 		comModRun = true;
-		
+
 		// der forsøges at oprette kontakt til serveren
 		try {
 			s = new Socket("localhost", 8085);
 		} catch (IOException ioe) {
 			System.err.println("Server can't be reached");
 		}
-		
+
 		// in- og output initieres
 		try {
 			inps = s.getInputStream();
 			dinp = new DataInputStream(inps);
 
-//			netin = new Scanner(s.getInputStream());
 		} catch (IOException ioe) {
 			System.err.println("does socket s not exist?");
 		} catch (Exception e) {
@@ -49,13 +47,12 @@ public class Communicator implements Runnable {
 		}
 		try {
 			doutp = new DataOutputStream ( s.getOutputStream() );
-			
-//			pw = new PrintWriter(s.getOutputStream());
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("pw not initiated");
 		}
-		
+
 		boolean moreData = false;
 		// loop, der løbende læser nye beskeder sendt fra serveren
 		while(comModRun) {
@@ -63,6 +60,7 @@ public class Communicator implements Runnable {
 				try {
 					if (dinp.available() > 0) {
 						System.out.println("der er kommet data");
+						UserInterface.greyIn();
 						moreData  = true;
 					}
 					else
@@ -70,20 +68,15 @@ public class Communicator implements Runnable {
 				} catch (IOException e) { 
 					e.printStackTrace(); 
 				}
-				
+
 				if (moreData) {
 					try {
 						ca = dinp.readUTF().split(";",2);
 						System.out.println("ca længde " + ca.length);
-						if(ca.length == 1) {
-							proListEmpty();
-						} else if (ca.length == 2){
-							System.out.println(ca[1]);
-							Controll.msgQueue(ca);
-						} else {
-							System.out.println("no bueno");
-						}
-						
+						System.out.println(ca[1]);
+						Controll.msgQueue(ca);
+
+
 					} catch (IOException e) { 
 						e.printStackTrace(); 
 					}
@@ -95,9 +88,9 @@ public class Communicator implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
+
 	private void proListEmpty() {
 		// TODO Auto-generated method stub
 		System.out.println("tom projektliste");
@@ -133,18 +126,21 @@ public class Communicator implements Runnable {
 	public static void sendAktLedMedAccess() {
 		sendBesked("6");
 	}
-	
+
 	// metoder for at sende beskeder til serveren afhængig af hvilket event.
 	public static void sendOpretAktiv(String projekt, String startUge, String slutUge, String timer, String navn) {
-		sendMsg = "a;" + projekt + ";" + startUge  + ";" + slutUge + ";" + timer + ";" + navn;
+		projektnr = projekt.substring(0,10);
+		sendMsg = "a;" + projektnr + ";" + startUge  + ";" + slutUge + ";" + timer + ";" + navn;
 		sendBesked(sendMsg);
 	}
 	public static void sendTildelAkt(String projekt, String aktivitet, String udvikler) {
-		sendMsg = "b;" + projekt + ";" + aktivitet + ";" + udvikler;
+		projektnr = projekt.substring(0,10);
+		sendMsg = "b;" + projektnr + ";" + aktivitet + ";" + udvikler;
 		sendBesked(sendMsg);
 	}
 	public static void sendSkafRapport(String projekt) {
-		sendMsg = "c;" + projekt;
+		projektnr = projekt.substring(0, 10);
+		sendMsg = "c;" + projektnr;
 		sendBesked(sendMsg);
 	}
 	public static void sendRegistrerFerie(String startDato, String slutDato) {
@@ -152,12 +148,13 @@ public class Communicator implements Runnable {
 		sendBesked(sendMsg);
 	}
 	public static void sendSoegHjaelp(String projekt, String aktivitet, String udvikler) {
-		sendMsg = "e;" + projekt + ";" + aktivitet + ";" + udvikler;
+		projektnr = projekt.substring(0,10);
+		sendMsg = "e;" + projektnr + ";" + aktivitet + ";" + udvikler;
 		sendBesked(sendMsg);
 	}
 	public static void sendRetterTimer(String projekt, String aktivitet, String dag, String timer) {
-		sendMsg = "f;" + projekt + ";" + aktivitet + ";" + dag + ";" + timer;
-		sendMsg = "f;" + dag + ";" + timer + ";" + projekt + ";" + aktivitet;
+		projektnr = projekt.substring(0,10);
+		sendMsg = "f;" + dag + ";" + timer + ";" + projektnr + ";" + aktivitet;
 		sendBesked(sendMsg);
 	}
 	public static void sendOpretPro(String leder, String startDato, String slutDato, String navn) {
@@ -165,7 +162,8 @@ public class Communicator implements Runnable {
 		sendBesked(sendMsg);
 	}
 	public static void sendIndmeldTid(String projekt, String aktivitet, String dag, String timer) {
-		sendMsg = "h;" + projekt + ";" + aktivitet + ";" + dag + ";" + timer;
+		projektnr = projekt.substring(0,10);
+		sendMsg = "h;" + projektnr + ";" + aktivitet + ";" + dag + ";" + timer;
 		sendBesked(sendMsg);
 	}
 	public static void sendErLedig(String uge) {
@@ -173,15 +171,17 @@ public class Communicator implements Runnable {
 		sendBesked(sendMsg);
 	}
 	public static void sendTidsbrug(String projekt, String aktivitet) {
-		sendMsg = "j;" + projekt + ";" + aktivitet;
+		projektnr = projekt.substring(0,10);
+		sendMsg = "j;" + projektnr + ";" + aktivitet;
 		sendBesked(sendMsg);
 	}
 	public static void sendSeArbejde() {
 		sendMsg = "k";
 		sendBesked(sendMsg);
 	}
-	
+
 	public static void sendBesked(String sendMessage) {
+		System.out.println("sender besked til server: " + sendMessage);
 		try {
 			doutp.writeUTF(sendMessage);
 			doutp.flush();
@@ -189,7 +189,13 @@ public class Communicator implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		if(UserInterface.log == null) {}
+		else {
+			System.out.println("should grey out");
+			UserInterface.greyOut();
+		}
+			
+
 	}
 
 

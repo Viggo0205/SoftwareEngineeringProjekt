@@ -5,24 +5,26 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 
 
 public class UserInterface extends JFrame implements ActionListener{
 
-	private JButton leAkt1;
-	private JButton leAkt2;
-	private JButton leAkt3;
-	private JButton leAkt4;
-	private JButton leAkt5;
-	private JButton leAkt6;
-	private JButton maAkt1;
-	private JButton maAkt2;
-	private JButton maAkt3;
-	private JButton maAkt4;
-	private JButton maAkt5;
-	private JButton maAkt6;
+	private static JButton leAkt1;
+	private static JButton leAkt2;
+	private static JButton leAkt3;
+	private static JButton leAkt4;
+	private static JButton leAkt5;
+	private static JButton leAkt6;
+	private static JButton maAkt1;
+	private static JButton maAkt2;
+	private static JButton maAkt3;
+	private static JButton maAkt4;
+	private static JButton maAkt5;
+	private static JButton maAkt6;
 	public static String windowWait;
 	public static JTextArea log;
+	private static boolean isGrey;
 	
 
 	public static void menu() {
@@ -36,6 +38,7 @@ public class UserInterface extends JFrame implements ActionListener{
 	
 	
 	public UserInterface() {
+		isGrey = false;
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		
 		JPanel medarbAktiv = new JPanel();
@@ -74,7 +77,7 @@ public class UserInterface extends JFrame implements ActionListener{
 		// knapper tilføjes
 		leAkt1 = new JButton("Bestil ny aktivitet");
 		leAkt2 = new JButton("Tildel opgaver til udviklere");
-		leAkt3 = new JButton("Se ledige udviklere for perioder");leAkt3.setEnabled(false); // OoO
+		leAkt3 = new JButton("Se ledige udviklere for perioder || OoO");leAkt3.setEnabled(false); // OoO
 		leAkt4 = new JButton("Se udvikling af timer på aktivitet");
 		leAkt5 = new JButton("Skaf rapporter");
 		leAkt6 = new JButton("");leAkt6.setEnabled(false); // der er endnu kun behov for 5 knapper
@@ -157,6 +160,55 @@ public class UserInterface extends JFrame implements ActionListener{
 		if(e.getSource() == leAkt6) {		// tom
 			
 		}
+	}
+
+
+	public static void greyOut() {
+		if(!isGrey) {
+//			System.out.println("greying buttons");
+			leAkt1.setEnabled(false);
+			leAkt2.setEnabled(false);
+			leAkt4.setEnabled(false);
+			leAkt5.setEnabled(false);
+			
+			maAkt1.setEnabled(false);
+			maAkt2.setEnabled(false);
+			maAkt3.setEnabled(false);
+			maAkt4.setEnabled(false);
+			maAkt5.setEnabled(false);
+			maAkt6.setEnabled(false);
+		}
+		isGrey = true;		
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+//		System.out.println("waited 1 sec");
+		if(isGrey) {
+//			System.out.println("calling grey in cus time passed");
+			log.append("Fejl!!! Intet svar modtaget fra server. Prøv igen eller genstart klien\n");
+			greyIn();
+		}
+		
+	}
+	public static void greyIn() {
+//		System.out.println("grey in is called");
+		if(isGrey) {
+//			System.out.println("greying in the buttons");
+			leAkt1.setEnabled(true);
+			leAkt2.setEnabled(true);
+			leAkt4.setEnabled(true);
+			leAkt5.setEnabled(true);
+			
+			maAkt1.setEnabled(true);
+			maAkt2.setEnabled(true);
+			maAkt3.setEnabled(true);
+			maAkt4.setEnabled(true);
+			maAkt5.setEnabled(true);
+			maAkt6.setEnabled(true);
+		}
+		isGrey = false;
 	}
 
 

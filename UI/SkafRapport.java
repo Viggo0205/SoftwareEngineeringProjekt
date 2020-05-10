@@ -51,9 +51,9 @@ public class SkafRapport extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
     	if(e.getSource() == skafRapportButton) {
-    		Communicator.sendSkafRapport((String)projekter.getSelectedItem());
     		frame.setVisible(false);
     		frame.dispose();
+    		Communicator.sendSkafRapport((String)projekter.getSelectedItem());
     	}
     }
 }

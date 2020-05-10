@@ -4,6 +4,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -40,6 +41,7 @@ public class Controll {
 		 * Liste over protokolkoder findes i bilag.
 		 */
 		ready = true;
+		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		try {
 			TimeUnit.MILLISECONDS.sleep(250);
 		} catch (InterruptedException e) {
@@ -64,8 +66,12 @@ public class Controll {
 					}
 				} else if(sQueue[0].equals("1")) {	// modtagelse af projekt liste
 					System.out.println("prjektliste modtaget");
-					lavProListe(sQueue[1]);
-					proListModt();
+					if(sQueue.length > 1) {
+						lavProListe(sQueue[1]);
+						proListModt();
+					} else {
+						proListEmpty();
+					}
 				} else if(sQueue[0].equals("2")) {	// modtagelse af aktiviteter
 					lavAktListe(sQueue[1]);
 					aktListModt();
@@ -85,6 +91,10 @@ public class Controll {
 					lavAktListe(aktMedaLists[0]);
 					lavMedarbListe(aktMedaLists[1]);
 					aktLedMedModt();
+				} else if(sQueue[0].equals("7")) {
+					UserInterface.log.append(sQueue[1] + "\n");
+					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+					ready = true;
 				}
 
 				else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
@@ -98,24 +108,25 @@ public class Controll {
 			} else { 
 				System.out.print("");
 			}
+			try {
+				TimeUnit.MILLISECONDS.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
 		}
 	}
-
+	
 	private static void lavMedarbListe(String s) {
 		String[] ss = s.split(";");
 		for( int i = 0; i < ss.length; i++)
 			medarbejderListe.add(ss[i]);
 	}
-
-
 	private static void lavAktListe(String s) {
 		String[] ssPro = s.split(";");
 		for(int i = 0; i < ssPro.length; i++)
 			lavAktListe2(i,ssPro);
 	}
-
-
 	private static void lavAktListe2(int i, String[] ssPro) {
 		String[] ssAkt = ssPro[i].split(":");
 		projektListe.add(ssAkt[0]);
@@ -124,13 +135,11 @@ public class Controll {
 			tempAktList.add(ssAkt[j]);
 		aktivListe.add((ArrayList<String>) tempAktList);
 	}
-
 	public static void chooseAktiv(int i) {
 		choiseAktivListe.clear();
 		for(int j = 1; j<aktivListe.get(i).size(); j++)
 			choiseAktivListe.add(aktivListe.get(i).get(j));
 	}
-
 	private static void lavProListe(String s) {
 		System.out.println(s);
 		String[] ss = s.split(";");
@@ -139,8 +148,6 @@ public class Controll {
 			//			System.out.print(ss[i] + "    ");
 		}
 	}
-
-
 	// testkode ind til communicator og server virker
 	public static boolean isEmployee(String initialer) {
 		for(int i = 0 ; i < employees.length ; i++)
@@ -148,29 +155,25 @@ public class Controll {
 				return true;
 		return false;
 	}
-
 	// metode kaldes, hvis login går gennem
 	public static void loggedIn() {
 		Login.bund.setText("logget ind");
 		UserInterface.menu();
-		sQueue[0] = "";sQueue[1] = "";
+		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 
 	}
-
 	// metode kaldes, når der modtages en nu besked med krav på, klienten var klar til at modtage den
 	public static void msgQueue(String[] sa) {
 		ready = false;
 		System.out.println("sa længde " + sa.length);
-		System.out.println(sa[0] + "    " + sa[1] + "sat i msgQueue");
-		sQueue[0] = sa[0]; sQueue[1] = sa[1];
-		System.out.println("sQueue er" + sQueue[0] + "    " + sQueue[1]);
+		System.out.println(Arrays.toString(sa) + " er sat i msgQueue");
+		sQueue[0] = sa[0];
+		if(sa.length == 2)
+			sQueue[1] = sa[1];
+		System.out.println("sQueue er" + Arrays.toString(sQueue));
 	}
 
-	//	
-	//	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
-	//		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
-	//	}
 
 	/*
 	 * Metoder for, hvis der er modtaget en projektliste eller en 
@@ -184,6 +187,14 @@ public class Controll {
 		} else if(UserInterface.windowWait.equals("leAkt5")) {	// skaf rapport
 			SkafRapport.popup();
 		} 
+		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+		ready = true;
+	}
+	public static void proListEmpty() {
+		UserInterface.log.append("Du er ikke leder for nogle projekter");
+		System.out.println("Du er ikke leder for nogle projekter");
+		
+		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}
 	public static void aktListModt() { // 2
@@ -194,6 +205,7 @@ public class Controll {
 		} else if(UserInterface.windowWait.equals("maAkt3")) {	// Ret registrerede timer
 			RegistrerTimer.popup();
 		}
+		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}
 	private static void medarbListModt() { // 3
@@ -204,18 +216,21 @@ public class Controll {
 		if(UserInterface.windowWait.equals("maAkt4")) {
 			soegHjaelp.popup();
 		}
+		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}
 	private static void aktLedModt() { // 5
 		if(UserInterface.windowWait.equals("leAkt4")) {	// se tidsbrug 
 			TidBrugtAktivitet.popup();
 		}
+		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}
 	private static void aktLedMedModt() { // 6
 		if(UserInterface.windowWait.equals("leAkt2")) {
 			TildelAktivitet.popup();
 		}
+		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}
 

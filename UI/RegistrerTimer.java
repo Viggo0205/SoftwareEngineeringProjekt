@@ -9,7 +9,7 @@ public class RegistrerTimer extends JFrame implements ActionListener {
 	private JComboBox aktiviteter =new JComboBox();
 	private JLabel datoLabel = new JLabel("Dato");
 	private JTextField dato = new JTextField();
-	private JLabel timerLabel = new JLabel("Timer brugt");
+	private JLabel timerLabel = new JLabel("Tid brugt i halve timer");
 	private JTextField timer = new JTextField();
 	private JButton registrerTimerButton = new JButton("Registrer timer");
 	private JPanel mainPanel;
