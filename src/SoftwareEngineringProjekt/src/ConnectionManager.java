@@ -4,18 +4,22 @@ package SoftwareEngineringProjekt.src;
 import java.io.IOException;
 import java.net.*;
 
-public class ConnectionManager {
-	
-	static int port = 8084;
-	
-	public void openCon()
+public class ConnectionManager implements Runnable {
+
+	static int port = 8085;
+
+	@SuppressWarnings("resource")
+	public void run()
 	{
 		ServerSocket serverSocket  = null;
 		Socket socket = null;
-		
-		try { serverSocket = new ServerSocket(port); }
-		catch (IOException e) { e.printStackTrace(); }
-		
+
+		try { 
+			serverSocket = new ServerSocket(port); 
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		}
+
 		while (true) {
 			try {
 				socket = serverSocket.accept();
@@ -27,4 +31,5 @@ public class ConnectionManager {
 			new UserConnection(socket).start();
 		}
 	}
+
 }

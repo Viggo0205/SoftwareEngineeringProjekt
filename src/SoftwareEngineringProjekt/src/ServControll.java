@@ -36,8 +36,10 @@ public class ServControll {
 		addMedarbToAkt("ADMN", "test0", "aktivitets test");
 		System.out.println("Aktivitetsdata for projekt test0: " + projekter.getProjects().get(0).getAktiviteter().get(0).getAllData());
 */
-		connectionManager = new ConnectionManager();
+//		connectionManager = new ConnectionManager();
 		//connectionManager.openCon();
+		Thread t = new Thread(new ConnectionManager());
+		t.start();
 
 	}
 	
@@ -130,7 +132,7 @@ public class ServControll {
 		return -1;
 	}
 	
-	private void newMedarbejder(String initialer) {
+	public void newMedarbejder(String initialer) {
 		try {
 			medarbejdere.newMedarbejder(initialer);
 		} catch (InitialsWrongLengthException e) {
@@ -144,5 +146,9 @@ public class ServControll {
 	
 	public ArrayList<Medarbejder> getMedarbejdere() {
 		return this.medarbejdere.getMedarbejdere();
+	}
+	
+	public void nyDato(int day, int month, int year) {
+		this.currentDate = new Dato(day, month, year);
 	}
 }
