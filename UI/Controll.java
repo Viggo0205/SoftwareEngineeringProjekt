@@ -134,10 +134,10 @@ public class Controll {
 		sQueue = sa;
 	}
 
-	
-	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
-		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
-	}
+//	
+//	public void OpretAktiv(String projekt, String startUge, String slutUge, String timer) {
+//		Communicator.sendOpretAktiv(projekt, startUge, slutUge, timer);
+//	}
 	
 	/*
 	 * Metoder for, hvis der er modtaget en projektliste eller en 

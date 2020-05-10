@@ -159,7 +159,6 @@ public class Communicator implements Runnable {
 			doutp.flush();
 			sendMsg = null;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

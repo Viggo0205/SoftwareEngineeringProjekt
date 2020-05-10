@@ -7,6 +7,7 @@ import java.net.*;
 public class UserConnection extends Thread {
 
 	private Socket socket;
+	private DataOutputStream doutp;
 
 	public UserConnection ( Socket clientSocket )
 	{
@@ -17,7 +18,7 @@ public class UserConnection extends Thread {
 		System.out.println("Starting UserConnection thread " + Thread.currentThread().getId());
 		InputStream inps = null;
 		DataInputStream dinp = null;
-		DataOutputStream doutp = null;
+		doutp = null;
 
 		
 		
@@ -51,5 +52,15 @@ public class UserConnection extends Thread {
 				} catch (IOException e) { e.printStackTrace(); }
 			}
 		}
+	}
+	
+	public void sendBesked(String sendMessage) {
+		try {
+			doutp.writeUTF(sendMessage);
+			doutp.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
