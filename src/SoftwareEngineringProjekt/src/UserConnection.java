@@ -135,54 +135,64 @@ public class UserConnection extends Thread {
 				{
 					sendBesked("6" + ServControll.packagedProjMedAktTake3(initials) + "|" + ServControll.packagedMedarb());
 				}
-				// Beder serverControlleren oprette en ny aktivitet tilknyttet 
+				//Beder serverControlleren oprette en ny aktivitet til et projekt
 				else if (request[0].equals("a"))
 				{
 					pend = request[1].split(";");
 					sendBesked("5;" + ServControll.newAktivitet(pend[0], pend[4], stringTilDato(pend[1]), stringTilDato(pend[2]), Integer.parseInt(pend[3])));
 				}
+				//Beder serveren tilmælde en udvikler til en aktivitet
 				else if (request[0].equals("b"))
 				{
 					pend = request[1].split(";");
 					sendBesked("6;" + ServControll.addMedarbToAkt(pend[2], pend[0], pend[1]));
 				}
+				//Beder servercontrolleren genere en rapport over et projekt
 				else if (request[0].equals("c"))
 				{
 					sendBesked("7;" + ServControll.packagedRap(request[1]));
 				}
+				//Beder servercontrolleren registrere ferie for klienten
 				else if (request[0].equals("d"))
 				{
 					pend = request[1].split(";");
 					sendBesked("8;" + ServControll.registrerFerie(initials, pend[0], pend[1]));
 				}
+				//Beder servercontrolleren tilføje en bestemt kollega til en aktivitet
 				else if (request[0].equals("e"))
 				{
 					pend = request[1].split(";");
 					sendBesked("9;" + ServControll.addMedarbToAkt(pend[2], pend[0], pend[1]));
 				}
+				//Beder servercontrolleren rette registrerede halve timer på en given arbejdsdag angivet ved dato
 				else if (request[0].equals("f"))
 				{
 					pend = request[1].split(";");
 					sendBesked("10;" + ServControll.registrerTimer(pend[2], pend[3], Integer.parseInt(pend[1]), initials, stringTilDato(pend[0])));
 				}
+				//Beder servercontrolleren oprette et nyt projekt
 				else if (request[0].equals("g"))
 				{
 					pend = request[1].split(";");
 					sendBesked("11;" + ServControll.newProjekt(pend[4], pend[0], stringTilDato(pend[2]), stringTilDato(pend[3])));
 				}
+				//Beder servercontrolleren registrere halve timer til en given arbejdsdag
 				else if (request[0].equals("h"))
 				{
 					sendBesked("12;" + ServControll.registrerTimer(pend[2], pend[3], Integer.parseInt(pend[1]), initials, stringTilDato(pend[0])));
 				}
+				//udgået feature
 				else if (request[0].equals("i"))
 				{
 					
 				}
+				//Beder servercontrolleren hente tidsforbruget for en bestemt aktivitet
 				else if (request[0].equals("j"))
 				{
 					pend = request[1].split(";");
 					sendBesked("14;" + ServControll.packagedAktivitetTid(pend[0], pend[1]));
 				}
+				//Beder servercontrolleren hente klientens registrerede arbejdstid for idag
 				else if (request[0].equals("k"))
 				{
 					sendBesked("15;" + ServControll.packagedArbejdsDag(initials));
