@@ -138,9 +138,9 @@ public class UserInterface extends JFrame implements ActionListener{
 			Communicator.sendAktivAccess();
 		}
 		if(e.getSource() == leAkt1) {		// Bestil ny aktivitet
-			BestilAktvitet.popup(); 		// test til comm virker
-//			windowWait = "leAkt1"; 			// * rigtig kode, når comm virker
-//			Communicator.sendProjAccess();	//*
+//			BestilAktvitet.popup(); 		// test til comm virker
+			windowWait = "leAkt1"; 			// * rigtig kode, når comm virker
+			Communicator.sendProjAccess();	//*
 			
 		}
 		if(e.getSource() == leAkt2) {		// Tildel opgaver til udviklere

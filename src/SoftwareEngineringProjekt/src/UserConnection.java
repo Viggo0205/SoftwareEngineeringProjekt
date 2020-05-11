@@ -179,7 +179,8 @@ public class UserConnection extends Thread {
 				//Beder servercontrolleren registrere halve timer til en given arbejdsdag
 				else if (request[0].equals("h"))
 				{
-					sendBesked("12;" + ServControll.registrerTimer(pend[2], pend[3], Integer.parseInt(pend[1]), initials, stringTilDato(pend[0])));
+					pend = request[1].split(";");
+					sendBesked("12;" + ServControll.registrerTimer(pend[0], pend[1], Integer.parseInt(pend[3]), initials, stringTilDato(pend[2])));
 				}
 				//udgået feature
 				else if (request[0].equals("i"))
