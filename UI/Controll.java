@@ -169,15 +169,17 @@ public class Controll {
 						UserInterface.log.append("Du har ingen arbejdstimer registreret for i dag\n");
 					} else {
 						tempSplit1 = sQueue[1].split(";");
-						UserInterface.log.append("Du har arbejdet " + (Double.parseDouble(tempSplit1[1])/2) + " timer i dag\n");
-						tempSplit2 = tempSplit1[0].split(":");
-						for(int i = 1; i < tempSplit2.length; i++) {
-							tempSplit3 = tempSplit2[i].split("\\|",2);
-							UserInterface.log.append((Double.parseDouble(tempSplit3[1])/2) + " timer brugt på " + tempSplit3[0] + "\n");
-							tempSplit3 = null;
+						UserInterface.log.append("Du har arbejdet " + (Double.parseDouble(tempSplit1[tempSplit1.length-1])/2) + " timer i dag\n");
+						for (int j = 0; j < tempSplit1.length-1; j++) {
+							tempSplit2 = tempSplit1[j].split(":");
+							for(int i = 1; i < tempSplit2.length; i++) {
+								tempSplit3 = tempSplit2[i].split("\\|",2);
+								UserInterface.log.append((Double.parseDouble(tempSplit3[1])/2) + " timer brugt på " + tempSplit3[0] + "\n");
+								tempSplit3 = null;
+							}
+							tempSplit2 = null;
 						}
 						tempSplit1 = null;
-						tempSplit2 = null;
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
