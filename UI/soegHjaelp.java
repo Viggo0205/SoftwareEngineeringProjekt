@@ -25,6 +25,8 @@ public class soegHjaelp extends JFrame implements ActionListener {
 
 		mainPanel.add(projektLabel);
 		mainPanel.add(projekter);
+		for( int i = 0; i < projekter.getItemCount();i+=0)			// ryder dropdown
+			projekter.removeItemAt(0);
 		for(int i = 0; i < Controll.projektListe.size(); i++) {
 			projekter.addItem(Controll.projektListe.get(i));
 		}
@@ -32,12 +34,11 @@ public class soegHjaelp extends JFrame implements ActionListener {
 
 		mainPanel.add(aktivitetLabel);
 		mainPanel.add(aktivitet);
-		for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {
-			aktivitet.addItem(Controll.choiseAktivListe.get(i));
-		}
 
 		mainPanel.add(medarbejderLabel);
 		mainPanel.add(medarbejdere);
+		for( int i = 0; i < medarbejdere.getItemCount();i+=0)			// ryder dropdown
+			medarbejdere.removeItemAt(0);
 		for(int i = 0; i < Controll.medarbejderListe.size(); i++) {
 			medarbejdere.addItem(Controll.medarbejderListe.get(i));
 		}

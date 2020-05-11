@@ -28,6 +28,8 @@ public class RetTimer extends JFrame implements ActionListener {
 
 		mainPanel.add(ProjektLabel);
 		mainPanel.add(projekter);
+		for( int i = 0; i < projekter.getItemCount();i+=0)			// ryder dropdown
+			projekter.removeItemAt(0);	
 		for(int i = 0; i < Controll.projektListe.size(); i++) {
 			projekter.addItem(Controll.projektListe.get(i));
 		}

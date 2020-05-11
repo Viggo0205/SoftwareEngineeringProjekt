@@ -28,6 +28,8 @@ public class RegistrerTimer extends JFrame implements ActionListener {
 
 		mainPanel.add(ProjektLabel);
 		mainPanel.add(projekter);
+		for( int i = 0; i < projekter.getItemCount();i+=0)			// ryder dropdown
+			projekter.removeItemAt(0);
 		for(int i = 0; i < Controll.projektListe.size(); i++) {
 			projekter.addItem(Controll.projektListe.get(i));
 		}
@@ -65,7 +67,7 @@ public class RegistrerTimer extends JFrame implements ActionListener {
 			frame.dispose();
 			}
 		} else if(e.getSource() == projekter) {							// valg af projekt skal indsætte aktiviteter i dropdown
-			for( int i = 0; i < aktiviteter.getItemCount();i++)			// ryder dropdown
+			for( int i = 0; i < aktiviteter.getItemCount();i+=0)			// ryder dropdown
 				aktiviteter.removeItemAt(0);							//
 			Controll.chooseAktiv(projekter.getSelectedIndex());			// vælger korrekt liste at trække aktiviteter fra
 			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {	// trækker aktiviteter og indsætter i dropdown

@@ -24,6 +24,8 @@ public class TidBrugtAktivitet extends JFrame implements ActionListener{
 
 		mainPanel.add(ProjektLabel);
 		mainPanel.add(projekter);
+		for( int i = 0; i < projekter.getItemCount();i+=0)			// ryder dropdown
+			projekter.removeItemAt(0);
 		for(int i = 0; i < Controll.projektListe.size(); i++) {
 			projekter.addItem(Controll.projektListe.get(i));
 
@@ -32,9 +34,6 @@ public class TidBrugtAktivitet extends JFrame implements ActionListener{
 
 		mainPanel.add(AktivitetLabel);
 		mainPanel.add(aktivitet);
-		for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {
-			aktivitet.addItem(Controll.choiseAktivListe.get(i));
-		}
 
 		mainPanel.add(seTidBrugtButton);
 		seTidBrugtButton.addActionListener(this);
@@ -55,6 +54,8 @@ public class TidBrugtAktivitet extends JFrame implements ActionListener{
 			for( int i = 0; i < aktivitet.getItemCount();i++)			// ryder dropdown
 				aktivitet.removeItemAt(0);							//
 			Controll.chooseAktiv(projekter.getSelectedIndex());			// vælger korrekt liste at trække aktiviteter fra
+			for( int i = 0; i < aktivitet.getItemCount();i+=0)			// ryder dropdown
+				aktivitet.removeItemAt(0);
 			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {	// trækker aktiviteter og indsætter i dropdown
 				aktivitet.addItem(Controll.choiseAktivListe.get(i));
 			}

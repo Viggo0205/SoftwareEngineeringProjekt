@@ -21,6 +21,7 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 	private JFrame frame;
 
 
+	@SuppressWarnings("unchecked")
 	public OpretProjekt() {
 		frame = new JFrame("Opret projekt");
 		mainPanel = new JPanel();
@@ -35,6 +36,8 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 		mainPanel.add(navnPåUdviklingsLeder);
 		Medarbejdere = new JComboBox();
 		mainPanel.add(Medarbejdere);
+		for( int i = 0; i < Medarbejdere.getItemCount();i+=0)			// ryder dropdown
+			Medarbejdere.removeItemAt(0);
 		for(int i = 0; i < Controll.medarbejderListe.size(); i++) {
 			Medarbejdere.addItem(Controll.medarbejderListe.get(i));
 		}
