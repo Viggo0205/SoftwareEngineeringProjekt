@@ -97,7 +97,7 @@ public class Controll {
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
 				} else if(sQueue[0].equals("6")) {
-					aktMedaLists = sQueue[1].split("-");
+					aktMedaLists = sQueue[1].split("\\|;");
 					lavAktListe(aktMedaLists[0]);
 					lavMedarbListe(aktMedaLists[1]);
 					aktLedMedModt();
@@ -115,10 +115,9 @@ public class Controll {
 					ready = true;
 				} else if(sQueue[0].equals("9")) {
 					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
-						UserInterface.log.append("Den valgte medarbejder kan nu hjælpe på aktiviteten\n");
+						UserInterface.log.append("Den valgte medarbejder kan nu arbejde på aktiviteten\n");
 					} else {
-						UserInterface.log.append("Dit ønske om hjælp har givet fejl\n");
-						System.out.println("ferie afvist");
+						UserInterface.log.append("Der er sket fejl i tildeling af aktivitet\n");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
