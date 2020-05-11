@@ -1,8 +1,11 @@
+// Skrevet af Victor Tadeusz Ulstrup Olszowski - s194281 og Rasmus Nyhus - s194285
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //
 
+@SuppressWarnings("serial")
 public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListener {
 
 	private JLabel startDatoLabel = new JLabel("Start Dato");
@@ -36,9 +39,11 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
 
 	}
 
+	// Metode skrevet af Rasmus Nyhus - s194285
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == registrer) {
+		if(e.getSource() == registrer) {						// ved klik på knap
+			// tjek for ugyldige inputs
 			if(!Controll.isValidDato(startDato.getText())) {
 				UserInterface.log.append("Fejl i input af startdato. Format for dato 5. april 2018: 05042018\n");
 				startDato.setText("");
@@ -46,14 +51,14 @@ public class RegistraerFraemtidigtFravaer extends JFrame implements ActionListen
 			} else if(!Controll.isValidDato(slutDato.getText())) {
 				UserInterface.log.append("Fejl i input af slutdato. Format for dato 5. april 2018: 05042018\n");
 				slutDato.setText("");
-				
+
 			} else if (!Controll.isDagOrdered(startDato.getText(), slutDato.getText())) {
 				UserInterface.log.append("Startdato er efter slutdato. Format for dato 5. april 2018: 05042018\n");
 				startDato.setText("");
 				slutDato.setText("");
 			} else if(Integer.parseInt(startDato.getText().substring(4, 8)) !=  Integer.parseInt(slutDato.getText().substring(4, 8))) {
 				UserInterface.log.append("Ferie kan kun registreres for et år ad gangen.\n");
-			} else {
+			} else {											// gyldigt input
 				Communicator.sendRegistrerFerie(startDato.getText(),slutDato.getText());
 				frame.setVisible(false);
 				frame.dispose();

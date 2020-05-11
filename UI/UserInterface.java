@@ -1,12 +1,12 @@
+// Skrevet af Rasmus Nyhus - s194285
 /*
  * Klasse til klientens grund-menu
  */
-//
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.TimeUnit;
-
 
 public class UserInterface extends JFrame implements ActionListener{
 
@@ -25,7 +25,6 @@ public class UserInterface extends JFrame implements ActionListener{
 	public static String windowWait;
 	public static JTextArea log;
 	private static boolean isGrey;
-	
 
 	public static void menu() {
 		UserInterface window = new UserInterface();
@@ -35,16 +34,15 @@ public class UserInterface extends JFrame implements ActionListener{
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 	}
-	
-	
+
 	public UserInterface() {
 		isGrey = false;
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		
+
 		JPanel medarbAktiv = new JPanel();
 		medarbAktiv.setLayout(new GridLayout(2,3));
 		medarbAktiv.setBorder(BorderFactory.createLineBorder(Color.black));
-		
+
 		// knapper tilføjes
 		maAkt1 = new JButton("Registrer fremtidig fravær");
 		maAkt2 = new JButton("Se timer brugt");
@@ -64,16 +62,16 @@ public class UserInterface extends JFrame implements ActionListener{
 		medarbAktiv.add(maAkt4);
 		medarbAktiv.add(maAkt5);
 		medarbAktiv.add(maAkt6);
-				
+
 		JPanel lederAktiv = new JPanel();
 		lederAktiv.setLayout(new BoxLayout(lederAktiv, BoxLayout.Y_AXIS));
 		lederAktiv.setBorder(BorderFactory.createLineBorder(Color.black));
-		
+
 		JLabel udvText = new JLabel("Udviklerleder aktiviteter");
-		
+
 		JPanel lederBut = new JPanel();
 		lederBut.setLayout(new GridLayout(2,3));
-		
+
 		// knapper tilføjes
 		leAkt1 = new JButton("Bestil ny aktivitet");
 		leAkt2 = new JButton("Tildel opgaver til udviklere");
@@ -93,10 +91,10 @@ public class UserInterface extends JFrame implements ActionListener{
 		lederBut.add(leAkt4);
 		lederBut.add(leAkt5);
 		lederBut.add(leAkt6);
-		
+
 		lederAktiv.add(udvText);
 		lederAktiv.add(lederBut);
-		
+
 		// log tekstfelt tilføjes
 		log = new JTextArea("Dags dato: " + Controll.currentDag.getFormatedDate() + "\n");
 		log.setLineWrap(true);
@@ -105,13 +103,12 @@ public class UserInterface extends JFrame implements ActionListener{
 		logScroll.setPreferredSize(new Dimension(8000,100));
 		logScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		logScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
+
 		getContentPane().add(medarbAktiv);
 		getContentPane().add(lederAktiv);
 		getContentPane().add(logScroll);
-		
-	}
 
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == maAkt1) {		// Registrer fremtidig fravær
@@ -123,7 +120,6 @@ public class UserInterface extends JFrame implements ActionListener{
 		if(e.getSource() == maAkt3) {		// Ret registrerede timer
 			windowWait = "maAkt3";
 			Communicator.sendAktivAccess();
-//			RetTimer.popup();
 		}
 		if(e.getSource() == maAkt4) {		// Søg hjælp fra anden udvikler
 			windowWait = "maAkt4";
@@ -138,10 +134,8 @@ public class UserInterface extends JFrame implements ActionListener{
 			Communicator.sendAktivAccess();
 		}
 		if(e.getSource() == leAkt1) {		// Bestil ny aktivitet
-//			BestilAktvitet.popup(); 		// test til comm virker
-			windowWait = "leAkt1"; 			// * rigtig kode, når comm virker
-			Communicator.sendProjAccess();	//*
-			
+			windowWait = "leAkt1";
+			Communicator.sendProjAccess();
 		}
 		if(e.getSource() == leAkt2) {		// Tildel opgaver til udviklere
 			windowWait = "leAkt2";
@@ -159,19 +153,18 @@ public class UserInterface extends JFrame implements ActionListener{
 			Communicator.sendProjAccess();
 		}
 		if(e.getSource() == leAkt6) {		// tom
-			
+
 		}
 	}
 
-
+	// gør knapperne utilgængelige, da man kun skal sende en besked til serveren ad gangen
 	public static void greyOut() {
 		if(!isGrey) {
-//			System.out.println("greying buttons");
 			leAkt1.setEnabled(false);
 			leAkt2.setEnabled(false);
 			leAkt4.setEnabled(false);
 			leAkt5.setEnabled(false);
-			
+
 			maAkt1.setEnabled(false);
 			maAkt2.setEnabled(false);
 			maAkt3.setEnabled(false);
@@ -185,23 +178,19 @@ public class UserInterface extends JFrame implements ActionListener{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-//		System.out.println("waited 1 sec");
 		if(isGrey) {
-//			System.out.println("calling grey in cus time passed");
 			log.append("Fejl!!! Intet svar modtaget fra server. Prøv igen eller genstart klien\n");
 			greyIn();
 		}
-		
+
 	}
 	public static void greyIn() {
-//		System.out.println("grey in is called");
 		if(isGrey) {
-//			System.out.println("greying in the buttons");
 			leAkt1.setEnabled(true);
 			leAkt2.setEnabled(true);
 			leAkt4.setEnabled(true);
 			leAkt5.setEnabled(true);
-			
+
 			maAkt1.setEnabled(true);
 			maAkt2.setEnabled(true);
 			maAkt3.setEnabled(true);
@@ -211,5 +200,4 @@ public class UserInterface extends JFrame implements ActionListener{
 		}
 		isGrey = false;
 	}
-
 }

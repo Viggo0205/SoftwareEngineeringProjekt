@@ -1,3 +1,4 @@
+// Skrevet af Rasmus Nyhus - s194285
 /*
  * Klasse til det første vindue, der bruges til at logge ind
  */
@@ -5,7 +6,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-//
+
+@SuppressWarnings("serial")
 public class Login extends JFrame implements ActionListener {
 
 	private JPanel center;
@@ -26,7 +28,7 @@ public class Login extends JFrame implements ActionListener {
 
 	public Login() {
 		getContentPane().setLayout(new BorderLayout());
-		
+
 		center = new JPanel();
 		center.setLayout(new BoxLayout(center, BoxLayout.PAGE_AXIS));
 		center.add(Box.createRigidArea(new Dimension(0,20)));
@@ -61,11 +63,10 @@ public class Login extends JFrame implements ActionListener {
 
 	}
 
-	// Action events
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == logInBut) { 						// knap for at logge ind
-			tryLogin();														// *
-		} else if(e.getSource()==logInput) { 					// ved tryk på enter for at logge ind
+		if(e.getSource() == logInBut) { 						// knap
+			tryLogin();											
+		} else if(e.getSource()==logInput) { 					// ved tryk på enter
 			tryLogin();
 		}
 	}
@@ -74,14 +75,7 @@ public class Login extends JFrame implements ActionListener {
 		initialer = logInput.getText();
 		logInput.setEnabled(false);
 		logInBut.setEnabled(false);
-		
-		Communicator.sendLogin(initialer); 			// sender login forespørgsel
-		
-//		if(Controll.isEmployee(initialer)) { 					// testkode indtil comm virker
-//			Controll.loggedIn();								// *
-//		} else { 												// *
-//			failed();											// *
-//		}														// *
+		Communicator.sendLogin(initialer); // sender login forespørgsel
 	}
 
 	// Ved fejlet login / forkerte initialer

@@ -1,13 +1,16 @@
+// Skrevet af Victor Tadeusz Ulstrup Olszowski - s194281 og Rasmus Nyhus - s194285
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//
+
+@SuppressWarnings("serial")
 public class TidBrugtAktivitet extends JFrame implements ActionListener{
 	private JComboBox projekter = new JComboBox();
-	private JComboBox aktivitet =new JComboBox();
-	private JButton seTidBrugtButton =new JButton("Se tid brugt");
-	private JLabel ProjektLabel =new JLabel();
-	private JLabel AktivitetLabel= new JLabel();
+	private JComboBox aktivitet = new JComboBox();
+	private JButton seTidBrugtButton = new JButton("Se tid brugt");
+	private JLabel ProjektLabel = new JLabel();
+	private JLabel AktivitetLabel = new JLabel();
 	private JPanel mainPanel = new JPanel();
 	private JFrame frame;
 
@@ -21,14 +24,12 @@ public class TidBrugtAktivitet extends JFrame implements ActionListener{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
-
 		mainPanel.add(ProjektLabel);
 		mainPanel.add(projekter);
 		for( int i = 0; i < projekter.getItemCount();i+=0)			// ryder dropdown
 			projekter.removeItemAt(0);
 		for(int i = 0; i < Controll.projektListe.size(); i++) {
 			projekter.addItem(Controll.projektListe.get(i));
-
 		}
 		projekter.addActionListener(this);
 
@@ -42,21 +43,23 @@ public class TidBrugtAktivitet extends JFrame implements ActionListener{
 
 	public static void popup() {
 		new TidBrugtAktivitet();
+
 	}
 
+	// Metode skrevet af Rasmus Nyhus - s194285
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == seTidBrugtButton) {
+		if(e.getSource() == seTidBrugtButton) {					// ved klik på knap
 			Communicator.sendTidsbrug((String) projekter.getSelectedItem(), (String) aktivitet.getSelectedItem());
 			frame.setVisible(false);
 			frame.dispose();
-		} else if(e.getSource() == projekter) {							// valg af projekt skal indsætte aktiviteter i dropdown
-			for( int i = 0; i < aktivitet.getItemCount();i++)			// ryder dropdown
-				aktivitet.removeItemAt(0);							//
-			Controll.chooseAktiv(projekter.getSelectedIndex());			// vælger korrekt liste at trække aktiviteter fra
-			for( int i = 0; i < aktivitet.getItemCount();i+=0)			// ryder dropdown
+		} else if(e.getSource() == projekter) {						// ved valg af projekt
+			for( int i = 0; i < aktivitet.getItemCount();i++)
 				aktivitet.removeItemAt(0);
-			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {	// trækker aktiviteter og indsætter i dropdown
+			Controll.chooseAktiv(projekter.getSelectedIndex());
+			for( int i = 0; i < aktivitet.getItemCount();i+=0)
+				aktivitet.removeItemAt(0);
+			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {
 				aktivitet.addItem(Controll.choiseAktivListe.get(i));
 			}
 		}

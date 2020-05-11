@@ -1,8 +1,9 @@
+// Skrevet af Victor Tadeusz Ulstrup Olszowski - s194281 og Rasmus Nyhus - s194285
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@SuppressWarnings("serial")
 public class OpretProjekt extends JFrame implements ActionListener  {
 	//
 	private JPanel mainPanel;
@@ -14,10 +15,7 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 	private JTextField projektNavn;
 	private JTextField startUge;
 	private JTextField slutUge;
-	private JComboBox comboBox2;
 	private JButton opretProjektButton;
-	private JComboBox comboBox3;
-	private JLabel projektLeder;
 	private JFrame frame;
 
 
@@ -69,11 +67,12 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 		new OpretProjekt();
 	}
 
+	// Metode skrevet af Rasmus Nyhus - s194285
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		if(e.getSource() == opretProjektButton) {
-			if(!Controll.isValidDato(startUge.getText())) {
+		if(e.getSource() == opretProjektButton) {				// ved klik på knap
+			// tjek for ugyldige inputs
+			if(!Controll.isValidDato(startUge.getText())) {		
 				UserInterface.log.append("Fejl i input af startdato. Format for dato 5. april 2018: 05042018\n");
 				startUge.setText("");
 
@@ -84,7 +83,7 @@ public class OpretProjekt extends JFrame implements ActionListener  {
 				UserInterface.log.append("Startdato er efter slutdato. Format for dato 5. april 2018: 05042018\n");
 				startUge.setText("");
 				slutUge.setText("");
-			} else {
+			} else {											// gyldigt input
 				Communicator.sendOpretPro((String) Medarbejdere.getSelectedItem(), startUge.getText(), slutUge.getText(), projektNavn.getText());
 				frame.setVisible(false);
 				frame.dispose();

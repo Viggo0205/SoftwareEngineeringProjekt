@@ -1,3 +1,4 @@
+// Skrevet af Rasmus Nyhus - s194285
 /*
  * Klasse til at oprette forbindelse til server,
  * sende og modtage beskeder til/fra serveren 
@@ -11,9 +12,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
-
 import SoftwareEngineringProjekt.src.Dato;
-//
+
+
 public class Communicator implements Runnable {
 
 	static Socket s = null;
@@ -21,7 +22,6 @@ public class Communicator implements Runnable {
 	static DataInputStream dinp = null;
 	static DataOutputStream doutp = null;
 	public boolean comModRun = false;
-	private boolean listening = true;
 	private String[] ca = new String[2];
 	private static String sendMsg;
 	private static String projektnr;
@@ -58,8 +58,8 @@ public class Communicator implements Runnable {
 			System.err.println("pw not initiated");
 		}
 
-		boolean moreData = false;
 		// loop, der løbende læser nye beskeder sendt fra serveren
+		boolean moreData = false;
 		while(comModRun) {
 			if (Controll.ready) {
 				try {
@@ -74,14 +74,12 @@ public class Communicator implements Runnable {
 					e.printStackTrace(); 
 				}
 
-				if (moreData) {
+				if (moreData) {			// hvis der er kommet en besked, sendes til til msgQueue
 					try {
 						ca = dinp.readUTF().split(";",2);
 						System.out.println("ca længde " + ca.length);
 						System.out.println(ca[1]);
 						Controll.msgQueue(ca);
-
-
 					} catch (IOException e) { 
 						e.printStackTrace(); 
 					}
@@ -93,46 +91,46 @@ public class Communicator implements Runnable {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
-	private void proListEmpty() {
-		// TODO Auto-generated method stub
-		System.out.println("tom projektliste");
-	}
 
-	// sender ønske om login med brugerens initialer
+	// her fra begynder metoderne, der formaterer beskeden korrekt til at serveren kan læse dem
+	// *	
+
+	// generelle forespørgsler
+	// for login
 	public static void sendLogin(String initialer) {	
 		System.out.println("sender login som: " + "0;" + initialer);
 		sendBesked("0;" + initialer);
 	}
-	// sender besked om, klienten vil kende projekter, han er leder for
+	// projekter, brugeren er leder for
 	public static void sendProjAccess() {
 		System.out.println("sender ønske om en prjektliste med besked 1");
 		sendBesked("1");
 	}
-	// sender besked om, klienten vil kende sine projekter og aktiviteter
+	// projekter og aktiveteter, brugeren er en del af
 	public static void sendAktivAccess() {
 		sendBesked("2");
 	}
-	// sender forespørgsel om medarbejderliste for hele firmaet
+	// medarbejderliste for hele firmaet
 	public static void sendMedarbAccess() {
 		sendBesked("3");
 	}
-	// sender forespørgsel for sine aktiviteter samt fuld medarbejderliste
+	// aktiviteter, brugeren er en del af, samt fuld medarbejderliste
 	public static void sendMedAktAccess() {
 		sendBesked("4");
 	}
-	// sender besked om, klienten vil kende aktiviteter, han er leder for
+	// aktiviteter, brugeren er leder for
 	public static void sendAktLedAccess() {
 		sendBesked("5");
 	}
-	// sender besked om, klienten vil kende projekter, han er leder for samt fuld medarb liste
+	// projekter, brugeren er leder for, samt fuld medarbejderliste
 	public static void sendAktLedMedAccess() {
 		sendBesked("6");
 	}
 
-	// metoder for at sende beskeder til serveren afhængig af hvilket event.
+	// mere specifikke beskeder til serveren
+	//
 	public static void sendOpretAktiv(String projekt, String startUge, String slutUge, String timer, String navn) {
 		projektnr = projekt.substring(0,10);
 		stringUgeToDato(startUge);
@@ -203,6 +201,7 @@ public class Communicator implements Runnable {
 		sendBesked(sendMsg);
 	}
 
+	// afsender besked til serveren
 	public static void sendBesked(String sendMessage) {
 		System.out.println("sender besked til server: " + sendMessage);
 		try {
@@ -216,18 +215,13 @@ public class Communicator implements Runnable {
 		else {
 			UserInterface.greyOut();
 		}
-			
-
 	}
-	
+
 	private static void stringDagToDato(String dagdato) {
-		// TODO Auto-generated method stub
 		datoFormated = new Dato(Integer.parseInt(dagdato.substring(0,2)),Integer.parseInt(dagdato.substring(2,4)),Integer.parseInt(dagdato.substring(4,8)));
 	}
 	private static void stringUgeToDato(String ugedato) {
 		String[] ss = ugedato.split("\\.");
 		datoFormated = new Dato(Integer.parseInt(ss[1]),Integer.parseInt(ss[0]));
 	}
-
-
 }

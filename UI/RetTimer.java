@@ -1,7 +1,10 @@
+// Skrevet af Victor Tadeusz Ulstrup Olszowski - s194281 og Rasmus Nyhus - s194285
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//
+
+@SuppressWarnings("serial")
 public class RetTimer extends JFrame implements ActionListener {
 	private JLabel ProjektLabel = new JLabel("Projekt");
 	private JComboBox projekter = new JComboBox();
@@ -38,7 +41,6 @@ public class RetTimer extends JFrame implements ActionListener {
 		mainPanel.add(aktivitetLabel);
 		mainPanel.add(aktiviteter);
 
-
 		mainPanel.add(datoLabel);
 		mainPanel.add(dato);
 
@@ -52,30 +54,31 @@ public class RetTimer extends JFrame implements ActionListener {
 	}
 
 	public static void popup(){
-
 		new RetTimer();
-
+		
 	}
 
+	// Metode skrevet af Rasmus Nyhus - s194285
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == registrerTimerButton) {
+		if(e.getSource() == registrerTimerButton) {				// ved klik på knap
+																// tjek for ugyldige inputs
 			if(!Controll.isValidDato(dato.getText())) {
 				UserInterface.log.append("Fejl i input af dato. Format for dato 5. april 2018: 05042018\n");
 				dato.setText("");	
 			} else if(Integer.parseInt(timer.getText()) < 0 || Integer.parseInt(timer.getText()) > 1000000 ) {
 				UserInterface.log.append("Fejl i antal timer\n");
 				timer.setText("");
-			} else {
+			} else {											// gyldigt input
 			Communicator.sendRetterTimer((String)projekter.getSelectedItem(), (String)aktiviteter.getSelectedItem(), dato.getText(), timer.getText());
 			frame.setVisible(false);
 			frame.dispose();
 			}
-		} else if(e.getSource() == projekter) {							// valg af projekt skal indsætte aktiviteter i dropdown
-			for( int i = 0; i < aktiviteter.getItemCount();i += 0)			// ryder dropdown
-				aktiviteter.removeItemAt(0);							//
-			Controll.chooseAktiv(projekter.getSelectedIndex());			// vælger korrekt liste at trække aktiviteter fra
-			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {	// trækker aktiviteter og indsætter i dropdown
+		} else if(e.getSource() == projekter) {					// ved valg af projekt
+			for( int i = 0; i < aktiviteter.getItemCount();i += 0)
+				aktiviteter.removeItemAt(0);
+			Controll.chooseAktiv(projekter.getSelectedIndex());
+			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {
 				aktiviteter.addItem(Controll.choiseAktivListe.get(i));
 			}
 		}

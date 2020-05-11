@@ -1,10 +1,13 @@
+// Skrevet af Victor Tadeusz Ulstrup Olszowski - s194281 og Rasmus Nyhus - s194285
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//
+
+@SuppressWarnings("serial")
 public class soegHjaelp extends JFrame implements ActionListener {
-	private JComboBox aktivitet =new JComboBox();
-	private JComboBox projekter =new JComboBox();
+	private JComboBox aktivitet = new JComboBox();
+	private JComboBox projekter = new JComboBox();
 	private JComboBox medarbejdere = new JComboBox();
 	public JPanel mainPanel =new JPanel();
 	private JButton soegHjaelp = new JButton("Søg hjælp");
@@ -52,17 +55,18 @@ public class soegHjaelp extends JFrame implements ActionListener {
 		new soegHjaelp();
 	}
 
+	// Metode skrevet af Rasmus Nyhus - s194285
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == soegHjaelp) {
+		if(e.getSource() == soegHjaelp) {						// ved klik på knap
 			Communicator.sendSoegHjaelp((String) projekter.getSelectedItem(), (String)aktivitet.getSelectedItem(), (String)medarbejdere.getSelectedItem());
 			frame.setVisible(false);
 			frame.dispose();
-		} else if (e.getSource() == projekter) {						// valg af projekt skal indsætte aktiviteter i dropdown
-			for( int i = 0; i < aktivitet.getItemCount();i+=0)			// ryder dropdown
-				aktivitet.removeItemAt(0);								//
-			Controll.chooseAktiv(projekter.getSelectedIndex());			// vælger korrekt liste at trække aktiviteter fra
-			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {	// trækker aktiviteter og indsætter i dropdown
+		} else if (e.getSource() == projekter) {				// ved valg af projekt
+			for( int i = 0; i < aktivitet.getItemCount();i+=0)
+				aktivitet.removeItemAt(0);
+			Controll.chooseAktiv(projekter.getSelectedIndex());
+			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {
 				aktivitet.addItem(Controll.choiseAktivListe.get(i));
 			}
 		}

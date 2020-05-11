@@ -1,22 +1,19 @@
+// Skrevet af Rasmus Nyhus - s194285
 /*
  * Klasse til hovedsageligt at håndtere forskellige beskeder sendt fra serveren,
- * men generelt også til nogle af de mere grundlæggende funktioner i klienten.
+ * men også til nogle af de mere grundlæggende funktioner i klienten.
  */
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import SoftwareEngineringProjekt.src.Dato;
 
-import SoftwareEngineringProjekt.src.Dato; // skal fjernes senere, når server og klient adskilles
-//
 public class Controll {
 
-
-	private static String employees[] = new String[]{"CHJA", "CLLO", "EILA", "RANY", "VIOL"}; // test array
 	public static boolean ready;
 	private static String[] sQueue = new String[]{"",""};
-	//	public static String[] projektListe = new String[] {"CHJA", "CLLO", "EILA", "RANY", "VIOL"};
 	public static List<String> projektListe = new ArrayList<String>();
 	public static List<ArrayList<String>> aktivListe = new ArrayList<ArrayList<String>>();
 	public static List<String> choiseAktivListe = new ArrayList<String>();
@@ -24,7 +21,6 @@ public class Controll {
 	private static String[] loginModt;
 	public static Dato currentDag;
 	private static String[] datoArray = new String[3];
-	private static String[] ledigMedarbListe;
 	private static String[] aktMedaLists = new String[2];
 	private static String[] tempSplit1;
 	private static String[] tempSplit2;
@@ -36,7 +32,6 @@ public class Controll {
 		Thread t = new Thread(new Communicator());
 		t.start();
 
-		// åbner login menuen
 		Login.menu();
 
 		/*
@@ -53,7 +48,6 @@ public class Controll {
 		while(true) {
 
 			if(!ready) {
-				//				System.out.println("in loop not rdy");
 				if(sQueue[0].equals("0")) {						// login svar
 					System.out.println("modtaget svar på login");
 					loginModt = sQueue[1].split(",");
@@ -62,12 +56,12 @@ public class Controll {
 						datoArray = loginModt[1].split("-");
 						currentDag = new Dato(Integer.parseInt(datoArray[0]),Integer.parseInt(datoArray[1]),Integer.parseInt(datoArray[2]));
 						loggedIn();
-					} else {
+					} else {								// fejlet loggin
 						System.out.println("login afvist");
 						Login.failed();
-						// fejlet loggin
+
 					}
-				} else if(sQueue[0].equals("1")) {	// modtagelse af projekt liste
+				} else if(sQueue[0].equals("1")) {				// projekt liste
 					System.out.println("prjektliste modtaget");
 					if(sQueue.length > 1) {
 						lavProListe(sQueue[1]);
@@ -75,36 +69,36 @@ public class Controll {
 					} else {
 						proListEmpty();
 					}
-				} else if(sQueue[0].equals("2")) {	// modtagelse af aktiviteter
+				} else if(sQueue[0].equals("2")) {				// aktivitetsliste
 					lavAktListe(sQueue[1]);
 					aktListModt();
-				} else if(sQueue[0].equals("3")) {	// modtagelse af medarbejderliste
+				} else if(sQueue[0].equals("3")) {				// medarbejderliste
 					lavMedarbListe(sQueue[1]);
 					medarbListModt();
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} else if(sQueue[0].equals("4")) {	// modtagelse af aktiv+medarb lister
+				} else if(sQueue[0].equals("4")) {				// aktivitets- og medarbejderliste
 					aktMedaLists = sQueue[1].split("\\|;");
 					lavAktListe(aktMedaLists[0]);
 					lavMedarbListe(aktMedaLists[1]);
 					aktMedaListsModt();
-				} else if(sQueue[0].equals("a")) {
+				} else if(sQueue[0].equals("a")) {				// aktivitetsliste (leder)
 					lavAktListe(sQueue[1]);
 					aktListModt();
-				} else if(sQueue[0].equals("b")) {
+				} else if(sQueue[0].equals("b")) {				// aktivitetsliste (leder) + medarbejderliste
 					aktMedaLists = sQueue[1].split("\\|;");
 					lavAktListe(aktMedaLists[0]);
 					lavMedarbListe(aktMedaLists[1]);
 					aktMedaListsModt();
-				} else if(sQueue[0].equals("5")) {
-					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+				} else if(sQueue[0].equals("5")) {				// opret aktivitet
+					if(sQueue[1].equals("ok")) { 		
 						UserInterface.log.append("Aktiviteten er blevet oprettet\n");
 					} else {
 						UserInterface.log.append("Der skete en fejl, og aktiviteten er ikke oprettet\n");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} else if(sQueue[0].equals("6")) {
+				} else if(sQueue[0].equals("6")) {				// tildel aktivitet til udvikler
 					aktMedaLists = sQueue[1].split("\\|;");
 					lavAktListe(aktMedaLists[0]);
 					lavMedarbListe(aktMedaLists[1]);
@@ -122,47 +116,47 @@ public class Controll {
 					tempSplit3 = null;
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} else if(sQueue[0].equals("8")) {
-					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+				} else if(sQueue[0].equals("8")) {				// registrer ferie/fravær
+					if(sQueue[1].equals("ok")) { 		
 						UserInterface.log.append("Dit ønske om fravær er blevet registreret\n");
 					} else {
 						UserInterface.log.append("Dit ønske om fravær er blevet afvist\n");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} else if(sQueue[0].equals("9")) {
-					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+				} else if(sQueue[0].equals("9")) {				// søg hjælp
+					if(sQueue[1].equals("ok")) {
 						UserInterface.log.append("Den valgte medarbejder kan nu arbejde på aktiviteten\n");
 					} else {
 						UserInterface.log.append("Der er sket fejl i tildeling af aktivitet\n");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} else if(sQueue[0].equals("10")) {
-					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+				} else if(sQueue[0].equals("10")) {				// Ret timer
+					if(sQueue[1].equals("ok")) {
 						UserInterface.log.append("Dine timer er blevet rettet\n");
 					} else {
 						UserInterface.log.append("Der skete en fejl i registrering af dine timer\n");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} else if(sQueue[0].equals("11")) {
-					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+				} else if(sQueue[0].equals("11")) {				// Opret projekt
+					if(sQueue[1].equals("ok")) {
 						UserInterface.log.append("Det ønskede projekt er blevet oprettet\n");
 					} else {
 						UserInterface.log.append("Der skete en fejl, og projektet kunne ikke oprettes\n");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} else if(sQueue[0].equals("12")) {
-					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+				} else if(sQueue[0].equals("12")) {				// Timeregistrering
+					if(sQueue[1].equals("ok")) {
 						UserInterface.log.append("Dine timer er blevet indmeldt\n");
 					} else {
 						UserInterface.log.append("Der skete en fejl i indmelding af dine timer\n");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} else if (sQueue[0].equals("14")) {
+				} else if (sQueue[0].equals("14")) {			// tid for aktivitet
 					if(sQueue[1].equals("no")) {
 						UserInterface.log.append("Der skete fejl i hentning af tidsbrug");
 					} else {
@@ -170,7 +164,7 @@ public class Controll {
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} else if(sQueue[0].equals("15")) { 
+				} else if(sQueue[0].equals("15")) { 			// projektrapport
 					if(sQueue[1].equals("no")) {
 						UserInterface.log.append("Du har ingen arbejdstimer registreret for i dag\n");
 					} else {
@@ -187,25 +181,16 @@ public class Controll {
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				}
-
-				else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
-					ledigMedarbListe = sQueue[1].split(";");
-					UserInterface.log.append("Ledige medarbejdere i perioden er: " + ledigMedarbListe.toString());
-				} else {					// mange flere...
+				} else {
 					System.out.println("ukendt protokolkode: " + sQueue[0]);
 					System.out.println("besked: " + sQueue[1]);
 				}
-
-			} else { 
-				System.out.print("");
-			}
+			} 
 			try {
 				TimeUnit.MILLISECONDS.sleep(250);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 
@@ -236,18 +221,10 @@ public class Controll {
 		String[] ss = s.split(";");
 		for(int i = 0; i < ss.length; i++) {
 			projektListe.add(ss[i]);
-			//			System.out.print(ss[i] + "    ");
 		}
 	}
-	// testkode ind til communicator og server virker
-	public static boolean isEmployee(String initialer) {
-		for(int i = 0 ; i < employees.length ; i++)
-			if(employees[i].equalsIgnoreCase(initialer))
-				return true;
-		return false;
-	}
 
-	// metode kaldes, hvis login går gennem
+	// når login accepteres
 	public static void loggedIn() {
 		Login.bund.setText("logget ind");
 		UserInterface.menu();
@@ -255,6 +232,8 @@ public class Controll {
 		ready = true;
 	}
 
+	// gemmer en besked inden den sendes videre til læsning
+	// ikke så vigtig, sa vi ikke lader klienten håndtere mere end en besked ad gangen
 	public static void msgQueue(String[] sa) {
 		ready = false;
 		System.out.println("sa længde " + sa.length);
@@ -267,15 +246,14 @@ public class Controll {
 
 
 	/*
-	 * Metoder for, hvis der er modtaget en projektliste eller en 
-	 * aktivitetsliste fra serveren.
+	 * Metoder for, hvis der er modtaget en projekt-, medarbejder- eller aktivitetsliste fra serveren.
 	 * Det sidst efterspurgte popup åbnes.
 	 */
 	public static void proListModt() { // 1
 		System.out.println(UserInterface.windowWait);
-		if(UserInterface.windowWait.equals("leAkt1")) {			// Bestil ny aktivitet
+		if(UserInterface.windowWait.equals("leAkt1")) {
 			BestilAktvitet.popup();
-		} else if(UserInterface.windowWait.equals("leAkt5")) {	// skaf rapport
+		} else if(UserInterface.windowWait.equals("leAkt5")) {
 			SkafRapport.popup();
 		} 
 		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
@@ -289,15 +267,15 @@ public class Controll {
 		ready = true;
 	}
 	public static void aktListModt() { // 2
-		if(UserInterface.windowWait.equals("leAkt2")) {			// Tildel opgaver til udvikler
+		if(UserInterface.windowWait.equals("leAkt2")) {
 			TildelAktivitet.popup();
-		} else if(UserInterface.windowWait.equals("maAkt4")) {	// Søg hjælp fra anden udvikler
+		} else if(UserInterface.windowWait.equals("maAkt4")) {
 			soegHjaelp.popup();
-		} else if(UserInterface.windowWait.equals("maAkt3")) {	// Ret registrerede timer
+		} else if(UserInterface.windowWait.equals("maAkt3")) {
 			RetTimer.popup();
-		} else if(UserInterface.windowWait.equals("maAkt6")) {	// Registrer brugte timer
+		} else if(UserInterface.windowWait.equals("maAkt6")) {
 			RegistrerTimer.popup();
-		} else if(UserInterface.windowWait.equals("leAkt4")) {	// se tidsbrug 
+		} else if(UserInterface.windowWait.equals("leAkt4")) {
 			TidBrugtAktivitet.popup();
 		}
 		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
@@ -315,13 +293,6 @@ public class Controll {
 		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}
-	private static void aktLedModt() { // 5
-		if(UserInterface.windowWait.equals("leAkt4")) {	// se tidsbrug 
-			TidBrugtAktivitet.popup();
-		}
-		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
-		ready = true;
-	}
 	private static void aktLedMedModt() { // 6
 		if(UserInterface.windowWait.equals("leAkt2")) {
 			TildelAktivitet.popup();
@@ -330,6 +301,8 @@ public class Controll {
 		ready = true;
 	}
 
+
+	// metoder, der bruges til at tjekke, om bruger inputs er ok
 	public static boolean isValidWeek(String weekString) {
 		String[] weekArray = weekString.split("\\.");
 		try {
@@ -345,8 +318,6 @@ public class Controll {
 			UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\nFormat for tid er tal\n");
 			return false;
 		}
-
-
 	}
 	public static boolean isWeekOrdered(String weekString1, String weekString2) {
 		String[] weekArray1 = weekString1.split("\\.");
@@ -363,7 +334,6 @@ public class Controll {
 			UserInterface.log.append("Fejl i input. Format for uge 5 i år 2018: 2018.5\nFormat for tid er tal\n");
 			return false;
 		}
-
 	}
 	public static boolean isValidDato(String datoString) {
 		try {

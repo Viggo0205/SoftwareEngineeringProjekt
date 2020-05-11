@@ -1,7 +1,10 @@
+// Skrevet af Victor Tadeusz Ulstrup Olszowski - s194281 og Rasmus Nyhus - s194285
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //
+@SuppressWarnings("serial")
 public class TildelAktivitet extends JFrame implements ActionListener {
     private JComboBox aktivitet =new JComboBox();
     private JComboBox projekter =new JComboBox();
@@ -50,19 +53,21 @@ public class TildelAktivitet extends JFrame implements ActionListener {
 
     public static void popup() {
       new TildelAktivitet();
+      
     }
 
+    // Metode skrevet af Rasmus Nyhus - s194285
     @Override
     public void actionPerformed(ActionEvent e) {
-    	if(e.getSource() == tildel) {
+    	if(e.getSource() == tildel) {							// ved klik på knap
 			Communicator.sendSoegHjaelp((String) projekter.getSelectedItem(), (String)aktivitet.getSelectedItem(), (String)medarbejdere.getSelectedItem());
 			frame.setVisible(false);
 			frame.dispose();
-		} else if (e.getSource() == projekter) {						// valg af projekt skal indsætte aktiviteter i dropdown
-			for( int i = 0; i < aktivitet.getItemCount();i+=0)			// ryder dropdown
-				aktivitet.removeItemAt(0);								//
-			Controll.chooseAktiv(projekter.getSelectedIndex());			// vælger korrekt liste at trække aktiviteter fra
-			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {	// trækker aktiviteter og indsætter i dropdown
+		} else if (e.getSource() == projekter) {				// ved valg af projekt
+			for( int i = 0; i < aktivitet.getItemCount();i+=0)
+				aktivitet.removeItemAt(0);
+			Controll.chooseAktiv(projekter.getSelectedIndex());
+			for(int i = 0; i < Controll.choiseAktivListe.size(); i++) {
 				aktivitet.addItem(Controll.choiseAktivListe.get(i));
 			}
 		}
