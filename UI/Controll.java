@@ -81,6 +81,8 @@ public class Controll {
 				} else if(sQueue[0].equals("3")) {	// modtagelse af medarbejderliste
 					lavMedarbListe(sQueue[1]);
 					medarbListModt();
+					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+					ready = true;
 				} else if(sQueue[0].equals("4")) {	// modtagelse af aktiv+medarb lister
 					aktMedaLists = sQueue[1].split("\\|;");
 					lavAktListe(aktMedaLists[0]);
@@ -123,6 +125,14 @@ public class Controll {
 						UserInterface.log.append("Dine timer er blevet rettet\n");
 					} else {
 						UserInterface.log.append("Der skete en fejl i registrering af dine timer\n");
+					}
+					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+					ready = true;
+				} else if(sQueue[0].equals("11")) {
+					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+						UserInterface.log.append("Det ønskede projekt er blevet oprettet\n");
+					} else {
+						UserInterface.log.append("Der skete en fejl, og projektet kunne ikke oprettes\n");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
