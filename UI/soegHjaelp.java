@@ -39,7 +39,7 @@ public class soegHjaelp extends JFrame implements ActionListener {
 		mainPanel.add(medarbejderLabel);
 		mainPanel.add(medarbejdere);
 		for(int i = 0; i < Controll.medarbejderListe.size(); i++) {
-			aktivitet.addItem(Controll.medarbejderListe.get(i));
+			medarbejdere.addItem(Controll.medarbejderListe.get(i));
 		}
 
 		mainPanel.add(soegHjaelp);

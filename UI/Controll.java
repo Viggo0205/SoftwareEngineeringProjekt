@@ -82,7 +82,7 @@ public class Controll {
 					lavMedarbListe(sQueue[1]);
 					medarbListModt();
 				} else if(sQueue[0].equals("4")) {	// modtagelse af aktiv+medarb lister
-					aktMedaLists = sQueue[1].split("-");
+					aktMedaLists = sQueue[1].split("\\|;");
 					lavAktListe(aktMedaLists[0]);
 					lavMedarbListe(aktMedaLists[1]);
 					aktMedaListsModt();
@@ -103,11 +103,19 @@ public class Controll {
 						UserInterface.log.append("Dit ønske om fravær er blevet registreret\n");
 					} else {
 						UserInterface.log.append("Dit ønske om fravær er blevet afvist\n");
+					}
+					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+					ready = true;
+				} else if(sQueue[0].equals("9")) {
+					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+						UserInterface.log.append("Den valgte medarbejder kan nu hjælpe på aktiviteten\n");
+					} else {
+						UserInterface.log.append("Dit ønske om hjælp har givet fejl\n");
 						System.out.println("ferie afvist");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				} 
+				}
 				
 				
 				else if(sQueue[0].equals("10")) {
@@ -115,7 +123,6 @@ public class Controll {
 						UserInterface.log.append("Dine timer er blevet rettet\n");
 					} else {
 						UserInterface.log.append("Der skete en fejl i registrering af dine timer\n");
-						System.out.println("ferie afvist");
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
@@ -170,8 +177,7 @@ public class Controll {
 		String[] ssPro = s.split(";");
 		for(int i = 0; i < ssPro.length; i++)
 			lavAktListe2(i,ssPro);
-	}
-	private static void lavAktListe2(int i, String[] ssPro) {
+	}	private static void lavAktListe2(int i, String[] ssPro) {
 		String[] ssAkt = ssPro[i].split(":");
 		projektListe.add(ssAkt[0]);
 		List<String> tempAktList = new ArrayList<String>();
@@ -199,15 +205,15 @@ public class Controll {
 				return true;
 		return false;
 	}
+	
 	// metode kaldes, hvis login går gennem
 	public static void loggedIn() {
 		Login.bund.setText("logget ind");
 		UserInterface.menu();
 		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
-
 	}
-	// metode kaldes, når der modtages en nu besked med krav på, klienten var klar til at modtage den
+
 	public static void msgQueue(String[] sa) {
 		ready = false;
 		System.out.println("sa længde " + sa.length);
@@ -254,6 +260,7 @@ public class Controll {
 		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}
+	
 	private static void medarbListModt() { // 3
 		if(UserInterface.windowWait.equals("maAkt5"))
 			OpretProjekt.popup();
@@ -346,3 +353,4 @@ public class Controll {
 		}
 	}
 }
+
