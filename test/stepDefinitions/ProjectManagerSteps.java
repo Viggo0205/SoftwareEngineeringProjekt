@@ -50,5 +50,22 @@ public class ProjectManagerSteps {
 	public void projektetMedIndeksErReturnet(Integer int1) {
 	    assertEquals((int)int1, this.projektManager.getProjects().indexOf(this.projektManager.getCertainProject(int1)));
 	}
+	
+	
+	
+	@When("Der efterspoerges en string {string}")
+	public void derEfterspRgesEnString(String string) throws Exception {
+		this.projektManager.pakString();
+		this.projektManager.pakStringMedAkt();
+	}
+
+	@Then("der er returnet en string {string}")
+	public void derErReturnetEnString(String string) {
+	    assertEquals(string,this.projektManager.pakString());
+	    assertEquals(string,this.projektManager.pakStringMedAkt());
+	}
+	
+	
+	
 
 }

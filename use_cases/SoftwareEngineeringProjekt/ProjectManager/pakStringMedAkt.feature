@@ -8,4 +8,3 @@ Feature: Pakker alle projekter som string til klienten
     And Der findes mindst et Project "projekt" i ProjectManager med indeks 0 
     When Der efterspoerges en string ";2020000000|projekt" 
     Then der er returnet en string ";2020000000|projekt" 
-
