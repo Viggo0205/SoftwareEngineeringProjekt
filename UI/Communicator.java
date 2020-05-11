@@ -106,10 +106,13 @@ public class Communicator implements Runnable {
 	// projekter, brugeren er leder for
 	public static void sendProjAccess() {
 		System.out.println("sender ønske om en prjektliste med besked 1");
+		Controll.projektListe.clear();
 		sendBesked("1");
 	}
 	// projekter og aktiveteter, brugeren er en del af
 	public static void sendAktivAccess() {
+		Controll.projektListe.clear();
+		Controll.aktivListe.clear();
 		sendBesked("2");
 	}
 	// medarbejderliste for hele firmaet
@@ -118,14 +121,20 @@ public class Communicator implements Runnable {
 	}
 	// aktiviteter, brugeren er en del af, samt fuld medarbejderliste
 	public static void sendMedAktAccess() {
+		Controll.projektListe.clear();
+		Controll.aktivListe.clear();
 		sendBesked("4");
 	}
 	// aktiviteter, brugeren er leder for
 	public static void sendAktLedAccess() {
+		Controll.projektListe.clear();
+		Controll.aktivListe.clear();
 		sendBesked("5");
 	}
 	// projekter, brugeren er leder for, samt fuld medarbejderliste
 	public static void sendAktLedMedAccess() {
+		Controll.projektListe.clear();
+		Controll.aktivListe.clear();
 		sendBesked("6");
 	}
 

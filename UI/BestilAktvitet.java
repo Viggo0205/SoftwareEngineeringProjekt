@@ -50,6 +50,8 @@ public class BestilAktvitet extends JFrame implements ActionListener {
 
 		projekter = new JComboBox();
 		panel1.add(projekter);
+		for( int i = 0; i < projekter.getItemCount();i+=0)			// ryder dropdown
+			projekter.removeItemAt(0);
 		for(int i = 0; i < Controll.projektListe.size(); i++) {
 			projekter.addItem(Controll.projektListe.get(i));
 		}
