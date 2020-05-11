@@ -8,13 +8,12 @@ import io.cucumber.java.en.When;
 public class DatoSteps {
 
 	private Dato dato;
-	private Dato dato2;
 	private String s;
 	private int d;
-	private int n;
 	
 //	Dato.featur
 //	1. scenarie 
+//	Der bliver her testet for dato angivet ved dag, måned og år
 	@Given("at der bliver oprettet en dato, f.eks. dag {int} maaned {int} aar {int}")
 	public void atDerBliverOprettetEnDatoFEksDagMaanedAar(Integer int1, Integer int2, Integer int3) {
 		this.dato = new Dato(int1, int2, int3);
@@ -30,7 +29,7 @@ public class DatoSteps {
 	}
 	
 //	2. scenarie
-
+//	Der bliver her testet for dato angivet ved dag, år og en string
 	@Given("der er oprettet en dato ud fra dag {int}, aar {int} {string}")
 	public void derErOprettetEnDatoUdFraDagAar(Integer int1, Integer int2, String string) {
 		this.dato = new Dato(365, 2020, "s");
@@ -42,6 +41,7 @@ public class DatoSteps {
 	}
 
 //	3. Scenarie
+//	Der bliver her testet for dato angivet ved uge og år
 	@Given("der oprettes en dato ud fra uge {int} aar {int}")
 	public void derOprettesEnDatoUdFraUgeAar(Integer int1, Integer int2) {
 		this.dato = new Dato((int)int1,(int) int2);
@@ -56,8 +56,9 @@ public class DatoSteps {
 	public void viFROutputtet(String string) {
 		assertEquals( "23-12-2020", this.dato.getFormatedDate());
 	}	
-//	
+	
 //	beregnUge.featur
+//	der bliver her testet for at få et ugenummer
 	@Given("en dato eksisterer i uge {int}")
 	public void enDatoEksistererIUge(Integer int1) {
 		int week = 4;
@@ -75,45 +76,24 @@ public class DatoSteps {
     }
 	
 //	getdeltaDag.feature
-//	1. scenarie
-//	Der bliver her prøvet at få testet koden for forkel på to dage
+//	Koden bliver her testet for forkel på to dage
 	@Given("dag {int} maaned {int} aar {int} er en dato der eksisterer")
 	public void dagMaanedAarErEnDatoDerEksisterer(Integer int1, Integer int2, Integer int3) {
 		this.dato = new Dato(int1, int2, int3);
 	}
-	
-	@When("dato {int} maaned {int} aar {int} bliver efterspurgt")
-	public void datoMaanedAarBliverEfterspurgt(Integer int1, Integer int2, Integer int3) {
+
+	@When("dag {int} maaned {int} aar {int} bliver efterspurgt")
+	public void dagMaanedAarBliverEfterspurgt(Integer int1, Integer int2, Integer int3) {
 		d = this.dato.getDeltaDag(new Dato(int1, int2, int3));
 	}
 
 	@Then("forskellen paa de to dage bliver fundet til at vaere {int}")
-	public void forskellenPDeToDageBliverFundetTilAtVaere(Integer int1) {
+	public void forskellenPaaDeToDageBliverFundetTilAtVaere(Integer int1) {
 		assertEquals((int) int1, d);
 	}
-
-//	2. scenarie
-//	Der bliver her prøvet at få testet koden for forkel på to dage der er langt fra hinanden, 
-//	det lykkedes dog ikke at får testet den del af koden ordentligt
-//	@Given("der er forskelg paa dag {int} maaned {int} aar {int} og dag {int} maaned {int} aar {int}")
-//	public void derErForskelgPaaDagMaanedAarOgDagMaanedAar(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5, Integer int6) {
-//		   this.dato = new Dato(int1, int2, int3);
-//		   this.dato2 = new Dato(int4, int5, int6);
-//	}
-//
-//	@When("dagene bliver efterspurgt")
-//	public void dageneBliverEfterspurgt() {
-//		this.dato.getFormatedDate();
-//		this.dato2.getFormatedDate();
-//	}
-//
-//	@Then("forskellen paa de to dage bliver fundet til at vaere {int} maaneder")
-//	public void forskellenPaaDeToDageBliverFundetTilAtVaereMaaneder(Integer int1) {
-//		assertEquals("1-1-2019", this.dato.getFormatedDate());
-//	}
-	
 	
 //	getFormatedDate.featur
+//	Koden skal returnere en string, hvilket der bliver testet for her 
 	@Given("der eksisterer en dato, f.eks. dag {int} maaned {int} aar {int}")
 	public void derEksistererEnDatoFEksDagMaanedAar(Integer int1, Integer int2, Integer int3) {
 	   this.dato = new Dato(int1, int2, int3);
@@ -123,10 +103,11 @@ public class DatoSteps {
 	public void datoenBliverSkrevetPEnStreng() {
 		this.dato.getFormatedDate();
 	}
-
+	
 	@Then("bliver der printet {string}")
 	public void bliverDerPrintet(String string) {
 		assertEquals((String) string, this.dato.getFormatedDate());
 	}
+	
 
 }
