@@ -344,13 +344,6 @@ public class ServControll {
 		return s;
 	}
 
-	// Til protokol 4
-	public static String packagedAkt() {
-		String s = "";
-
-		return s;
-	}
-	
 	
 	
 	//Queuers
