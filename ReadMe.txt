@@ -1,3 +1,7 @@
+Brugsvejledning til at køre test
+kør eller kør coverage for fil SoftwareEngineeringProjekt2/test/RasTesttTunner.java
+
+
 Brugsvejledning til at køre program
 Kildekoden samt tests er pakket som Eclipse projekt og kan importeres af Eclipse.
 Applikationslaget ligger i SoftwareEngineeringProjekt/src/SoftwareEngineringProjekt/src, og brugefladen findes i SoftwareEngineeringProjekt/UI.
