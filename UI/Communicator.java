@@ -139,7 +139,7 @@ public class Communicator implements Runnable {
 		dato1 = datoFormated;
 		stringUgeToDato(slutUge);
 		dato2 = datoFormated;
-		sendMsg = "a;" + projektnr + ";" + dato1  + ";" + dato2 + ";" + timer + ";" + navn;
+		sendMsg = "a;" + projektnr + ";" + dato1.getFormatedDate()  + ";" + dato2.getFormatedDate() + ";" + timer + ";" + navn;
 		sendBesked(sendMsg);
 	}
 	public static void sendTildelAkt(String projekt, String aktivitet, String udvikler) {
@@ -169,18 +169,22 @@ public class Communicator implements Runnable {
 		projektnr = projekt.substring(0,10);
 		stringDagToDato(dag);
 		dato1 = datoFormated;
-		sendMsg = "f;" + dato1 + ";" + timer + ";" + projektnr + ";" + aktivitet;
+		sendMsg = "f;" + dato1.getFormatedDate() + ";" + timer + ";" + projektnr + ";" + aktivitet;
 		sendBesked(sendMsg);
 	}
 	public static void sendOpretPro(String leder, String startDato, String slutDato, String navn) {
-		sendMsg = "g;" + leder + ";" + startDato + ";" + slutDato + ";" + navn;
+		stringDagToDato(startDato);
+		dato1 = datoFormated;
+		stringDagToDato(slutDato);
+		dato2 = datoFormated;
+		sendMsg = "g;" + leder + ";" + dato1.getFormatedDate() + ";" + dato2.getFormatedDate() + ";" + navn;
 		sendBesked(sendMsg);
 	}
 	public static void sendIndmeldTid(String projekt, String aktivitet, String dag, String timer) {
 		projektnr = projekt.substring(0,10);
 		stringDagToDato(dag);
 		dato1 = datoFormated;
-		sendMsg = "h;" + projektnr + ";" + aktivitet + ";" + dato1 + ";" + timer;
+		sendMsg = "h;" + projektnr + ";" + aktivitet + ";" + dato1.getFormatedDate() + ";" + timer;
 		sendBesked(sendMsg);
 	}
 	public static void sendErLedig(String uge) {
