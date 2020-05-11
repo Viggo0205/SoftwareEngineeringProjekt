@@ -153,7 +153,8 @@ public class ServControll {
 						throw new NullPointerException("No more room for projects this year");
 					}
 					else
-						projektNummer = Integer.toString(ServControll.currentDate.getYear()) + nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
+						projektNummer = Integer.toString(ServControll.currentDate.getYear())
+						+ nulStuff(Integer.toString(Integer.parseInt(s.substring(4, 10)) + 1));
 				}
 				else 
 				{
@@ -161,7 +162,9 @@ public class ServControll {
 				}
 			}
 			else projektNummer = "" + ServControll.currentDate.getYear() + "000000";
-			ServControll.projekter.addProject(new Project(navn, medarbejdere.getMedarbejdere().get(projektlederInd), startUge, slutUge, projektNummer));
+			ServControll.projekter.addProject(
+					new Project(navn, medarbejdere.getMedarbejdere().get(projektlederInd), startUge, slutUge, projektNummer)
+					);
 			return "ok";
 		}
 	}

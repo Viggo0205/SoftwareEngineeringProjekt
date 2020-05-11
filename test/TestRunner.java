@@ -6,7 +6,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"use_cases/SoftwareEngineeringProjekt/ServControll"/* /RegistrerFerie.feature"/*,
+@CucumberOptions(features = {"use_cases/SoftwareEngineeringProjekt"/* /ServControll"/* /RegistrerFerie.feature"/*,
 		"use_cases/SoftwareEngineeringProjekt/ProjectManager",
 		"use_cases/SoftwareEngineeringProjekt/Aktivitet",
 		/*"use_cases/SoftwareEngineeringProjekt"*/},

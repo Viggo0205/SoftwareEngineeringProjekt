@@ -3,8 +3,9 @@
 Feature: At tilfoeje nye projekter
 
   @tag1
-  Scenario: Der er plads til flere projekter dette aar, og der eksisterer ikke projekter endnu
+  Scenario: Der er plads til flere projekter dette aar, og der eksisterer ikke projekter for dette aar endnu
     Given Serveren koerer
+    And Det nuvaerende aar overgaar til et nyt
     When Et nyt projekt "projekt" forsoeges tilfoejet
     Then Projektet "projekt" findes i serverens projektManager
 
