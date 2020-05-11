@@ -8,3 +8,7 @@ Feature: datoen bliver printet ud på en streng
     When datoen bliver skrevet paa en streng 
     Then bliver der printet "24-1-2020"
     
+    
+    
+    
+    
