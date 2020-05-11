@@ -110,7 +110,16 @@ public class Controll {
 					lavMedarbListe(aktMedaLists[1]);
 					aktLedMedModt();
 				} else if(sQueue[0].equals("7")) {
-					UserInterface.log.append(sQueue[1] + "\n");
+					tempSplit1 = sQueue[1].split(";");
+					tempSplit3 = tempSplit1[tempSplit1.length-1].split("\\|");
+					UserInterface.log.append("Total tid brugt for projektet: " + tempSplit3[1] + "\n");
+					for(int i = 0; i < tempSplit1.length-1; i++) {
+						tempSplit2 = tempSplit1[i].split("\\|");
+						UserInterface.log.append("Aktivitet: " + tempSplit2[0] + ", Timer: " + tempSplit2[1] + "\n");
+						tempSplit2 = null;
+					}
+					tempSplit1 = null;
+					tempSplit3 = null;
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
 				} else if(sQueue[0].equals("8")) {
@@ -129,10 +138,7 @@ public class Controll {
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				}
-				
-				
-				else if(sQueue[0].equals("10")) {
+				} else if(sQueue[0].equals("10")) {
 					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
 						UserInterface.log.append("Dine timer er blevet rettet\n");
 					} else {
@@ -156,9 +162,7 @@ public class Controll {
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				}
-				
-				else if (sQueue[0].equals("14")) {
+				} else if (sQueue[0].equals("14")) {
 					if(sQueue[1].equals("no")) {
 						UserInterface.log.append("Der skete fejl i hentning af tidsbrug");
 					} else {
@@ -166,8 +170,7 @@ public class Controll {
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
-				}
-				else if(sQueue[0].equals("15")) { 
+				} else if(sQueue[0].equals("15")) { 
 					if(sQueue[1].equals("no")) {
 						UserInterface.log.append("Du har ingen arbejdstimer registreret for i dag\n");
 					} else {
@@ -205,7 +208,7 @@ public class Controll {
 
 		}
 	}
-	
+
 	private static void lavMedarbListe(String s) {
 		String[] ss = s.split(";");
 		for( int i = 0; i < ss.length; i++)
@@ -243,7 +246,7 @@ public class Controll {
 				return true;
 		return false;
 	}
-	
+
 	// metode kaldes, hvis login går gennem
 	public static void loggedIn() {
 		Login.bund.setText("logget ind");
@@ -281,7 +284,7 @@ public class Controll {
 	public static void proListEmpty() {
 		UserInterface.log.append("Du er ikke leder for nogle projekter");
 		System.out.println("Du er ikke leder for nogle projekter");
-		
+
 		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}
@@ -300,7 +303,7 @@ public class Controll {
 		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}
-	
+
 	private static void medarbListModt() { // 3
 		if(UserInterface.windowWait.equals("maAkt5"))
 			OpretProjekt.popup();
