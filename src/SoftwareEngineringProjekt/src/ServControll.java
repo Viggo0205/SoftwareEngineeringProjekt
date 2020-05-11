@@ -96,7 +96,7 @@ public class ServControll {
 		return ServControll.currentDate;
 	}
 
-	public ArrayList<Medarbejder> getMedarbejdere() {
+	public static ArrayList<Medarbejder> getMedarbejdere() {
 		return ServControll.medarbejdere.getMedarbejdere();
 	}
 
@@ -183,7 +183,7 @@ public class ServControll {
 	}
 
 	// Forsøger at lave en ny medarbejder med givne initialer
-	public void newMedarbejder(String initialer) {
+	public static void newMedarbejder(String initialer) {
 		try {
 			medarbejdere.newMedarbejder(initialer);
 		} catch (InitialsWrongLengthException e) {
@@ -221,7 +221,7 @@ public class ServControll {
 	}
 
 	// finder en arbejdsdags indeks i kallenderen den tilhører
-	private static int findArbejdsDagIndvedMedarbIndOgDag(int medarbInd, Dato dag) {
+	public static int findArbejdsDagIndvedMedarbIndOgDag(int medarbInd, Dato dag) {
 		return medarbejdere.getMedarbejdere().get(medarbInd).getKalender().findArbejdsagIndVedDato(dag);
 	}
 	

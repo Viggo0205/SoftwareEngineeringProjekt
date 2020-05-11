@@ -26,7 +26,6 @@ public class ServControllSteps {
 	@Given("Serveren startes d. {int} . {int} . {int} test")
 	public void serverenStartesDTest(Integer int1, Integer int2, Integer int3) {
 		System.out.println("Server starter");
-		//this.servControll = new ServControll();
 		ServControll.ServerStart(9, 5, 2020, false);
 	}
 
@@ -145,5 +144,36 @@ public class ServControllSteps {
 		actualInitialer = ServControll.getProjekter().get(1).getMedarbejdere().get(1).getInitialer();
 		assertEquals(string, actualInitialer);
 	}
+
+	@When("Medarbejderen med initialerne {string} registrerer ferie fra dato {string} til {string}")
+	public void medarbejderenMedInitialerneRegistrererFerieFraDatoTil(String string, String string2, String string3) {
+		ServControll.registrerFerie(string, string2, string3);
+	}
 	
+	@Then("medarbejderen {string} staar registreret for ferie d. {int} , {int}, {int}")
+	public void medarbejderenStaarRegistreretForFerieD(String string, Integer int1, Integer int2, Integer int3) {
+		int arbejdsdag = ServControll.findArbejdsDagIndvedMedarbIndOgDag(ServControll.findMedarbVedInit(string), new Dato(int1, int2, int3));
+		assertEquals("test",ServControll.getProjekter().get(0).getMedarbejdere().get(1).getKalender().getCertainArbejdsdag(arbejdsdag).getTid());
+	}
+	
+	@When("Medarbejderen med initialerne {string} registrerer ferie fra dato {string} til {string} d")
+	public void medarbejderenMedInitialerneRegistrererFerieFraDatoTilD(String string, String string2, String string3) {
+		ServControll.registrerFerie(string, string2, string3);
+	}
+
+	@Then("medarbejderen {string} staar registreret for ferie d. {int} , {int}, {int} d")
+	public void medarbejderenStaarRegistreretForFerieDD(String string, Integer int1, Integer int2, Integer int3) {
+		int arbejdsdag = ServControll.
+				findArbejdsDagIndvedMedarbIndOgDag(
+						ServControll
+						.findMedarbVedInit(string)
+						, new Dato(int1, int2, int3));
+		assertEquals("Arbejdstider for: 21-2-2020\n2020000000\nFerie: 16\nTotaltid: 16",ServControll.getMedarbejdere().get(1).getKalender().getCertainArbejdsdag(arbejdsdag).getTid());
+	}
+	
+	@Given("Medarbejderen med initialerne {string} eksisterer")
+	public void medarbejderenMedInitialerneEksisterer(String string) {
+	    ServControll.newMedarbejder(string);
+	    ServControll.findMedarbVedInit(string);
+	}
 }
