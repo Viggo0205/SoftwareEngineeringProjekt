@@ -294,12 +294,12 @@ public class ServControll {
 	public static String packagedArbejdsDag(String init) {
 		int medarbInd = findMedarbVedInit(init);
 		if ( medarbInd == -1 )
-			return "no";
+			return ";no";
 		else
 		{
 			int arbejdsInd = findArbejdsDagIndvedMedarbIndOgDag(medarbInd, currentDate);
 			if ( arbejdsInd == -1 )
-				return "no";
+				return ";no";
 			else
 				return medarbejdere.getMedarbejdere().get(medarbInd).getKalender().getCertainArbejdsdag(arbejdsInd).packagedTid();
 		}

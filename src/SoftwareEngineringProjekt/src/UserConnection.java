@@ -195,7 +195,7 @@ public class UserConnection extends Thread {
 				//Beder servercontrolleren hente klientens registrerede arbejdstid for idag
 				else if (request[0].equals("k"))
 				{
-					sendBesked("15;" + ServControll.packagedArbejdsDag(initials));
+					sendBesked("15" + ServControll.packagedArbejdsDag(initials));
 				}
 				else
 				{
