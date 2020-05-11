@@ -26,6 +26,9 @@ public class Controll {
 	private static String[] datoArray = new String[3];
 	private static String[] ledigMedarbListe;
 	private static String[] aktMedaLists = new String[2];
+	private static String[] tempSplit1;
+	private static String[] tempSplit2;
+	private static String[] tempSplit3;
 
 
 	public static void main(String[] args) {	
@@ -98,22 +101,41 @@ public class Controll {
 				} else if(sQueue[0].equals("8")) {
 					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
 						UserInterface.log.append("Dit ønske om fravær er blevet registreret\n");
-						sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
-						ready = true;
 					} else {
 						UserInterface.log.append("Dit ønske om fravær er blevet afvist\n");
 						System.out.println("ferie afvist");
-						sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
-						ready = true;
 					}
+					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+					ready = true;
 				} 
+				
+				
+				else if(sQueue[0].equals("10")) {
+					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+						UserInterface.log.append("Dine timer er blevet rettet\n");
+					} else {
+						UserInterface.log.append("Der skete en fejl i registrering af dine timer\n");
+						System.out.println("ferie afvist");
+					}
+					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+					ready = true;
+				}
 				
 				
 				else if(sQueue[0].equals("15")) { 
 					if(sQueue[1].equals("no")) {
 						UserInterface.log.append("Du har ingen arbejdstimer registreret for i dag\n");
 					} else {
-						UserInterface.log.append("Du har arbejdet " + sQueue[1] + " timer i dag\n");
+						tempSplit1 = sQueue[1].split(";");
+						UserInterface.log.append("Du har arbejdet " + (Double.parseDouble(tempSplit1[1])/2) + " timer i dag\n");
+						tempSplit2 = tempSplit1[0].split(":");
+						for(int i = 1; i < tempSplit2.length; i++) {
+							tempSplit3 = tempSplit2[i].split("\\|",2);
+							UserInterface.log.append((Double.parseDouble(tempSplit3[1])/2) + " timer brugt på " + tempSplit3[0] + "\n");
+							tempSplit3 = null;
+						}
+						tempSplit1 = null;
+						tempSplit2 = null;
 					}
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
@@ -225,8 +247,10 @@ public class Controll {
 		} else if(UserInterface.windowWait.equals("maAkt4")) {	// Søg hjælp fra anden udvikler
 			soegHjaelp.popup();
 		} else if(UserInterface.windowWait.equals("maAkt3")) {	// Ret registrerede timer
+			RetTimer.popup();
+		} else if(UserInterface.windowWait.equals("maAkt6")) {	// Registrer brugte timer
 			RegistrerTimer.popup();
-		}
+		}	
 		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}

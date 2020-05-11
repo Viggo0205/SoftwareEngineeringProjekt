@@ -121,7 +121,9 @@ public class UserInterface extends JFrame implements ActionListener{
 			Communicator.sendSeArbejde();			
 		}
 		if(e.getSource() == maAkt3) {		// Ret registrerede timer
-			RetTimer.popup();
+			windowWait = "maAkt3";
+			Communicator.sendAktivAccess();
+//			RetTimer.popup();
 		}
 		if(e.getSource() == maAkt4) {		// Søg hjælp fra anden udvikler
 			windowWait = "maAkt4";
