@@ -88,6 +88,14 @@ public class Controll {
 					lavAktListe(aktMedaLists[0]);
 					lavMedarbListe(aktMedaLists[1]);
 					aktMedaListsModt();
+				} else if(sQueue[0].equals("a")) {
+					lavAktListe(sQueue[1]);
+					aktListModt();
+				} else if(sQueue[0].equals("b")) {
+					aktMedaLists = sQueue[1].split("\\|;");
+					lavAktListe(aktMedaLists[0]);
+					lavMedarbListe(aktMedaLists[1]);
+					aktMedaListsModt();
 				} else if(sQueue[0].equals("5")) {
 					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
 						UserInterface.log.append("Aktiviteten er blevet oprettet\n");
@@ -150,7 +158,15 @@ public class Controll {
 					ready = true;
 				}
 				
-				
+				else if (sQueue[0].equals("14")) {
+					if(sQueue[1].equals("no")) {
+						UserInterface.log.append("Der skete fejl i hentning af tidsbrug");
+					} else {
+						UserInterface.log.append("Der er arbejdet " + (Double.parseDouble(sQueue[1])/2) + " timer på aktiviteten\n");
+					}
+					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+					ready = true;
+				}
 				else if(sQueue[0].equals("15")) { 
 					if(sQueue[1].equals("no")) {
 						UserInterface.log.append("Du har ingen arbejdstimer registreret for i dag\n");
@@ -278,7 +294,9 @@ public class Controll {
 			RetTimer.popup();
 		} else if(UserInterface.windowWait.equals("maAkt6")) {	// Registrer brugte timer
 			RegistrerTimer.popup();
-		}	
+		} else if(UserInterface.windowWait.equals("leAkt4")) {	// se tidsbrug 
+			TidBrugtAktivitet.popup();
+		}
 		sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 		ready = true;
 	}

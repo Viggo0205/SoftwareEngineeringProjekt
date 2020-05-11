@@ -128,7 +128,7 @@ public class UserConnection extends Thread {
 				//Svarer på hvilke projekter klienten er leder af, og hvilke aktiviteter der eksistere tilknyttet disse
 				else if (request[0].equals("5"))
 				{
-					sendBesked("5" + ServControll.packagedProjMedAktTake3(initials));
+					sendBesked("a" + ServControll.packagedProjMedAktTake3(initials));
 				}
 				//Svarer på hvilke projekter klienten er leder af, og hvilke aktiviteter der eksistere tilknyttet disse, samt en liste over alle medarbejdere i en string uden linjeskifte
 				else if (request[0].equals("6"))
