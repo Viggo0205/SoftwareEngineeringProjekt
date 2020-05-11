@@ -150,7 +150,7 @@ public class UserConnection extends Thread {
 				//Beder servercontrolleren genere en rapport over et projekt
 				else if (request[0].equals("c"))
 				{
-					sendBesked("7;" + ServControll.packagedRap(request[1]));
+					sendBesked("7" + ServControll.packagedRap(request[1]));
 				}
 				//Beder servercontrolleren registrere ferie for klienten
 				else if (request[0].equals("d"))
