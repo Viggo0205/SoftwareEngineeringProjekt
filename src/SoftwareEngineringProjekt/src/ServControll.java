@@ -25,7 +25,13 @@ public class ServControll {
 		projekter = new ProjectManager();
 		medarbejdere = new MedarbejderManager();
 		currentDate = new Dato(day, month, year);
-
+		
+		newMedarbejder("CHRJ");
+		newMedarbejder("CLAL");
+		newMedarbejder("EIGL");
+		newMedarbejder("RASN");
+		newMedarbejder("VICO");
+		
 		newProjekt("Fravear", "ADMN", new Dato(1, 1, 2020), new Dato(31, 12, 2050));
 		newAktivitet("" + currentDate.getYear() + "000000", "Ferie", new Dato(1, 1, 2020), new Dato(31, 12, 2050), 0);
 		newAktivitet("" + currentDate.getYear() + "000000", "Sygdom", new Dato(1, 1, 2020), new Dato(31, 12, 2050), 0);
