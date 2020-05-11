@@ -106,6 +106,17 @@ public class Controll {
 						sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 						ready = true;
 					}
+				} 
+				
+				
+				else if(sQueue[0].equals("15")) { 
+					if(sQueue[1].equals("no")) {
+						UserInterface.log.append("Du har ingen arbejdstimer registreret for i dag\n");
+					} else {
+						UserInterface.log.append("Du har arbejdet " + sQueue[1] + " timer i dag\n");
+					}
+					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+					ready = true;
 				}
 
 				else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
