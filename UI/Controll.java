@@ -95,6 +95,17 @@ public class Controll {
 					UserInterface.log.append(sQueue[1] + "\n");
 					sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
 					ready = true;
+				} else if(sQueue[0].equals("8")) {
+					if(sQueue[1].equals("ok")) { 		// godkendt login, indstil dato
+						UserInterface.log.append("Dit ønske om fravær er blevet registreret\n");
+						sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+						ready = true;
+					} else {
+						UserInterface.log.append("Dit ønske om fravær er blevet afvist\n");
+						System.out.println("ferie afvist");
+						sQueue[0] = "";if(sQueue.length > 1) {sQueue[1] = "";}
+						ready = true;
+					}
 				}
 
 				else if(sQueue[0].equals("i")) { 				// svar ledeige medarbejdere
@@ -109,7 +120,7 @@ public class Controll {
 				System.out.print("");
 			}
 			try {
-				TimeUnit.MILLISECONDS.sleep(100);
+				TimeUnit.MILLISECONDS.sleep(250);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

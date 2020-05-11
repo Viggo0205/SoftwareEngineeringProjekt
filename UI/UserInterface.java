@@ -98,7 +98,6 @@ public class UserInterface extends JFrame implements ActionListener{
 		lederAktiv.add(lederBut);
 		
 		// log tekstfelt tilføjes
-//		log = new JTextArea("Dags dato: " + Controll.currentDag.getFormatedDate()); 
 		log = new JTextArea("Dags dato: " + Controll.currentDag.getFormatedDate() + "\n");
 		log.setLineWrap(true);
 		log.setEditable(false);
@@ -211,6 +210,4 @@ public class UserInterface extends JFrame implements ActionListener{
 		isGrey = false;
 	}
 
-
-	
 }

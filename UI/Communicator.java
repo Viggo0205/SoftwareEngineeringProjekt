@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
+
+import SoftwareEngineringProjekt.src.Dato;
 //
 public class Communicator implements Runnable {
 
@@ -23,6 +25,9 @@ public class Communicator implements Runnable {
 	private String[] ca = new String[2];
 	private static String sendMsg;
 	private static String projektnr;
+	private static Dato datoFormated;
+	private static Dato dato1;
+	private static Dato dato2;
 
 	@Override
 	public void run() {
@@ -130,7 +135,11 @@ public class Communicator implements Runnable {
 	// metoder for at sende beskeder til serveren afhængig af hvilket event.
 	public static void sendOpretAktiv(String projekt, String startUge, String slutUge, String timer, String navn) {
 		projektnr = projekt.substring(0,10);
-		sendMsg = "a;" + projektnr + ";" + startUge  + ";" + slutUge + ";" + timer + ";" + navn;
+		stringUgeToDato(startUge);
+		dato1 = datoFormated;
+		stringUgeToDato(slutUge);
+		dato2 = datoFormated;
+		sendMsg = "a;" + projektnr + ";" + dato1  + ";" + dato2 + ";" + timer + ";" + navn;
 		sendBesked(sendMsg);
 	}
 	public static void sendTildelAkt(String projekt, String aktivitet, String udvikler) {
@@ -144,7 +153,11 @@ public class Communicator implements Runnable {
 		sendBesked(sendMsg);
 	}
 	public static void sendRegistrerFerie(String startDato, String slutDato) {
-		sendMsg = "d;" + startDato + ";" + slutDato;
+		stringDagToDato(startDato);
+		dato1 = datoFormated;
+		stringDagToDato(slutDato);
+		dato2 = datoFormated;
+		sendMsg = "d;" + dato1.getFormatedDate() + ";" + dato2.getFormatedDate();
 		sendBesked(sendMsg);
 	}
 	public static void sendSoegHjaelp(String projekt, String aktivitet, String udvikler) {
@@ -154,7 +167,9 @@ public class Communicator implements Runnable {
 	}
 	public static void sendRetterTimer(String projekt, String aktivitet, String dag, String timer) {
 		projektnr = projekt.substring(0,10);
-		sendMsg = "f;" + dag + ";" + timer + ";" + projektnr + ";" + aktivitet;
+		stringDagToDato(dag);
+		dato1 = datoFormated;
+		sendMsg = "f;" + dato1 + ";" + timer + ";" + projektnr + ";" + aktivitet;
 		sendBesked(sendMsg);
 	}
 	public static void sendOpretPro(String leder, String startDato, String slutDato, String navn) {
@@ -163,11 +178,15 @@ public class Communicator implements Runnable {
 	}
 	public static void sendIndmeldTid(String projekt, String aktivitet, String dag, String timer) {
 		projektnr = projekt.substring(0,10);
-		sendMsg = "h;" + projektnr + ";" + aktivitet + ";" + dag + ";" + timer;
+		stringDagToDato(dag);
+		dato1 = datoFormated;
+		sendMsg = "h;" + projektnr + ";" + aktivitet + ";" + dato1 + ";" + timer;
 		sendBesked(sendMsg);
 	}
 	public static void sendErLedig(String uge) {
-		sendMsg = "i;" + uge;
+		stringUgeToDato(uge);
+		dato1 = datoFormated;
+		sendMsg = "i;" + dato1;
 		sendBesked(sendMsg);
 	}
 	public static void sendTidsbrug(String projekt, String aktivitet) {
@@ -191,11 +210,19 @@ public class Communicator implements Runnable {
 		}
 		if(UserInterface.log == null) {}
 		else {
-			System.out.println("should grey out");
 			UserInterface.greyOut();
 		}
 			
 
+	}
+	
+	private static void stringDagToDato(String dagdato) {
+		// TODO Auto-generated method stub
+		datoFormated = new Dato(Integer.parseInt(dagdato.substring(0,2)),Integer.parseInt(dagdato.substring(2,4)),Integer.parseInt(dagdato.substring(4,8)));
+	}
+	private static void stringUgeToDato(String ugedato) {
+		String[] ss = ugedato.split("\\.");
+		datoFormated = new Dato(Integer.parseInt(ss[1]),Integer.parseInt(ss[0]));
 	}
 
 
